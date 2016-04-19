@@ -1,3 +1,10 @@
+move = enum {
+  up;
+  down;
+  left;
+  right;
+}
+
 player = interface +c {
   static create(): player;
   new_game();
