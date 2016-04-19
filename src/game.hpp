@@ -20,6 +20,10 @@ class Game final {
   friend class PlayerImpl;
 
  public:
+#if 0
+#pragma mark -
+#pragma mark Constructors
+#endif
   Game();
   ~Game();
   Game(Game &&) = default;

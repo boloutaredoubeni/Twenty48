@@ -3,6 +3,8 @@
 #include <random>
 #include <algorithm>
 
+#include <cassert>
+
 using namespace twentyfortyeight::cpp;
 using namespace twentyfortyeight::impl;
 

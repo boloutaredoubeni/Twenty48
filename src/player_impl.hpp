@@ -3,8 +3,6 @@
 #include "player.hpp"
 #include "game.hpp"
 
-#include <cassert>
-
 namespace twentyfortyeight {
 namespace impl {
 
@@ -26,7 +24,7 @@ class PlayerImpl : public cpp::Player {
 
 #if 0
 #pragma mark -
-#pragma mark PublicMethods
+#pragma mark Public Methods
 #endif
 
   void NewGame();
@@ -36,6 +34,10 @@ class PlayerImpl : public cpp::Player {
   bool GameOver();
 
  private:
+#if 0
+#pragma mark -
+#pragma mark Private Methods
+#endif
   void addTile() const;
   bool hasMoves() const;
 };

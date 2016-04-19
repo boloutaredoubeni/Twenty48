@@ -5,8 +5,12 @@
 #include <algorithm>
 
 using namespace twentyfortyeight::cpp;
-// using namespace twentyfortyeight::impl;
 
+#if 0
+#pragma mark -
+#pragma mark New Game Tests
+Verify how the program behaves when the player starts a new game
+#endif
 TEST(Player, ctor_dtor) { const auto player = Player::Create(); }
 
 TEST(Player, new_game) {
@@ -36,3 +40,21 @@ TEST(Player, new_game_adds_a_tile) {
   player->NewGame();
   ASSERT_EQ(1, count_values(player->GameState()));
 }
+
+TEST(Player, can_move_tiles) {
+  // TODO(boloutaredoubeni): assert that there are two tiles or that the
+  // combined tile is
+  // TODO(boloutaredoubeni): assert that the score is changed
+}
+
+#if 0
+#pragma mark -
+#pragma mark In Game Tests
+Progress through the game for a couple of steps then verify behavoir
+#endif
+
+#if 0
+#pragma mark -
+#pragma mark End Game
+Verify how the program behaves at the end of the game
+#endif
