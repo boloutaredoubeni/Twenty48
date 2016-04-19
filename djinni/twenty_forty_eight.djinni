@@ -1,0 +1,3 @@
+player = interface +c {
+  static create(): player;
+}

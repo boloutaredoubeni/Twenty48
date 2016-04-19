@@ -6,7 +6,7 @@
       'sources': [
         'googletest/googletest/src/gtest-all.cc',
         'googletest/googlemock/src/gmock-all.cc',
-        # 'googletest/googlemock/src/gmock-main.cc',
+        'googletest/googlemock/src/gmock_main.cc',
         # 'googletest/googletest/src/gtest-main.cc',
       ],
       'cflags_cc!': ['-Werror'],
