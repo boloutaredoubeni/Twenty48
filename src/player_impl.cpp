@@ -1,4 +1,5 @@
 #include "player_impl.hpp"
+#include "move.hpp"
 
 #include <random>
 #include <algorithm>
@@ -57,6 +58,20 @@ std::vector<int32_t> PlayerImpl::GameState() {
 
 bool PlayerImpl::GameOver() { return game_->is_over_; }
 
+bool PlayerImpl::Swipe(Move move) {
+  switch (move) {
+    case Move::Up:
+      return moveUp();
+    case Move::Down:
+      return moveDown();
+    case Move::Left:
+      return moveLeft();
+    case Move::Right:
+      return moveRight();
+  }
+  return true;
+}
+
 void PlayerImpl::addTile() const {
   std::random_device rd;
   std::mt19937 generator(rd());
@@ -92,10 +107,19 @@ bool PlayerImpl::hasMoves() const {
   return !std::all_of(begin, end, [](int i) { return i > 0; });
 }
 
-bool PlayerImpl::Swipe(Move move) {
-  switch (move) {
-    case Up:
-      break;
-    case Down:
-  }
+bool PlayerImpl::moveUp() const {
+  return false;
 }
+
+bool PlayerImpl::moveDown() const {
+  return false;
+}
+
+bool PlayerImpl::moveLeft() const {
+  return false;
+}
+
+bool PlayerImpl::moveRight() const {
+  return false;
+}
+

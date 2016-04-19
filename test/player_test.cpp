@@ -45,6 +45,7 @@ TEST(Player, can_move_tiles) {
   // TODO(boloutaredoubeni): assert that there are two tiles or that the
   // combined tile is
   // TODO(boloutaredoubeni): assert that the score is changed
+  //
 }
 
 #if 0

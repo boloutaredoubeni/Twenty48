@@ -18,7 +18,7 @@ public abstract class Player {
     public abstract boolean gameOver();
 
     /** returns false if the move was unsuccessful */
-    public abstract void swipe(Move move);
+    public abstract boolean swipe(Move move);
 
     public static native Player create();
 
@@ -86,11 +86,11 @@ public abstract class Player {
         private native boolean native_gameOver(long _nativeRef);
 
         @Override
-        public void swipe(Move move)
+        public boolean swipe(Move move)
         {
             assert !this.destroyed.get() : "trying to use a destroyed object";
-            native_swipe(this.nativeRef, move);
+            return native_swipe(this.nativeRef, move);
         }
-        private native void native_swipe(long _nativeRef, Move move);
+        private native boolean native_swipe(long _nativeRef, Move move);
     }
 }

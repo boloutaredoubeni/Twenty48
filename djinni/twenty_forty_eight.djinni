@@ -13,5 +13,5 @@ player = interface +c {
   game_state(): list<i32>;
   game_over(): bool;
   # returns false if the move was unsuccessful
-  swipe(move: move);
+  swipe(move: move): bool;
 }

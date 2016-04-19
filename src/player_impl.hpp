@@ -32,7 +32,7 @@ class PlayerImpl : public cpp::Player {
   bool HasWon();
   std::vector<int32_t> GameState();
   bool GameOver();
-  bool Swipe(Move move);
+  bool Swipe(cpp::Move move);
 
  private:
 #if 0
@@ -41,6 +41,10 @@ class PlayerImpl : public cpp::Player {
 #endif
   void addTile() const;
   bool hasMoves() const;
+  bool moveUp() const;
+  bool moveDown() const;
+  bool moveLeft() const;
+  bool moveRight() const;
 };
 
 }  // namespace impl

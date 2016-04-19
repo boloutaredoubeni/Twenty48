@@ -21,6 +21,6 @@
 - (BOOL)gameOver;
 
 /** returns false if the move was unsuccessful */
-- (void)swipe:(TFEMove)move;
+- (BOOL)swipe:(TFEMove)move;
 
 @end

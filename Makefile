@@ -15,6 +15,7 @@ djinni: ./third_party/djinni/src/
 		--cpp-namespace twentyfortyeight::cpp \
 		--ident-cpp-method FooBar \
 		--ident-cpp-enum FooBar \
+		--cpp-enum-hash-workaround false \
 		--java-out ./generated-src/java \
 		--java-package com.boloutaredoubeni.twentyfortyeight.djinni \
 		--jni-out ./generated-src/jni \
