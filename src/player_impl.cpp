@@ -1,5 +1,11 @@
 #include "player_impl.hpp"
 
+#include <random>
+
+#ifdef DEBUG
+#include <algorithm>
+#endif
+
 using namespace twentyfortyeight::cpp;
 using namespace twentyfortyeight::impl;
 
@@ -26,6 +32,12 @@ void PlayerImpl::NewGame() {
   for (auto tile : game_->board_) {
     tile = 0;
   }
+#if DEBUG
+  const auto begin = game_->board_.begin();
+  const auto end = game_->board_.end();
+  assert(std::all_of(begin, end, [](int i) { return i == 0; }));
+#endif
+  addTile();
   game_->score_ = 0;
 }
 
@@ -47,8 +59,32 @@ std::vector<int32_t> PlayerImpl::GameState() {
 bool PlayerImpl::GameOver() { return game_->is_over_; }
 
 void PlayerImpl::addTile() const {
-  for (const auto tile : game_->board_) {
+  std::random_device rd;
+  std::mt19937 generator(rd());
+  std::uniform_int_distribution<> rand_dist(dimension * dimension - 1);
+  // Loop thru all tiles
+  for (auto& tile : game_->board_) {
+    // if it is 0 find an random empty one
     if (!tile) {
+      if (rand_dist(generator) >= chance_of_four) {
+        tile = 4;
+      } else {
+        tile = 2;
+      }
+
+      // FIXME(boloutaredoubeni): select a random tile instead of the first one that is found
     }
+
+    if (hasMoves()) {
+      return;
+    }
+#if DEBUG
+    const auto begin = game_->board_.begin();
+    const auto end = game_->board_.end();
+    assert(std::any_of(begin, end, [](int i) { return i > 0; }));
+#endif
   }
+  game_->is_over_ = true;
 }
+
+bool PlayerImpl::hasMoves() const { return true; }

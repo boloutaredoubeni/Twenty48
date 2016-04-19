@@ -8,6 +8,7 @@ namespace twentyfortyeight {
 namespace impl {
 
 const static uint8_t dimension = 4;
+const static uint8_t chance_of_four = 13;
 
 using GameBoard = std::array<uint32_t, dimension * dimension>;
 
@@ -15,7 +16,7 @@ class Game final {
   uint64_t score_{0};
   bool has_won_ = false;
   bool is_over_ = false;
-  const GameBoard board_{};  // NOTE: all members are zero
+  GameBoard board_{};  // NOTE: all members are zero
   friend class PlayerImpl;
 
  public:

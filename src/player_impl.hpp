@@ -37,6 +37,7 @@ class PlayerImpl : public cpp::Player {
 
  private:
   void addTile() const;
+  bool hasMoves() const;
 };
 
 }  // namespace impl
