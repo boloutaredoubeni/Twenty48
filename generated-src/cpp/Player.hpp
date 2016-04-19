@@ -27,7 +27,10 @@ public:
 
     virtual bool GameOver() = 0;
 
-    /** returns false if the move was unsuccessful */
+    /**
+     * @param move the direction of movement
+     * @return bool false if the move was unsuccessful
+     */
     virtual bool Swipe(Move move) = 0;
 };
 

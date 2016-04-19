@@ -12,6 +12,7 @@ player = interface +c {
   has_won(): bool;
   game_state(): list<i32>;
   game_over(): bool;
-  # returns false if the move was unsuccessful
+  # @param move the direction of movement
+  # @return bool false if the move was unsuccessful
   swipe(move: move): bool;
 }

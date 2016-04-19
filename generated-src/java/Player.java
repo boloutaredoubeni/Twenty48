@@ -17,7 +17,10 @@ public abstract class Player {
 
     public abstract boolean gameOver();
 
-    /** returns false if the move was unsuccessful */
+    /**
+     * @param move the direction of movement
+     * @return bool false if the move was unsuccessful
+     */
     public abstract boolean swipe(Move move);
 
     public static native Player create();

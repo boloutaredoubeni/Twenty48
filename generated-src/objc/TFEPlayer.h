@@ -20,7 +20,10 @@
 
 - (BOOL)gameOver;
 
-/** returns false if the move was unsuccessful */
+/**
+ * @param move the direction of movement
+ * @return bool false if the move was unsuccessful
+ */
 - (BOOL)swipe:(TFEMove)move;
 
 @end
