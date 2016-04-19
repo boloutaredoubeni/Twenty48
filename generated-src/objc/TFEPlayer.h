@@ -17,4 +17,6 @@
 
 - (nonnull NSArray<NSNumber *> *)gameState;
 
+- (BOOL)gameOver;
+
 @end

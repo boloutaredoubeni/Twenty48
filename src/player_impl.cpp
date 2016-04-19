@@ -43,3 +43,12 @@ std::vector<int32_t> PlayerImpl::GameState() {
   assert(game_board.size() == 16);
   return game_board;
 }
+
+bool PlayerImpl::GameOver() { return game_->is_over_; }
+
+void PlayerImpl::addTile() const {
+  for (const auto tile : game_->board_) {
+    if (!tile) {
+    }
+  }
+}

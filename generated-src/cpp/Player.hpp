@@ -22,6 +22,8 @@ public:
     virtual bool HasWon() = 0;
 
     virtual std::vector<int32_t> GameState() = 0;
+
+    virtual bool GameOver() = 0;
 };
 
 } }  // namespace twentyfortyeight::cpp

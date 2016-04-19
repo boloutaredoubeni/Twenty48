@@ -33,6 +33,10 @@ class PlayerImpl : public cpp::Player {
   int64_t Score();
   bool HasWon();
   std::vector<int32_t> GameState();
+  bool GameOver();
+
+ private:
+  void addTile() const;
 };
 
 }  // namespace impl

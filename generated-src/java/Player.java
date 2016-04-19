@@ -15,6 +15,8 @@ public abstract class Player {
 
     public abstract ArrayList<Integer> gameState();
 
+    public abstract boolean gameOver();
+
     public static native Player create();
 
     private static final class CppProxy extends Player
@@ -71,5 +73,13 @@ public abstract class Player {
             return native_gameState(this.nativeRef);
         }
         private native ArrayList<Integer> native_gameState(long _nativeRef);
+
+        @Override
+        public boolean gameOver()
+        {
+            assert !this.destroyed.get() : "trying to use a destroyed object";
+            return native_gameOver(this.nativeRef);
+        }
+        private native boolean native_gameOver(long _nativeRef);
     }
 }
