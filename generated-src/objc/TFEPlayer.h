@@ -13,4 +13,6 @@
 
 - (int64_t)score;
 
+- (BOOL)hasWon;
+
 @end

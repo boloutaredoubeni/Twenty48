@@ -22,10 +22,18 @@ PlayerImpl::~PlayerImpl() {}
 #pragma mark PublicMethods
 #endif
 
-void PlayerImpl::NewGame() { game_->score_ = 0; }
+void PlayerImpl::NewGame() {
+  for (auto tile : game_->board_) {
+    tile = 0;
+  }
+
+  game_->score_ = 0;
+}
 
 int64_t PlayerImpl::Score() {
   const auto score = game_->score_;
   assert(score >= 0);
   return score;
 }
+
+bool PlayerImpl::HasWon() { return game_->has_won_; }

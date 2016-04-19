@@ -17,6 +17,8 @@ public:
     virtual void NewGame() = 0;
 
     virtual int64_t Score() = 0;
+
+    virtual bool HasWon() = 0;
 };
 
 } }  // namespace twentyfortyeight::cpp

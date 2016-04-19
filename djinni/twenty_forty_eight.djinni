@@ -2,4 +2,5 @@ player = interface +c {
   static create(): player;
   new_game();
   score(): i64;
+  has_won(): bool;
 }

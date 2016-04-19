@@ -13,6 +13,7 @@ using GameBoard = std::array<uint32_t, dimension * dimension>;
 
 class Game final {
   uint64_t score_;
+  bool has_won_ = false;
   const GameBoard board_{};  // NOTE: all members are zero
   friend class PlayerImpl;
 

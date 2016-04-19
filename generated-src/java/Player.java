@@ -10,6 +10,8 @@ public abstract class Player {
 
     public abstract long score();
 
+    public abstract boolean hasWon();
+
     public static native Player create();
 
     private static final class CppProxy extends Player
@@ -50,5 +52,13 @@ public abstract class Player {
             return native_score(this.nativeRef);
         }
         private native long native_score(long _nativeRef);
+
+        @Override
+        public boolean hasWon()
+        {
+            assert !this.destroyed.get() : "trying to use a destroyed object";
+            return native_hasWon(this.nativeRef);
+        }
+        private native boolean native_hasWon(long _nativeRef);
     }
 }

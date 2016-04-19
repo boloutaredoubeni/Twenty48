@@ -11,4 +11,5 @@ TEST(Player, new_game) {
   const auto player = Player::Create();
   player->NewGame();
   ASSERT_EQ(0, player->Score());
+  ASSERT_FALSE(player->HasWon());
 }

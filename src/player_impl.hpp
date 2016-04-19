@@ -31,6 +31,7 @@ class PlayerImpl : public cpp::Player {
 
   void NewGame();
   int64_t Score();
+  bool HasWon();
 };
 
 }  // namespace impl
