@@ -1,6 +1,6 @@
 
 xb-prettifier := $(shell command -v xcpretty >/dev/null 2>&1 && echo "xcpretty -c" || echo "cat")
-
+valgrind-exe := $(shell command -v valgrind)
 clean: common.gypi lib2048.gyp third_party/gtest.gyp
 	rm -rf generated-src/*
 	rm -rf build/
@@ -30,8 +30,11 @@ gyp: ./third_party/gyp/gyp djinni
 
 test: test-cpp
 
-test-cpp: gyp
+test-cpp: lib2048
 	xcodebuild -project build/lib2048.xcodeproj/ -configuration Debug -target "test" | ${xb-prettifier} \
-		&& ./build/Debug/test
+		&& ${valgrind-exe} ./build/Debug/test
+
+lib2048: gyp
+	xcodebuild -project build/lib2048.xcodeproj/ -configuration Debug -target lib2048 | ${xb-prettifier}
 
 .PHONY: djinni gyp test clean
