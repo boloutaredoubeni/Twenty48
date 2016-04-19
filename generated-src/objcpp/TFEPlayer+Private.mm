@@ -5,6 +5,7 @@
 #import "TFEPlayer.h"
 #import "DJICppWrapperCache+Private.h"
 #import "DJIError.h"
+#import "DJIMarshal+Private.h"
 #import "TFEPlayer+Private.h"
 #include <exception>
 #include <utility>
@@ -33,6 +34,19 @@ static_assert(__has_feature(objc_arc), "Djinni requires ARC to be enabled for th
     try {
         auto r = ::twentyfortyeight::cpp::Player::Create();
         return ::twentyfortyeight::objc::Player::fromCpp(r);
+    } DJINNI_TRANSLATE_EXCEPTIONS()
+}
+
+- (void)newGame {
+    try {
+        _cppRefHandle.get()->NewGame();
+    } DJINNI_TRANSLATE_EXCEPTIONS()
+}
+
+- (int64_t)score {
+    try {
+        auto r = _cppRefHandle.get()->Score();
+        return ::djinni::I64::fromCpp(r);
     } DJINNI_TRANSLATE_EXCEPTIONS()
 }
 

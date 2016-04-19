@@ -9,4 +9,8 @@
 
 + (nullable TFEPlayer *)create;
 
+- (void)newGame;
+
+- (int64_t)score;
+
 @end

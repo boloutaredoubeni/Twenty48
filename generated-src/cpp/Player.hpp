@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <cstdint>
 #include <memory>
 
 namespace twentyfortyeight { namespace cpp {
@@ -12,6 +13,10 @@ public:
     virtual ~Player() {}
 
     static std::shared_ptr<Player> Create();
+
+    virtual void NewGame() = 0;
+
+    virtual int64_t Score() = 0;
 };
 
 } }  // namespace twentyfortyeight::cpp

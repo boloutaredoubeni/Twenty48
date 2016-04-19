@@ -6,6 +6,10 @@ package com.boloutaredoubeni.twentyfortyeight.djinni;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class Player {
+    public abstract void newGame();
+
+    public abstract long score();
+
     public static native Player create();
 
     private static final class CppProxy extends Player
@@ -30,5 +34,21 @@ public abstract class Player {
             destroy();
             super.finalize();
         }
+
+        @Override
+        public void newGame()
+        {
+            assert !this.destroyed.get() : "trying to use a destroyed object";
+            native_newGame(this.nativeRef);
+        }
+        private native void native_newGame(long _nativeRef);
+
+        @Override
+        public long score()
+        {
+            assert !this.destroyed.get() : "trying to use a destroyed object";
+            return native_score(this.nativeRef);
+        }
+        private native long native_score(long _nativeRef);
     }
 }
