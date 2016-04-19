@@ -18,4 +18,5 @@ djinni: ./third_party/djinni/src/
 		--objcpp-out ./generated-src/objcpp \
 		--objcpp-namespace twentyfortyeight::objc
 
+
 .PHONY: djinni

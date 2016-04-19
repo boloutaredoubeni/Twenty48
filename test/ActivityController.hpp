@@ -1,3 +1,7 @@
 #pragma once
 
-namespace twentyfortyeigh
+#include "GameUI.hpp"
+
+namespace twentyfortyeight {
+namespace testing {}  // namespace testing
+}  // namespace twentyfortyeight
