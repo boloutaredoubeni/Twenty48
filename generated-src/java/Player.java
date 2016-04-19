@@ -3,6 +3,7 @@
 
 package com.boloutaredoubeni.twentyfortyeight.djinni;
 
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class Player {
@@ -11,6 +12,8 @@ public abstract class Player {
     public abstract long score();
 
     public abstract boolean hasWon();
+
+    public abstract ArrayList<Integer> gameState();
 
     public static native Player create();
 
@@ -60,5 +63,13 @@ public abstract class Player {
             return native_hasWon(this.nativeRef);
         }
         private native boolean native_hasWon(long _nativeRef);
+
+        @Override
+        public ArrayList<Integer> gameState()
+        {
+            assert !this.destroyed.get() : "trying to use a destroyed object";
+            return native_gameState(this.nativeRef);
+        }
+        private native ArrayList<Integer> native_gameState(long _nativeRef);
     }
 }

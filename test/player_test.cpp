@@ -13,3 +13,9 @@ TEST(Player, new_game) {
   ASSERT_EQ(0, player->Score());
   ASSERT_FALSE(player->HasWon());
 }
+
+TEST(Player, can_notify_view_of_game_board) {
+  const auto player = Player::Create();
+  const auto board = player->GameState();
+  ASSERT_EQ(16, board.size());
+}

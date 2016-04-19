@@ -26,7 +26,6 @@ void PlayerImpl::NewGame() {
   for (auto tile : game_->board_) {
     tile = 0;
   }
-
   game_->score_ = 0;
 }
 
@@ -37,3 +36,10 @@ int64_t PlayerImpl::Score() {
 }
 
 bool PlayerImpl::HasWon() { return game_->has_won_; }
+
+std::vector<int32_t> PlayerImpl::GameState() {
+  const auto game_board =
+      std::vector<int32_t>(game_->board_.begin(), game_->board_.end());
+  assert(game_board.size() == 16);
+  return game_board;
+}

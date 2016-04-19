@@ -3,4 +3,5 @@ player = interface +c {
   new_game();
   score(): i64;
   has_won(): bool;
+  game_state(): list<i32>;
 }

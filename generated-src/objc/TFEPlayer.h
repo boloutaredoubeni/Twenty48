@@ -15,4 +15,6 @@
 
 - (BOOL)hasWon;
 
+- (nonnull NSArray<NSNumber *> *)gameState;
+
 @end

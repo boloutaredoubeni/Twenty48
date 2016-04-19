@@ -58,4 +58,14 @@ CJNIEXPORT jboolean JNICALL Java_com_boloutaredoubeni_twentyfortyeight_djinni_Pl
     } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, 0 /* value doesn't matter */)
 }
 
+CJNIEXPORT jobject JNICALL Java_com_boloutaredoubeni_twentyfortyeight_djinni_Player_00024CppProxy_native_1gameState(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
+{
+    try {
+        DJINNI_FUNCTION_PROLOGUE1(jniEnv, nativeRef);
+        const auto& ref = ::djinni::objectFromHandleAddress<::twentyfortyeight::cpp::Player>(nativeRef);
+        auto r = ref->GameState();
+        return ::djinni::release(::djinni::List<::djinni::I32>::fromCpp(jniEnv, r));
+    } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, 0 /* value doesn't matter */)
+}
+
 } }  // namespace twentyfortyeight::jni

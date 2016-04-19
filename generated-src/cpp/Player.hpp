@@ -5,6 +5,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <vector>
 
 namespace twentyfortyeight { namespace cpp {
 
@@ -19,6 +20,8 @@ public:
     virtual int64_t Score() = 0;
 
     virtual bool HasWon() = 0;
+
+    virtual std::vector<int32_t> GameState() = 0;
 };
 
 } }  // namespace twentyfortyeight::cpp
