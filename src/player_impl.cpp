@@ -1,10 +1,7 @@
 #include "player_impl.hpp"
 
 #include <random>
-
-#ifdef DEBUG
 #include <algorithm>
-#endif
 
 using namespace twentyfortyeight::cpp;
 using namespace twentyfortyeight::impl;
@@ -32,11 +29,11 @@ void PlayerImpl::NewGame() {
   for (auto tile : game_->board_) {
     tile = 0;
   }
-#if DEBUG
+
   const auto begin = game_->board_.begin();
   const auto end = game_->board_.end();
   assert(std::all_of(begin, end, [](int i) { return i == 0; }));
-#endif
+
   addTile();
   game_->score_ = 0;
 }
@@ -72,19 +69,23 @@ void PlayerImpl::addTile() const {
         tile = 2;
       }
 
-      // FIXME(boloutaredoubeni): select a random tile instead of the first one that is found
+      // FIXME(boloutaredoubeni): select a random tile instead of the first one
+      // that is found
     }
 
     if (hasMoves()) {
       return;
     }
-#if DEBUG
+
     const auto begin = game_->board_.begin();
     const auto end = game_->board_.end();
     assert(std::any_of(begin, end, [](int i) { return i > 0; }));
-#endif
   }
   game_->is_over_ = true;
 }
 
-bool PlayerImpl::hasMoves() const { return true; }
+bool PlayerImpl::hasMoves() const {
+  const auto begin = game_->board_.begin();
+  const auto end = game_->board_.end();
+  return !std::all_of(begin, end, [](int i) { return i > 0; });
+}
