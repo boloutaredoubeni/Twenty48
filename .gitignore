@@ -99,3 +99,5 @@ jspm_packages
 *.exe
 *.out
 *.app
+
+./generated-src/
