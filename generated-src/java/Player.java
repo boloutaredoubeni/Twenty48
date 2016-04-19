@@ -17,6 +17,7 @@ public abstract class Player {
 
     public abstract boolean gameOver();
 
+    /** returns false if the move was unsuccessful */
     public abstract void swipe(Move move);
 
     public static native Player create();

@@ -91,3 +91,11 @@ bool PlayerImpl::hasMoves() const {
   const auto end = game_->board_.end();
   return !std::all_of(begin, end, [](int i) { return i > 0; });
 }
+
+bool PlayerImpl::Swipe(Move move) {
+  switch (move) {
+    case Up:
+      break;
+    case Down:
+  }
+}

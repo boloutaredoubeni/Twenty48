@@ -27,6 +27,7 @@ public:
 
     virtual bool GameOver() = 0;
 
+    /** returns false if the move was unsuccessful */
     virtual void Swipe(Move move) = 0;
 };
 
