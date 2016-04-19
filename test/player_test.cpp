@@ -38,12 +38,12 @@ TEST(Player, new_game_adds_a_tile) {
 
   ASSERT_EQ(0, count_values(player->GameState()));
   player->NewGame();
-  ASSERT_EQ(1, count_values(player->GameState()));
+  ASSERT_EQ(2, count_values(player->GameState()));
 }
 
 TEST(Player, can_move_tiles) {
   // TODO(boloutaredoubeni): assert that there are two tiles or that the
-  // combined tile is
+  // combined tiles is
   // TODO(boloutaredoubeni): assert that the score is changed
   //
 }

@@ -73,6 +73,8 @@ bool PlayerImpl::Swipe(Move move) {
 }
 
 void PlayerImpl::addTile() const {
+  bool is_new_game = std::all_of(game_->board_.begin(), game_->board_.end(),
+                                 [](int i) { return i == 0; });
   std::random_device rd;
   std::mt19937 generator(rd());
   std::uniform_int_distribution<> rand_dist(dimension * dimension - 1);
@@ -85,9 +87,14 @@ void PlayerImpl::addTile() const {
       } else {
         tile = 2;
       }
-
       // FIXME(boloutaredoubeni): select a random tile instead of the first one
       // that is found
+    }
+
+    if (is_new_game) {
+      is_new_game = false;
+      // loop again add another tile
+      continue;
     }
 
     if (hasMoves()) {
@@ -107,19 +114,10 @@ bool PlayerImpl::hasMoves() const {
   return !std::all_of(begin, end, [](int i) { return i > 0; });
 }
 
-bool PlayerImpl::moveUp() const {
-  return false;
-}
+bool PlayerImpl::moveUp() const { return false; }
 
-bool PlayerImpl::moveDown() const {
-  return false;
-}
+bool PlayerImpl::moveDown() const { return false; }
 
-bool PlayerImpl::moveLeft() const {
-  return false;
-}
+bool PlayerImpl::moveLeft() const { return false; }
 
-bool PlayerImpl::moveRight() const {
-  return false;
-}
-
+bool PlayerImpl::moveRight() const { return false; }
