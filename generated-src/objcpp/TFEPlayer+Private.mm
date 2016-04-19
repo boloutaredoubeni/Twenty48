@@ -6,7 +6,7 @@
 #import "DJICppWrapperCache+Private.h"
 #import "DJIError.h"
 #import "DJIMarshal+Private.h"
-#import "TFEGameStateChangedListener+Private.h"
+#import "TFEPlayer+Private.h"
 #include <exception>
 #include <utility>
 
@@ -30,15 +30,18 @@ static_assert(__has_feature(objc_arc), "Djinni requires ARC to be enabled for th
     return self;
 }
 
-- (void)create:(nullable id<TFEGameStateChangedListener>)listener {
++ (nullable TFEPlayer *)create {
     try {
-        _cppRefHandle.get()->Create(::twentyfortyeight::objc::GameStateChangedListener::toCpp(listener));
+        auto r = ::twentyfortyeight::cpp::Player::Create();
+        return ::twentyfortyeight::objc::Player::fromCpp(r);
     } DJINNI_TRANSLATE_EXCEPTIONS()
 }
 
-- (void)moveTile:(TFEMove)move {
+- (void)moveTile:(TFEMove)move
+            from:(int8_t)from {
     try {
-        _cppRefHandle.get()->MoveTile(::djinni::Enum<::twentyfortyeight::cpp::Move, TFEMove>::toCpp(move));
+        _cppRefHandle.get()->MoveTile(::djinni::Enum<::twentyfortyeight::cpp::Move, TFEMove>::toCpp(move),
+                                      ::djinni::I8::toCpp(from));
     } DJINNI_TRANSLATE_EXCEPTIONS()
 }
 

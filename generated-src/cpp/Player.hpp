@@ -3,20 +3,20 @@
 
 #pragma once
 
+#include <cstdint>
 #include <memory>
 
 namespace twentyfortyeight { namespace cpp {
 
-class GameStateChangedListener;
 enum class Move;
 
 class Player {
 public:
     virtual ~Player() {}
 
-    virtual void Create(const std::shared_ptr<GameStateChangedListener> & listener) = 0;
+    static std::shared_ptr<Player> Create();
 
-    virtual void MoveTile(Move move) = 0;
+    virtual void MoveTile(Move move, int8_t from) = 0;
 
     virtual void NewGame() = 0;
 

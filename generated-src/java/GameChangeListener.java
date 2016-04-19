@@ -3,6 +3,6 @@
 
 package com.boloutaredoubeni.twentyfortyeight.djinni;
 
-public abstract class GameStateChangedListener {
+public abstract class GameChangeListener {
     public abstract void onGameStateChanged();
 }

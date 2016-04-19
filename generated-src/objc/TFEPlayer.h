@@ -3,14 +3,15 @@
 
 #import "TFEMove.h"
 #import <Foundation/Foundation.h>
-@protocol TFEGameStateChangedListener;
+@class TFEPlayer;
 
 
 @interface TFEPlayer : NSObject
 
-- (void)create:(nullable id<TFEGameStateChangedListener>)listener;
++ (nullable TFEPlayer *)create;
 
-- (void)moveTile:(TFEMove)move;
+- (void)moveTile:(TFEMove)move
+            from:(int8_t)from;
 
 - (void)newGame;
 

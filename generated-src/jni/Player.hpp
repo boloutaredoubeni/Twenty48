@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Player.hpp"
 #include "djinni_support.hpp"
+#include "player.hpp"
 
 namespace twentyfortyeight { namespace jni {
 

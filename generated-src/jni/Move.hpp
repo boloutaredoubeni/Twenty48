@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "Move.hpp"
 #include "djinni_support.hpp"
+#include "move.hpp"
 
 namespace twentyfortyeight { namespace jni {
 

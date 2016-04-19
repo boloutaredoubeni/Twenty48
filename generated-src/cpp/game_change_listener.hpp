@@ -5,9 +5,9 @@
 
 namespace twentyfortyeight { namespace cpp {
 
-class GameStateChangedListener {
+class GameChangeListener {
 public:
-    virtual ~GameStateChangedListener() {}
+    virtual ~GameChangeListener() {}
 
     virtual void OnGameStateChanged() = 0;
 };

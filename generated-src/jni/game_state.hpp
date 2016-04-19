@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include "GameState.hpp"
 #include "djinni_support.hpp"
+#include "game_state.hpp"
 
 namespace twentyfortyeight { namespace jni {
 

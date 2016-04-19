@@ -4,7 +4,7 @@
 #import <Foundation/Foundation.h>
 
 
-@protocol TFEGameStateChangedListener
+@protocol TFEGameChangeListener
 
 - (void)onGameStateChanged;
 

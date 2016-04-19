@@ -6,13 +6,13 @@ package com.boloutaredoubeni.twentyfortyeight.djinni;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class Player {
-    public abstract void create(GameStateChangedListener listener);
-
-    public abstract void moveTile(Move move);
+    public abstract void moveTile(Move move, byte from);
 
     public abstract void newGame();
 
     public abstract void endGame();
+
+    public static native Player create();
 
     private static final class CppProxy extends Player
     {
@@ -38,20 +38,12 @@ public abstract class Player {
         }
 
         @Override
-        public void create(GameStateChangedListener listener)
+        public void moveTile(Move move, byte from)
         {
             assert !this.destroyed.get() : "trying to use a destroyed object";
-            native_create(this.nativeRef, listener);
+            native_moveTile(this.nativeRef, move, from);
         }
-        private native void native_create(long _nativeRef, GameStateChangedListener listener);
-
-        @Override
-        public void moveTile(Move move)
-        {
-            assert !this.destroyed.get() : "trying to use a destroyed object";
-            native_moveTile(this.nativeRef, move);
-        }
-        private native void native_moveTile(long _nativeRef, Move move);
+        private native void native_moveTile(long _nativeRef, Move move, byte from);
 
         @Override
         public void newGame()

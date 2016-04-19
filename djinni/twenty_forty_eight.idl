@@ -13,8 +13,8 @@ move = enum {
 }
 
 player = interface +c {
-  create(listener: game_state_changed_listener);
-  move_tile(move: move);
+  static create(): player;
+  move_tile(move: move, from: i8);
   new_game();
   end_game();
 }
