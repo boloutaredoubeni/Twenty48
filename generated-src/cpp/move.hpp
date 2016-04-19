@@ -8,10 +8,10 @@
 namespace twentyfortyeight { namespace cpp {
 
 enum class Move : int {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
+    Up,
+    Down,
+    Left,
+    Right,
 };
 
 } }  // namespace twentyfortyeight::cpp

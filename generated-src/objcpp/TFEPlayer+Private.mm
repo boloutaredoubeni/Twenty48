@@ -71,6 +71,12 @@ static_assert(__has_feature(objc_arc), "Djinni requires ARC to be enabled for th
     } DJINNI_TRANSLATE_EXCEPTIONS()
 }
 
+- (void)swipe:(TFEMove)move {
+    try {
+        _cppRefHandle.get()->Swipe(::djinni::Enum<::twentyfortyeight::cpp::Move, TFEMove>::toCpp(move));
+    } DJINNI_TRANSLATE_EXCEPTIONS()
+}
+
 namespace twentyfortyeight { namespace objc {
 
 auto Player::toCpp(ObjcType objc) -> CppType

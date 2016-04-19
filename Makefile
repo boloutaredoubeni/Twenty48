@@ -14,6 +14,7 @@ djinni: ./third_party/djinni/src/
 		--cpp-out ./generated-src/cpp \
 		--cpp-namespace twentyfortyeight::cpp \
 		--ident-cpp-method FooBar \
+		--ident-cpp-enum FooBar \
 		--java-out ./generated-src/java \
 		--java-package com.boloutaredoubeni.twentyfortyeight.djinni \
 		--jni-out ./generated-src/jni \

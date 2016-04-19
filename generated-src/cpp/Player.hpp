@@ -9,6 +9,8 @@
 
 namespace twentyfortyeight { namespace cpp {
 
+enum class Move;
+
 class Player {
 public:
     virtual ~Player() {}
@@ -24,6 +26,8 @@ public:
     virtual std::vector<int32_t> GameState() = 0;
 
     virtual bool GameOver() = 0;
+
+    virtual void Swipe(Move move) = 0;
 };
 
 } }  // namespace twentyfortyeight::cpp

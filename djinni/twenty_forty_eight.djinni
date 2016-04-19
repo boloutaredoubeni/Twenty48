@@ -12,4 +12,5 @@ player = interface +c {
   has_won(): bool;
   game_state(): list<i32>;
   game_over(): bool;
+  swipe(move: move);
 }
