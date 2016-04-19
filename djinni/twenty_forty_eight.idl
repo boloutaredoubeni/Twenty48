@@ -19,6 +19,6 @@ player = interface +c {
   end_game();
 }
 
-game_state_changed_listener = interface +o +j {
+game_change_listener = interface +o +j {
   on_game_state_changed();
 }

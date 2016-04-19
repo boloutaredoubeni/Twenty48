@@ -4,3 +4,6 @@
 [submodule "third_party/djinni"]
 	path = third_party/djinni
 	url = https://github.com/dropbox/djinni
+[submodule "third_party/gyp"]
+	path = third_party/gyp
+	url = https://chromium.googlesource.com/external/gyp
