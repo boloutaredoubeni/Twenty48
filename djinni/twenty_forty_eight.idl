@@ -1,0 +1,24 @@
+# NOTE: just for design, will be deleted
+game_state = interface +c {
+  score(): i16;
+  draw();
+  win(): bool;
+}
+
+move = enum {
+  up;
+  down;
+  left;
+  right;
+}
+
+player = interface +c {
+  create(listener: game_state_changed_listener);
+  move_tile(move: move);
+  new_game();
+  end_game();
+}
+
+game_state_changed_listener = interface +o +j {
+  on_game_state_changed();
+}

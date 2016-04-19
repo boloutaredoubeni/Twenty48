@@ -4,13 +4,8 @@
 #import <Foundation/Foundation.h>
 
 
-/** NOTE: just for design, will be deleted */
-@interface TFEGameState : NSObject
+@protocol TFEGameStateChangedListener
 
-- (int16_t)score;
-
-- (void)draw;
-
-- (BOOL)win;
+- (void)onGameStateChanged;
 
 @end

@@ -1,4 +1,0 @@
-game_state = interface +c {
-  score(): i16;
-  draw();
-}

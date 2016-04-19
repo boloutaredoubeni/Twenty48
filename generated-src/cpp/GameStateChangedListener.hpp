@@ -3,20 +3,13 @@
 
 #pragma once
 
-#include <cstdint>
-
 namespace twentyfortyeight { namespace cpp {
 
-/** NOTE: just for design, will be deleted */
-class GameState {
+class GameStateChangedListener {
 public:
-    virtual ~GameState() {}
+    virtual ~GameStateChangedListener() {}
 
-    virtual int16_t Score() = 0;
-
-    virtual void Draw() = 0;
-
-    virtual bool Win() = 0;
+    virtual void OnGameStateChanged() = 0;
 };
 
 } }  // namespace twentyfortyeight::cpp
