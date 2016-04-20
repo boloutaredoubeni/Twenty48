@@ -27,6 +27,8 @@
         'lib2048'
       ],
       'sources': [
+        # XXX(boloutaredoubeni): djinni support files need to be included twice?
+        '<!@(python scripts/glob.py third_party/djinni/support-lib/objc/ *.mm)'
         '<!@(python scripts/glob.py generated-src/objc/ *.h *.m)',
         '<!@(python scripts/glob.py generated-src/objcpp/ *.h *.mm)',
       ],
@@ -34,12 +36,12 @@
         'generated-src/objc',
         'generated-src/objcpp',
       ],
-    #   'all_dependent_settings': {
-    #     'include_dirs': [
-    #       'generated-src/objc',
-    #       'generated-src/objcpp',
-    #     ],
-    #   },
+      'all_dependent_settings': {
+        'include_dirs': [
+          'generated-src/objc',
+          'generated-src/objcpp',
+        ],
+      },
     },
     {
       'target_name': 'test',
