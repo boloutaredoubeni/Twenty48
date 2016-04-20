@@ -23,6 +23,28 @@
       },
     },
     {
+        'target_name': 'lib2048_ios',
+        'type': 'static_library',
+        'dependencies': [
+            'third_party/djinni/support-lib/support_lib.gyp:djinni_objc',
+            'lib2048'
+        ],
+        'sources': [
+            '<!@(python scripts/glob.py generated-src/objc/ *.h *.m)',
+            '<!@(python scripts/glob.py generated-src/objcpp/ *.h *.mm)',
+        ],
+        'include_dirs': [
+            'generated-src/objc',
+            'generated-src/objcpp',
+        ],
+        'all_dependent_settings': {
+            'include_dirs': [
+                'generated-src/objc',
+                'generated-src/objcpp',
+            ],
+        },
+    },
+    {
       'target_name': 'test',
       'type': 'executable',
       'dependencies': [

@@ -39,4 +39,8 @@ test-cpp: lib2048
 lib2048: gyp
 	xcodebuild -project build/lib2048.xcodeproj/ -configuration Debug -target lib2048 | ${xb-prettifier}
 
+lib2048_ios: lib2048
+	xcodebuild -project build/lib2048.xcodeproj/ -configuration Debug -target lib2048_ios | ${xb-prettifier}
+
+
 .PHONY: djinni gyp test clean

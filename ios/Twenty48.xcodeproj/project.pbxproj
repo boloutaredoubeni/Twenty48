@@ -26,6 +26,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		001D0BFC1CC724520049AA5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 001D0BF51CC724520049AA5B /* lib2048.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9F4F155D82B0BA2742006BC0;
+			remoteInfo = lib2048;
+		};
+		001D0BFE1CC724520049AA5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 001D0BF51CC724520049AA5B /* lib2048.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A8D65FACBC4CECC7C73D3186;
+			remoteInfo = test;
+		};
 		00C302AB1ABCB8CE00DB3ED1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -108,6 +122,7 @@
 /* Begin PBXFileReference section */
 		001D0BF21CC718640049AA5B /* PlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerManager.h; path = Twenty48/PlayerManager.h; sourceTree = "<group>"; };
 		001D0BF31CC718640049AA5B /* PlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerManager.m; path = Twenty48/PlayerManager.m; sourceTree = "<group>"; };
+		001D0BF51CC724520049AA5B /* lib2048.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lib2048.xcodeproj; path = ../build/lib2048.xcodeproj; sourceTree = "<group>"; };
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
 		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
@@ -159,6 +174,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		001D0BF61CC724520049AA5B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				001D0BFD1CC724520049AA5B /* lib2048.a */,
+				001D0BFF1CC724520049AA5B /* test */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		00C302A81ABCB8CE00DB3ED1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,6 +316,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				001D0BF51CC724520049AA5B /* lib2048.xcodeproj */,
 				13B07FAE1A68108700A75B9A /* Twenty48 */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* Twenty48Tests */,
@@ -377,6 +402,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 001D0BF61CC724520049AA5B /* Products */;
+					ProjectRef = 001D0BF51CC724520049AA5B /* lib2048.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
@@ -426,6 +455,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		001D0BFD1CC724520049AA5B /* lib2048.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = lib2048.a;
+			remoteRef = 001D0BFC1CC724520049AA5B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		001D0BFF1CC724520049AA5B /* test */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = test;
+			remoteRef = 001D0BFE1CC724520049AA5B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -627,6 +670,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Twenty48;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../generated-src/objc $(SRCROOT)/../../generated-src/objcpp $(SRCROOT)/../../third_party/djinni/support-lib/objc";
 			};
 			name = Debug;
 		};
@@ -643,6 +687,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Twenty48;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../generated-src/objc $(SRCROOT)/../../generated-src/objcpp $(SRCROOT)/../../third_party/djinni/support-lib/objc";
 			};
 			name = Release;
 		};
