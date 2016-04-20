@@ -99,3 +99,7 @@ jspm_packages
 *.exe
 *.out
 *.app
+
+GypAndroid.mk
+lib2048.target.mk
+lib2048_jni.target.mk

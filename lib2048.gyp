@@ -27,8 +27,7 @@
         'lib2048'
       ],
       'sources': [
-        # XXX(boloutaredoubeni): djinni support files need to be included twice?
-        '<!@(python scripts/glob.py third_party/djinni/support-lib/objc/ *.mm)'
+        '<!@(python scripts/glob.py third_party/djinni/support-lib/objc/ *.h *.mm)'
         '<!@(python scripts/glob.py generated-src/objc/ *.h *.m)',
         '<!@(python scripts/glob.py generated-src/objcpp/ *.h *.mm)',
       ],
@@ -42,6 +41,30 @@
           'generated-src/objcpp',
         ],
       },
+    },
+    {
+        'target_name': 'lib2048_jni',
+        'type': 'shared_library',
+        'dependencies': [
+            'third_party/djinni/support-lib/support_lib.gyp:djinni_jni',
+            'lib2048'
+        ],
+        'ldflags': [
+            '-llog',
+            '-Wl,--build-id,--gc-sections,--exclude-libs,ALL'
+        ],
+        'sources': [
+          '<!@(python scripts/glob.py third_party/djinni/support-lib/jni/ *.hpp *.cpp)',
+          '<!@(python scripts/glob.py generated-src/jni/ *.hpp *.cpp)'
+        ],
+        'include_dirs': [
+          'generated-src/jni'
+        ],
+        'all_dependent_settings': {
+          'include_dirs': [
+            'generated-src/jni'
+          ]
+        }
     },
     {
       'target_name': 'test',
