@@ -114,10 +114,22 @@ bool PlayerImpl::hasMoves() const {
   return !std::all_of(begin, end, [](int i) { return i > 0; });
 }
 
-bool PlayerImpl::moveUp() const { return false; }
+bool PlayerImpl::moveUp() const {
+  addTile();
+  return false;
+}
 
-bool PlayerImpl::moveDown() const { return false; }
+bool PlayerImpl::moveDown() const {
+  addTile();
+  return false;
+}
 
-bool PlayerImpl::moveLeft() const { return false; }
+bool PlayerImpl::moveLeft() const {
+  addTile();
+  return false;
+}
 
-bool PlayerImpl::moveRight() const { return false; }
+bool PlayerImpl::moveRight() const {
+  addTile();
+  return false;
+}

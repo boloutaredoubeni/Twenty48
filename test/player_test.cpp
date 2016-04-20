@@ -11,6 +11,7 @@ using namespace twentyfortyeight::cpp;
 #pragma mark New Game Tests
 Verify how the program behaves when the player starts a new game
 #endif
+
 TEST(Player, ctor_dtor) { const auto player = Player::Create(); }
 
 TEST(Player, new_game) {
@@ -45,7 +46,12 @@ TEST(Player, can_move_tiles) {
   // TODO(boloutaredoubeni): assert that there are two tiles or that the
   // combined tiles is
   // TODO(boloutaredoubeni): assert that the score is changed
-  //
+  // TODO(boloutaredoubeni): all tile are as far as they can possible be in the
+  // direction they were swiped
+  // TODO(boloutaredoubeni): if two consecutive tiles are matches they are
+  // combined
+  // TODO(boloutaredoubeni): after a move is finished and addTile() is called is
+  // should notify is available moves are possible
 }
 
 #if 0
