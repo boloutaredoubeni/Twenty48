@@ -2,7 +2,7 @@
 xb-prettifier := $(shell command -v xcpretty >/dev/null 2>&1 && echo "xcpretty -c" || echo "cat")
 valgrind-exe := $(shell command -v valgrind)
 
-all: ios
+all: ios_app android_app
 
 clean:  lib2048.gyp third_party/gtest.gyp
 	rm -rf generated-src/*
@@ -57,5 +57,11 @@ android: gyp_android
 gyp_android: djinni
 	PYTHONPATH=third_party/gyp/pylib ANDROID_BUILD_TOP=$(shell dirname `which ndk-build`) ./third_party/gyp/gyp --depth=. -f android 	-DOS=android -I./third_party/djinni/common.gypi lib2048.gyp --root-target=lib2048_jni
 
+
+ios_app: ios
+	xcodebuild -workspace ios/Twenty48.xcworkspace -scheme Twenty48 -configuration Debug -sdk iphonesimulator | ${xb-prettifier}
+	
+android_app: android
+	react-native run-android
 
 .PHONY: djinni gyp test clean ios android

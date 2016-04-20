@@ -103,3 +103,5 @@ jspm_packages
 GypAndroid.mk
 lib2048.target.mk
 lib2048_jni.target.mk
+
+/.vscode
