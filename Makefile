@@ -2,11 +2,12 @@
 xb-prettifier := $(shell command -v xcpretty >/dev/null 2>&1 && echo "xcpretty -c" || echo "cat")
 valgrind-exe := $(shell command -v valgrind)
 
-all: ios_app android_app
+all: test ios_app android_app
 
 clean:  lib2048.gyp third_party/gtest.gyp
 	rm -rf generated-src/*
 	rm -rf build/*
+	rm -rf android/app/src/main/java/com/boloutaredoubeni/twenty48/djinni/*
 	./third_party/gyp/tools/pretty_gyp.py lib2048.gyp > lib_tmp && mv lib_tmp lib2048.gyp
 	./third_party/gyp/tools/pretty_gyp.py third_party/gtest.gyp > gtest_tmp && mv gtest_tmp third_party/gtest.gyp
 
@@ -22,7 +23,7 @@ djinni: ./third_party/djinni/src/ third_party/gyp/
 		--ident-cpp-method FooBar \
 		--ident-cpp-enum FooBar \
 		--cpp-enum-hash-workaround false \
-		--java-out ./generated-src/java \
+		--java-out ./android/app/src/main/java/com/boloutaredoubeni/twenty48/djinni \
 		--java-package com.boloutaredoubeni.twenty48.djinni \
 		--jni-out ./generated-src/jni \
 		--jni-namespace twenty48::jni \

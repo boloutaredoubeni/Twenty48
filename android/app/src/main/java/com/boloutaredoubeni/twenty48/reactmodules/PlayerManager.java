@@ -5,6 +5,7 @@ import android.util.Log;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.boloutaredoubeni.twenty48.djinni.Player;
 
 /**
  * Copyright 2016 Boloutare Doubeni
@@ -15,15 +16,15 @@ public class PlayerManager extends ReactContextBaseJavaModule {
 
   static {
     try {
-      System.load("2048_jni");
-    } catch (UnsatifiedLinkError e) {
+      System.loadLibrary("2048_jni");
+    } catch (UnsatisfiedLinkError e) {
       Log.e(TAG, "The library was not loaded");
       System.exit(1);
     }
   }
-  
-  com.boloutaredoubeni.twentyfortyeight.djinni.Player player;
-  
+
+  Player player;
+
   public PlayerManager(ReactApplicationContext context) {
     super(context);
   }
@@ -36,8 +37,9 @@ public class PlayerManager extends ReactContextBaseJavaModule {
   @ReactMethod
   public void startNewGame() {
     if (player == null) {
-      player = com.boloutaredoubeni.twentyfortyeight.djinni.Player.create();
+      player = Player.create();
     }
-    player.startNewGame();
+    player.newGame();
+    Log.d(TAG, "The game has been created!!");
   }
 }

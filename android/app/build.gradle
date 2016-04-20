@@ -120,7 +120,7 @@ android {
     }
     sourceSets {
         main {
-            java.srcDirs = ['src/main/java', '../../generated-src/java']
+//            java.srcDirs = ['src/main/java', '../../../generated-src/java']
             jniLibs.srcDirs = ['libs']
             jni.srcDirs = [
                 // '../../generated-src/jni',

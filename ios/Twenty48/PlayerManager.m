@@ -4,14 +4,14 @@
 #import "RCTLog.h"
 
 @implementation PlayerManager {
-  TFEPlayer *_player;
+  T48Player *_player;
 }
 
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(startNewGame) {
   if (!_player) {
-    _player = [TFEPlayer create];
+    _player = [T48Player create];
   }
   [_player newGame];
   RCTLogInfo(@"Starting a new game");
