@@ -9,7 +9,8 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View
+  View,
+  NativeModules,
 } from 'react-native';
 
 class Twenty48 extends Component {
@@ -49,5 +50,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+var PlayerManager = NativeModules.PlayerManager;
+PlayerManager.startNewGame();
+
 
 AppRegistry.registerComponent('Twenty48', () => Twenty48);
