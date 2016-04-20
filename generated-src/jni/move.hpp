@@ -6,11 +6,11 @@
 #include "djinni_support.hpp"
 #include "move.hpp"
 
-namespace twentyfortyeight { namespace jni {
+namespace twenty48 { namespace jni {
 
 class Move final : ::djinni::JniEnum {
 public:
-    using CppType = ::twentyfortyeight::cpp::Move;
+    using CppType = ::twenty48::cpp::Move;
     using JniType = jobject;
 
     using Boxed = Move;
@@ -19,8 +19,8 @@ public:
     static ::djinni::LocalRef<JniType> fromCpp(JNIEnv* jniEnv, CppType c) { return ::djinni::JniClass<Move>::get().create(jniEnv, static_cast<jint>(c)); }
 
 private:
-    Move() : JniEnum("com/boloutaredoubeni/twentyfortyeight/djinni/Move") {}
+    Move() : JniEnum("com/boloutaredoubeni/twenty48/djinni/Move") {}
     friend ::djinni::JniClass<Move>;
 };
 
-} }  // namespace twentyfortyeight::jni
+} }  // namespace twenty48::jni

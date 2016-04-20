@@ -1,6 +1,6 @@
 #include "game.hpp"
 
-using namespace twentyfortyeight::impl;
+using namespace twenty48::impl;
 
 Game::Game() {}
 

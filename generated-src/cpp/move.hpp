@@ -3,7 +3,7 @@
 
 #pragma once
 
-namespace twentyfortyeight { namespace cpp {
+namespace twenty48 { namespace cpp {
 
 enum class Move : int {
     Up,
@@ -12,4 +12,4 @@ enum class Move : int {
     Right,
 };
 
-} }  // namespace twentyfortyeight::cpp
+} }  // namespace twenty48::cpp

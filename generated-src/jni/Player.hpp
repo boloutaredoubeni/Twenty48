@@ -6,12 +6,12 @@
 #include "djinni_support.hpp"
 #include "player.hpp"
 
-namespace twentyfortyeight { namespace jni {
+namespace twenty48 { namespace jni {
 
-class Player final : ::djinni::JniInterface<::twentyfortyeight::cpp::Player, Player> {
+class Player final : ::djinni::JniInterface<::twenty48::cpp::Player, Player> {
 public:
-    using CppType = std::shared_ptr<::twentyfortyeight::cpp::Player>;
-    using CppOptType = std::shared_ptr<::twentyfortyeight::cpp::Player>;
+    using CppType = std::shared_ptr<::twenty48::cpp::Player>;
+    using CppOptType = std::shared_ptr<::twenty48::cpp::Player>;
     using JniType = jobject;
 
     using Boxed = Player;
@@ -25,8 +25,8 @@ public:
 private:
     Player();
     friend ::djinni::JniClass<Player>;
-    friend ::djinni::JniInterface<::twentyfortyeight::cpp::Player, Player>;
+    friend ::djinni::JniInterface<::twenty48::cpp::Player, Player>;
 
 };
 
-} }  // namespace twentyfortyeight::jni
+} }  // namespace twenty48::jni

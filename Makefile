@@ -18,18 +18,18 @@ djinni: ./third_party/djinni/src/ third_party/gyp/
 	./third_party/djinni/src/run \
 		--idl ./djinni/twenty_forty_eight.djinni \
 		--cpp-out ./generated-src/cpp \
-		--cpp-namespace twentyfortyeight::cpp \
+		--cpp-namespace twenty48::cpp \
 		--ident-cpp-method FooBar \
 		--ident-cpp-enum FooBar \
 		--cpp-enum-hash-workaround false \
 		--java-out ./generated-src/java \
-		--java-package com.boloutaredoubeni.twentyfortyeight.djinni \
+		--java-package com.boloutaredoubeni.twenty48.djinni \
 		--jni-out ./generated-src/jni \
-		--jni-namespace twentyfortyeight::jni \
+		--jni-namespace twenty48::jni \
 		--objc-out ./generated-src/objc \
-		--objc-type-prefix TFE \
+		--objc-type-prefix T48 \
 		--objcpp-out ./generated-src/objcpp \
-		--objcpp-namespace twentyfortyeight::objc
+		--objcpp-namespace twenty48::objc
 
 
 lib2048.xcodeproj: third_party/gyp/ djinni

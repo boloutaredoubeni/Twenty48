@@ -3,7 +3,7 @@
 #include "player.hpp"
 #include "game.hpp"
 
-namespace twentyfortyeight {
+namespace twenty48 {
 namespace impl {
 
 class PlayerImpl : public cpp::Player {

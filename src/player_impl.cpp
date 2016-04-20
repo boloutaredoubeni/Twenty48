@@ -6,8 +6,8 @@
 
 #include <cassert>
 
-using namespace twentyfortyeight::cpp;
-using namespace twentyfortyeight::impl;
+using namespace twentyforty48::cpp;
+using namespace twentyforty48::impl;
 
 #if 0
 #pragma mark -

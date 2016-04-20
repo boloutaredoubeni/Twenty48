@@ -4,7 +4,7 @@
 
 #include <cstdint>
 
-namespace twentyfortyeight {
+namespace twenty48 {
 namespace impl {
 
 const static uint8_t dimension = 4;

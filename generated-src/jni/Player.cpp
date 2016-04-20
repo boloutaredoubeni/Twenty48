@@ -6,87 +6,87 @@
 #include "move.hpp"
 #include "player.hpp"
 
-namespace twentyfortyeight { namespace jni {
+namespace twenty48 { namespace jni {
 
-Player::Player() : ::djinni::JniInterface<::twentyfortyeight::cpp::Player, Player>("com/boloutaredoubeni/twentyfortyeight/djinni/Player$CppProxy") {}
+Player::Player() : ::djinni::JniInterface<::twenty48::cpp::Player, Player>("com/boloutaredoubeni/twenty48/djinni/Player$CppProxy") {}
 
 Player::~Player() = default;
 
 
-CJNIEXPORT void JNICALL Java_com_boloutaredoubeni_twentyfortyeight_djinni_Player_00024CppProxy_nativeDestroy(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
+CJNIEXPORT void JNICALL Java_com_boloutaredoubeni_twenty48_djinni_Player_00024CppProxy_nativeDestroy(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
 {
     try {
         DJINNI_FUNCTION_PROLOGUE1(jniEnv, nativeRef);
-        delete reinterpret_cast<::djinni::CppProxyHandle<::twentyfortyeight::cpp::Player>*>(nativeRef);
+        delete reinterpret_cast<::djinni::CppProxyHandle<::twenty48::cpp::Player>*>(nativeRef);
     } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, )
 }
 
-CJNIEXPORT jobject JNICALL Java_com_boloutaredoubeni_twentyfortyeight_djinni_Player_create(JNIEnv* jniEnv, jobject /*this*/)
+CJNIEXPORT jobject JNICALL Java_com_boloutaredoubeni_twenty48_djinni_Player_create(JNIEnv* jniEnv, jobject /*this*/)
 {
     try {
         DJINNI_FUNCTION_PROLOGUE0(jniEnv);
-        auto r = ::twentyfortyeight::cpp::Player::Create();
-        return ::djinni::release(::twentyfortyeight::jni::Player::fromCpp(jniEnv, r));
+        auto r = ::twenty48::cpp::Player::Create();
+        return ::djinni::release(::twenty48::jni::Player::fromCpp(jniEnv, r));
     } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, 0 /* value doesn't matter */)
 }
 
-CJNIEXPORT void JNICALL Java_com_boloutaredoubeni_twentyfortyeight_djinni_Player_00024CppProxy_native_1newGame(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
+CJNIEXPORT void JNICALL Java_com_boloutaredoubeni_twenty48_djinni_Player_00024CppProxy_native_1newGame(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
 {
     try {
         DJINNI_FUNCTION_PROLOGUE1(jniEnv, nativeRef);
-        const auto& ref = ::djinni::objectFromHandleAddress<::twentyfortyeight::cpp::Player>(nativeRef);
+        const auto& ref = ::djinni::objectFromHandleAddress<::twenty48::cpp::Player>(nativeRef);
         ref->NewGame();
     } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, )
 }
 
-CJNIEXPORT jlong JNICALL Java_com_boloutaredoubeni_twentyfortyeight_djinni_Player_00024CppProxy_native_1score(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
+CJNIEXPORT jlong JNICALL Java_com_boloutaredoubeni_twenty48_djinni_Player_00024CppProxy_native_1score(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
 {
     try {
         DJINNI_FUNCTION_PROLOGUE1(jniEnv, nativeRef);
-        const auto& ref = ::djinni::objectFromHandleAddress<::twentyfortyeight::cpp::Player>(nativeRef);
+        const auto& ref = ::djinni::objectFromHandleAddress<::twenty48::cpp::Player>(nativeRef);
         auto r = ref->Score();
         return ::djinni::release(::djinni::I64::fromCpp(jniEnv, r));
     } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, 0 /* value doesn't matter */)
 }
 
-CJNIEXPORT jboolean JNICALL Java_com_boloutaredoubeni_twentyfortyeight_djinni_Player_00024CppProxy_native_1hasWon(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
+CJNIEXPORT jboolean JNICALL Java_com_boloutaredoubeni_twenty48_djinni_Player_00024CppProxy_native_1hasWon(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
 {
     try {
         DJINNI_FUNCTION_PROLOGUE1(jniEnv, nativeRef);
-        const auto& ref = ::djinni::objectFromHandleAddress<::twentyfortyeight::cpp::Player>(nativeRef);
+        const auto& ref = ::djinni::objectFromHandleAddress<::twenty48::cpp::Player>(nativeRef);
         auto r = ref->HasWon();
         return ::djinni::release(::djinni::Bool::fromCpp(jniEnv, r));
     } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, 0 /* value doesn't matter */)
 }
 
-CJNIEXPORT jobject JNICALL Java_com_boloutaredoubeni_twentyfortyeight_djinni_Player_00024CppProxy_native_1gameState(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
+CJNIEXPORT jobject JNICALL Java_com_boloutaredoubeni_twenty48_djinni_Player_00024CppProxy_native_1gameState(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
 {
     try {
         DJINNI_FUNCTION_PROLOGUE1(jniEnv, nativeRef);
-        const auto& ref = ::djinni::objectFromHandleAddress<::twentyfortyeight::cpp::Player>(nativeRef);
+        const auto& ref = ::djinni::objectFromHandleAddress<::twenty48::cpp::Player>(nativeRef);
         auto r = ref->GameState();
         return ::djinni::release(::djinni::List<::djinni::I32>::fromCpp(jniEnv, r));
     } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, 0 /* value doesn't matter */)
 }
 
-CJNIEXPORT jboolean JNICALL Java_com_boloutaredoubeni_twentyfortyeight_djinni_Player_00024CppProxy_native_1gameOver(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
+CJNIEXPORT jboolean JNICALL Java_com_boloutaredoubeni_twenty48_djinni_Player_00024CppProxy_native_1gameOver(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
 {
     try {
         DJINNI_FUNCTION_PROLOGUE1(jniEnv, nativeRef);
-        const auto& ref = ::djinni::objectFromHandleAddress<::twentyfortyeight::cpp::Player>(nativeRef);
+        const auto& ref = ::djinni::objectFromHandleAddress<::twenty48::cpp::Player>(nativeRef);
         auto r = ref->GameOver();
         return ::djinni::release(::djinni::Bool::fromCpp(jniEnv, r));
     } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, 0 /* value doesn't matter */)
 }
 
-CJNIEXPORT jboolean JNICALL Java_com_boloutaredoubeni_twentyfortyeight_djinni_Player_00024CppProxy_native_1swipe(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef, jobject j_move)
+CJNIEXPORT jboolean JNICALL Java_com_boloutaredoubeni_twenty48_djinni_Player_00024CppProxy_native_1swipe(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef, jobject j_move)
 {
     try {
         DJINNI_FUNCTION_PROLOGUE1(jniEnv, nativeRef);
-        const auto& ref = ::djinni::objectFromHandleAddress<::twentyfortyeight::cpp::Player>(nativeRef);
-        auto r = ref->Swipe(::twentyfortyeight::jni::Move::toCpp(jniEnv, j_move));
+        const auto& ref = ::djinni::objectFromHandleAddress<::twenty48::cpp::Player>(nativeRef);
+        auto r = ref->Swipe(::twenty48::jni::Move::toCpp(jniEnv, j_move));
         return ::djinni::release(::djinni::Bool::fromCpp(jniEnv, r));
     } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, 0 /* value doesn't matter */)
 }
 
-} }  // namespace twentyfortyeight::jni
+} }  // namespace twenty48::jni
