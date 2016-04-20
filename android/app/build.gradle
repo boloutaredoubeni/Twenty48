@@ -88,6 +88,7 @@ android {
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
+            moduleName "2048_jni"
         }
     }
     splits {
@@ -115,6 +116,18 @@ android {
                 output.versionCodeOverride =
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
+        }
+    }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', '../../generated-src/java']
+            jniLibs.srcDirs = ['libs']
+            jni.srcDirs = [
+                // '../../generated-src/jni',
+                // '../../src/',
+                // '../../third_party/djinni/support-lib/jni/',
+                // '../../third_party/djinni/support-lib/',
+            ]
         }
     }
 }
