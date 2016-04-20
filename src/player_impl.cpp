@@ -33,9 +33,8 @@ void PlayerImpl::NewGame() {
     tile = 0;
   }
 
-  const auto begin = game_->board_.begin();
-  const auto end = game_->board_.end();
-  assert(std::all_of(begin, end, [](int i) { return i == 0; }));
+  assert(std::all_of(game_->board_.begin(), game_->board_.end(),
+                     [](int i) { return i == 0; }));
 
   addTile();
   game_->score_ = 0;
@@ -101,9 +100,8 @@ void PlayerImpl::addTile() const {
       return;
     }
 
-    const auto begin = game_->board_.begin();
-    const auto end = game_->board_.end();
-    assert(std::any_of(begin, end, [](int i) { return i > 0; }));
+    assert(std::any_of(game_->board_.begin(), game_->board_.end(),
+                       [](int i) { return i > 0; }));
   }
   game_->is_over_ = true;
 }

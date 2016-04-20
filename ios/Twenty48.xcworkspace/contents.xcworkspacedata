@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../build/ios/third_party/djinni/support-lib/support_lib.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../build/ios/lib2048.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "container:Twenty48.xcodeproj">
+   </FileRef>
+</Workspace>
