@@ -32,7 +32,6 @@ djinni: ./third_party/djinni/src/ third_party/gyp/
 		--jni-out ./generated-src/jni \
 		--jni-namespace twenty48::jni \
 		--ident-jni-file FooBar \
-		--ident-jni-class foo_bar \
 		--objc-out ./generated-src/objc \
 		--objc-type-prefix T48 \
 		--objcpp-out ./generated-src/objcpp \
