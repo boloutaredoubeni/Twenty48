@@ -1,6 +1,12 @@
+plugins {
+    id 'com.github.jlouns.cpe' version '0.1.0'
+}
+
 apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
+
+
 
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
@@ -143,4 +149,38 @@ dependencies {
 task copyDownloadableDepsToLibs(type: Copy) {
   from configurations.compile
   into 'libs'
+}
+
+task ndkBuild(type: CrossPlatformExec) {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//    def sdkDir = properties.getProperty('sdk.dir')
+    def ndkLoc = properties.getProperty('ndk.dir')
+    String MainDirectory = System.getProperty("user.dir") + '/app/'
+    File ndkDir = new File(ndkLoc)
+    if (ndkDir == null) {
+        ndkDir = file(System.env.NDK_ROOT)
+    }
+
+    if (ndkDir == null) {
+        def gradle_project_root = project.rootProject.rootDir
+        throw new GradleException("NDK is not configured. Make sure there is a local.properties " +
+                "file with an ndk.dir entry in the directory ${gradle_project_root}, or set the " +
+                "ANDROID_NDK envrionment variable")
+    }
+
+    def ndkBuildExecutable = new File(ndkDir, 'ndk-build')
+    if (!ndkBuildExecutable.exists()) {
+        throw new GradleException("Could not find ndk-build. The configured NDK directory ${ndkDir} may not be correct.")
+    }
+    // Since this project actually follows the standard jni project layout, we don't need to set
+    // the project path.  There would be no problem setting it, except I can't figure out how to
+    // properly escape paths as env variables :(
+    // environment("NDK_PROJECT_PATH", MainDirectory)
+    environment("GYP_CONFIGURATION", "Debug")
+    commandLine(ndkBuildExecutable, "-j8")
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn ndkBuild
 }

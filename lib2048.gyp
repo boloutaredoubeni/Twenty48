@@ -58,8 +58,11 @@
         '<!@(python scripts/glob.py generated-src/jni/ *.hpp *.cpp)'
       ],
       'include_dirs': [
+        'generated-src/cpp',
+        'src',
         'generated-src/jni'
       ],
+      'cflags_cc!': ['-Wno-literal-suffix'],
       'all_dependent_settings': {
         'include_dirs': [
           'generated-src/jni'

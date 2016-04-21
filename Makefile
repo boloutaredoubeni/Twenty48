@@ -7,6 +7,10 @@ all: test ios_app android_app
 clean:  lib2048.gyp third_party/gtest.gyp
 	rm -rf generated-src/*
 	rm -rf build/*
+	rm -rf android/build/*
+	rm -rf android/app/build/*
+	rm -rf android/app/obj/*
+	rm -rf third_party/build/*
 	rm -rf android/app/src/main/java/com/boloutaredoubeni/twenty48/djinni/*
 	./third_party/gyp/tools/pretty_gyp.py lib2048.gyp > lib_tmp && mv lib_tmp lib2048.gyp
 	./third_party/gyp/tools/pretty_gyp.py third_party/gtest.gyp > gtest_tmp && mv gtest_tmp third_party/gtest.gyp
@@ -27,6 +31,8 @@ djinni: ./third_party/djinni/src/ third_party/gyp/
 		--java-package com.boloutaredoubeni.twenty48.djinni \
 		--jni-out ./generated-src/jni \
 		--jni-namespace twenty48::jni \
+		--ident-jni-file FooBar \
+		--ident-jni-class foo_bar \
 		--objc-out ./generated-src/objc \
 		--objc-type-prefix T48 \
 		--objcpp-out ./generated-src/objcpp \
