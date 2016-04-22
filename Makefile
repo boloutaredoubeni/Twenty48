@@ -31,7 +31,7 @@ djinni: ./third_party/djinni/src/ third_party/gyp/
 		--ident-cpp-enum FooBar \
 		--java-out ./android/app/src/main/java/com/boloutaredoubeni/twenty48/djinni \
 		--java-package com.boloutaredoubeni.twenty48.djinni \
-		--jni-out build \
+		--jni-out android/app/src/main/jni \
 		--jni-namespace twenty48::jni \
 		--ident-jni-file FooBar \
 		--objc-out ./ios/Twenty48/Djinni \

@@ -48,9 +48,9 @@
         '-Wl,--build-id,--gc-sections,--exclude-libs,ALL'
       ],
       'sources': [
-        '<!@(python scripts/glob.py src/ *.hpp *.cpp)',
-        '<!@(python scripts/glob.py generated-src/cpp *.hpp *.cpp)',
-        '<!@(python scripts/glob.py generated-src/jni/ *.hpp *.cpp)',
+        # '<!@(python scripts/glob.py src/ *.hpp *.cpp)',
+        # '<!@(python scripts/glob.py generated-src/cpp *.hpp *.cpp)',
+        # '<!@(python scripts/glob.py generated-src/jni/ *.hpp *.cpp)',
         '<!@(python scripts/glob.py third_party/djinni/support-lib/jni/ *.hpp *.cpp)',
       ],
       'include_dirs': [
@@ -60,11 +60,6 @@
         'generated-src/jni'
       ],
       'cflags_cc!': ['-Wno-literal-suffix'],
-      'all_dependent_settings': {
-        'include_dirs': [
-          'generated-src/jni'
-        ]
-      }
     },
     {
       'target_name': 'test',
