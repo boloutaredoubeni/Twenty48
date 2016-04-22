@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
 });
 
-var PlayerManager = NativeModules.PlayerManager;
+const PlayerManager = NativeModules.PlayerManager;
 PlayerManager.startNewGame();
 
 

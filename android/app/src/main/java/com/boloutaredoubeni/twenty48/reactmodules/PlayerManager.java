@@ -31,7 +31,7 @@ public class PlayerManager extends ReactContextBaseJavaModule {
   
   @Override
   public String getName() {
-    return "Player";
+    return "PlayerManager";
   }
   
   @ReactMethod
