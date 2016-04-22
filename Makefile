@@ -5,7 +5,6 @@ valgrind-exe := $(shell command -v valgrind)
 all: test ios_app android_app
 
 clean:  lib2048.gyp third_party/gtest.gyp
-	rm -rf generated-src/
 	rm -rf build/*
 	rm -rf android/build/*
 	rm -rf android/app/build/*
@@ -13,6 +12,7 @@ clean:  lib2048.gyp third_party/gtest.gyp
 	rm -rf third_party/build/*
 	rm -rf ios/Twenty48/Djinni/*
 	rm -rf include/*
+	rm -rf android/jni-src/*
 	rm -rf android/app/src/main/java/com/boloutaredoubeni/twenty48/djinni/*
 	./third_party/gyp/tools/pretty_gyp.py lib2048.gyp > lib_tmp && mv lib_tmp lib2048.gyp
 	./third_party/gyp/tools/pretty_gyp.py third_party/gtest.gyp > gtest_tmp && mv gtest_tmp third_party/gtest.gyp
@@ -24,20 +24,30 @@ third_party/gyp/:
 djinni: ./third_party/djinni/src/ third_party/gyp/
 	./third_party/djinni/src/run \
 		--idl ./djinni/twenty_forty_eight.djinni \
+		\
 		--cpp-out include/Twenty48 \
-		--cpp-namespace twenty48::cpp \
-		--objcpp-include-cpp-prefix Twenty48/ \
+		--cpp-namespace twenty48 \
 		--ident-cpp-method FooBar \
 		--ident-cpp-enum FooBar \
-		--java-out ./android/app/src/main/java/com/boloutaredoubeni/twenty48/djinni \
-		--java-package com.boloutaredoubeni.twenty48.djinni \
-		--jni-out android/app/src/main/jni \
-		--jni-namespace twenty48::jni \
-		--ident-jni-file FooBar \
+		\
+		--objcpp-include-cpp-prefix Twenty48/ \
+		--objcpp-out ./ios/Twenty48/Djinni \
+		--objcpp-namespace twenty48::objc \
+		\
 		--objc-out ./ios/Twenty48/Djinni \
 		--objc-type-prefix T48 \
-		--objcpp-out ./ios/Twenty48/Djinni \
-		--objcpp-namespace twenty48::objc
+		\
+		--jni-out android/jni-src \
+		--jni-namespace twenty48::jni \
+		--ident-jni-file NativeFooBar \
+		--jni-include-cpp-prefix Twenty48/ \
+		--ident-jni-class NativeFooBar \
+		\
+		--java-out ./android/app/src/main/java/com/boloutaredoubeni/twenty48/djinni \
+		--java-package com.boloutaredoubeni.twenty48.djinni \
+		
+	
+	
 
 lib2048.xcodeproj: third_party/gyp/ djinni
 	 ./third_party/gyp/gyp --depth=. -DOS=mac -f xcode \

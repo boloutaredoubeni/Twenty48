@@ -6,7 +6,7 @@
 
 #include <cassert>
 
-using namespace twenty48::cpp;
+using namespace twenty48;
 using namespace twenty48::impl;
 
 #if 0

@@ -14,15 +14,15 @@ static_assert(__has_feature(objc_arc), "Djinni requires ARC to be enabled for th
 
 @interface T48Player ()
 
-- (id)initWithCpp:(const std::shared_ptr<::twenty48::cpp::Player>&)cppRef;
+- (id)initWithCpp:(const std::shared_ptr<::twenty48::Player>&)cppRef;
 
 @end
 
 @implementation T48Player {
-    ::djinni::CppProxyCache::Handle<std::shared_ptr<::twenty48::cpp::Player>> _cppRefHandle;
+    ::djinni::CppProxyCache::Handle<std::shared_ptr<::twenty48::Player>> _cppRefHandle;
 }
 
-- (id)initWithCpp:(const std::shared_ptr<::twenty48::cpp::Player>&)cppRef
+- (id)initWithCpp:(const std::shared_ptr<::twenty48::Player>&)cppRef
 {
     if (self = [super init]) {
         _cppRefHandle.assign(cppRef);
@@ -32,7 +32,7 @@ static_assert(__has_feature(objc_arc), "Djinni requires ARC to be enabled for th
 
 + (nullable T48Player *)create {
     try {
-        auto r = ::twenty48::cpp::Player::Create();
+        auto r = ::twenty48::Player::Create();
         return ::twenty48::objc::Player::fromCpp(r);
     } DJINNI_TRANSLATE_EXCEPTIONS()
 }
@@ -73,7 +73,7 @@ static_assert(__has_feature(objc_arc), "Djinni requires ARC to be enabled for th
 
 - (BOOL)swipe:(T48Move)move {
     try {
-        auto r = _cppRefHandle.get()->Swipe(::djinni::Enum<::twenty48::cpp::Move, T48Move>::toCpp(move));
+        auto r = _cppRefHandle.get()->Swipe(::djinni::Enum<::twenty48::Move, T48Move>::toCpp(move));
         return ::djinni::Bool::fromCpp(r);
     } DJINNI_TRANSLATE_EXCEPTIONS()
 }

@@ -7,7 +7,7 @@
 #include <memory>
 #include <vector>
 
-namespace twenty48 { namespace cpp {
+namespace twenty48 {
 
 enum class Move;
 
@@ -34,4 +34,4 @@ public:
     virtual bool Swipe(Move move) = 0;
 };
 
-} }  // namespace twenty48::cpp
+}  // namespace twenty48

@@ -6,7 +6,7 @@
 namespace twenty48 {
 namespace impl {
 
-class PlayerImpl : public cpp::Player {
+class PlayerImpl : public twenty48::Player {
   std::shared_ptr<Game> game_;
 
  public:
@@ -32,7 +32,7 @@ class PlayerImpl : public cpp::Player {
   bool HasWon();
   std::vector<int32_t> GameState();
   bool GameOver();
-  bool Swipe(cpp::Move);
+  bool Swipe(twenty48::Move);
 
  private:
 #if 0

@@ -48,14 +48,12 @@
         '-Wl,--build-id,--gc-sections,--exclude-libs,ALL'
       ],
       'sources': [
-        # NOTE: sources were put in android's jni folder which are read by default
+        # '<!@(python scripts/glob.py include/ *.hpp *.cpp)',
+        '<!@(python scripts/glob.py android/jni-src/ *.hpp *.cpp)',
         '<!@(python scripts/glob.py third_party/djinni/support-lib/jni/ *.hpp *.cpp)',
       ],
       'include_dirs': [
-        'generated-src/cpp',
-        'src',
         'include'
-        'generated-src/jni'
       ],
       'cflags_cc!': ['-Wno-literal-suffix'],
     },

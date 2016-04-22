@@ -5,7 +5,7 @@
 
 #include <functional>
 
-namespace twenty48 { namespace cpp {
+namespace twenty48 {
 
 enum class Move : int {
     Up,
@@ -14,13 +14,13 @@ enum class Move : int {
     Right,
 };
 
-} }  // namespace twenty48::cpp
+}  // namespace twenty48
 
 namespace std {
 
 template <>
-struct hash<::twenty48::cpp::Move> {
-    size_t operator()(::twenty48::cpp::Move type) const {
+struct hash<::twenty48::Move> {
+    size_t operator()(::twenty48::Move type) const {
         return std::hash<int>()(static_cast<int>(type));
     }
 };

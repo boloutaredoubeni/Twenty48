@@ -4,7 +4,7 @@
 
 #include <algorithm>
 
-using namespace twenty48::cpp;
+using namespace twenty48;
 
 #if 0
 #pragma mark -

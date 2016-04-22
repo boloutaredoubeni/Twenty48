@@ -13,8 +13,8 @@ namespace twenty48 { namespace objc {
 class Player
 {
 public:
-    using CppType = std::shared_ptr<::twenty48::cpp::Player>;
-    using CppOptType = std::shared_ptr<::twenty48::cpp::Player>;
+    using CppType = std::shared_ptr<::twenty48::Player>;
+    using CppOptType = std::shared_ptr<::twenty48::Player>;
     using ObjcType = T48Player*;
 
     using Boxed = Player;

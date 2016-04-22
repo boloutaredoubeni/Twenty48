@@ -128,12 +128,12 @@ android {
         main {
 //            java.srcDirs = ['src/main/java', '../../../generated-src/java']
             jniLibs.srcDirs = ['libs']
-            jni.srcDirs = [
-                // '../../generated-src/jni',
-                // '../../src/',
-                // '../../third_party/djinni/support-lib/jni/',
-                // '../../third_party/djinni/support-lib/',
-            ]
+            // jni.srcDirs = [
+            //     // '../../generated-src/jni',
+            //     // '../../src/',
+            //     // '../../third_party/djinni/support-lib/jni/',
+            //     // '../../third_party/djinni/support-lib/',
+            // ]
         }
     }
 }
