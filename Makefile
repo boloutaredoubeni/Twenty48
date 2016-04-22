@@ -14,6 +14,7 @@ clean:  lib2048.gyp third_party/gtest.gyp
 	rm -rf include/*
 	rm -rf android/jni-src/*
 	rm -rf android/app/src/main/java/com/boloutaredoubeni/twenty48/djinni/*
+	rm *.mk
 	./third_party/gyp/tools/pretty_gyp.py lib2048.gyp > lib_tmp && mv lib_tmp lib2048.gyp
 	./third_party/gyp/tools/pretty_gyp.py third_party/gtest.gyp > gtest_tmp && mv gtest_tmp third_party/gtest.gyp
 
