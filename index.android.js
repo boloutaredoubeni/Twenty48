@@ -49,7 +49,10 @@ const styles = StyleSheet.create({
   },
 });
 
-console.dir(NativeModules.PlayerManager);
+const player = NativeModules.PlayerManager;
+console.dir(player);
+player.startNewGame();
+
 
 
 AppRegistry.registerComponent('Twenty48', () => Twenty48);

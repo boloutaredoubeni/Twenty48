@@ -40,6 +40,6 @@ public class PlayerManager extends ReactContextBaseJavaModule {
       player = Player.create();
     }
     player.newGame();
-    Log.d(TAG, "The game has been created!!");
+    Log.i(TAG, "The game has been created!!");
   }
 }
