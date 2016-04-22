@@ -8,9 +8,9 @@
 
 namespace twenty48 { namespace jni {
 
-player::player() : ::djinni::JniInterface<::twenty48::cpp::Player, player>("com/boloutaredoubeni/twenty48/djinni/Player$CppProxy") {}
+Player::Player() : ::djinni::JniInterface<::twenty48::cpp::Player, Player>("com/boloutaredoubeni/twenty48/djinni/Player$CppProxy") {}
 
-player::~player() = default;
+Player::~Player() = default;
 
 
 CJNIEXPORT void JNICALL Java_com_boloutaredoubeni_twenty48_djinni_Player_00024CppProxy_nativeDestroy(JNIEnv* jniEnv, jobject /*this*/, jlong nativeRef)
@@ -26,7 +26,7 @@ CJNIEXPORT jobject JNICALL Java_com_boloutaredoubeni_twenty48_djinni_Player_crea
     try {
         DJINNI_FUNCTION_PROLOGUE0(jniEnv);
         auto r = ::twenty48::cpp::Player::Create();
-        return ::djinni::release(::twenty48::jni::player::fromCpp(jniEnv, r));
+        return ::djinni::release(::twenty48::jni::Player::fromCpp(jniEnv, r));
     } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, 0 /* value doesn't matter */)
 }
 
@@ -84,7 +84,7 @@ CJNIEXPORT jboolean JNICALL Java_com_boloutaredoubeni_twenty48_djinni_Player_000
     try {
         DJINNI_FUNCTION_PROLOGUE1(jniEnv, nativeRef);
         const auto& ref = ::djinni::objectFromHandleAddress<::twenty48::cpp::Player>(nativeRef);
-        auto r = ref->Swipe(::twenty48::jni::move::toCpp(jniEnv, j_move));
+        auto r = ref->Swipe(::twenty48::jni::Move::toCpp(jniEnv, j_move));
         return ::djinni::release(::djinni::Bool::fromCpp(jniEnv, r));
     } JNI_TRANSLATE_EXCEPTIONS_RETURN(jniEnv, 0 /* value doesn't matter */)
 }

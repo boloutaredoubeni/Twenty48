@@ -8,19 +8,19 @@
 
 namespace twenty48 { namespace jni {
 
-class move final : ::djinni::JniEnum {
+class Move final : ::djinni::JniEnum {
 public:
     using CppType = ::twenty48::cpp::Move;
     using JniType = jobject;
 
-    using Boxed = move;
+    using Boxed = Move;
 
-    static CppType toCpp(JNIEnv* jniEnv, JniType j) { return static_cast<CppType>(::djinni::JniClass<move>::get().ordinal(jniEnv, j)); }
-    static ::djinni::LocalRef<JniType> fromCpp(JNIEnv* jniEnv, CppType c) { return ::djinni::JniClass<move>::get().create(jniEnv, static_cast<jint>(c)); }
+    static CppType toCpp(JNIEnv* jniEnv, JniType j) { return static_cast<CppType>(::djinni::JniClass<Move>::get().ordinal(jniEnv, j)); }
+    static ::djinni::LocalRef<JniType> fromCpp(JNIEnv* jniEnv, CppType c) { return ::djinni::JniClass<Move>::get().create(jniEnv, static_cast<jint>(c)); }
 
 private:
-    move() : JniEnum("com/boloutaredoubeni/twenty48/djinni/Move") {}
-    friend ::djinni::JniClass<move>;
+    Move() : JniEnum("com/boloutaredoubeni/twenty48/djinni/Move") {}
+    friend ::djinni::JniClass<Move>;
 };
 
 } }  // namespace twenty48::jni

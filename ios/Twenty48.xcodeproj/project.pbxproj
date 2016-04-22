@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		001D0BF41CC718640049AA5B /* PlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 001D0BF31CC718640049AA5B /* PlayerManager.m */; };
+		006F35721CC9DCD100B12CB0 /* Djinni in Resources */ = {isa = PBXBuildFile; fileRef = 006F35711CC9DCD100B12CB0 /* Djinni */; };
 		009AD34A1CC73355009772FA /* lib2048_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 009AD3471CC73355009772FA /* lib2048_ios.a */; };
 		009AD34E1CC73488009772FA /* lib2048.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 009AD34D1CC73488009772FA /* lib2048.a */; };
 		009AD3501CC73497009772FA /* libdjinni_objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 009AD34F1CC73497009772FA /* libdjinni_objc.a */; };
@@ -111,6 +112,7 @@
 /* Begin PBXFileReference section */
 		001D0BF21CC718640049AA5B /* PlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerManager.h; path = Twenty48/PlayerManager.h; sourceTree = "<group>"; };
 		001D0BF31CC718640049AA5B /* PlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerManager.m; path = Twenty48/PlayerManager.m; sourceTree = "<group>"; };
+		006F35711CC9DCD100B12CB0 /* Djinni */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Djinni; path = Twenty48/Djinni; sourceTree = "<group>"; };
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		009AD3471CC73355009772FA /* lib2048_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = lib2048_ios.a; path = "../build/Debug-iphoneos/lib2048_ios.a"; sourceTree = "<group>"; };
 		009AD34D1CC73488009772FA /* lib2048.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = lib2048.a; path = "../../../../Library/Developer/Xcode/DerivedData/Twenty48-fzpjlipvzmwugpatczdjveolijic/Build/Products/Debug-iphonesimulator/lib2048.a"; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 		13B07FAE1A68108700A75B9A /* Twenty48 */ = {
 			isa = PBXGroup;
 			children = (
+				006F35711CC9DCD100B12CB0 /* Djinni */,
 				001D0BF21CC718640049AA5B /* PlayerManager.h */,
 				001D0BF31CC718640049AA5B /* PlayerManager.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -523,6 +526,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				006F35721CC9DCD100B12CB0 /* Djinni in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

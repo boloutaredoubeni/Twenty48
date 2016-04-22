@@ -15,7 +15,7 @@
       'all_dependent_settings': {
         'include_dirs': [
           'include',
-          'generated-src/cpp/'
+          # 'generated-src/cpp/'
         ]
       },
     },
@@ -28,17 +28,14 @@
       ],
       'sources': [
         '<!@(python scripts/glob.py third_party/djinni/support-lib/objc/ *.h *.mm)'
-        '<!@(python scripts/glob.py generated-src/objc/ *.h *.m)',
-        '<!@(python scripts/glob.py generated-src/objcpp/ *.h *.mm)',
+        '<!@(python scripts/glob.py ./ios/Twenty48/Djinni *.h *.m *.mm)',
       ],
       'include_dirs': [
-        'generated-src/objc',
-        'generated-src/objcpp',
+        './ios/Twenty48/Djinni'
       ],
       'all_dependent_settings': {
         'include_dirs': [
-          'generated-src/objc',
-          'generated-src/objcpp',
+          './ios/Twenty48/Djinni'
         ],
       },
     },
@@ -54,12 +51,15 @@
         '-Wl,--build-id,--gc-sections,--exclude-libs,ALL'
       ],
       'sources': [
+        '<!@(python scripts/glob.py src/ *.hpp *.cpp)',
+        '<!@(python scripts/glob.py generated-src/cpp *.hpp *.cpp)',
+        '<!@(python scripts/glob.py generated-src/jni/ *.hpp *.cpp)',
         '<!@(python scripts/glob.py third_party/djinni/support-lib/jni/ *.hpp *.cpp)',
-        '<!@(python scripts/glob.py generated-src/jni/ *.hpp *.cpp)'
       ],
       'include_dirs': [
         'generated-src/cpp',
         'src',
+        'include'
         'generated-src/jni'
       ],
       'cflags_cc!': ['-Wno-literal-suffix'],

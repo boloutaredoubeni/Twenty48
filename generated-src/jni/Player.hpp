@@ -8,24 +8,24 @@
 
 namespace twenty48 { namespace jni {
 
-class player final : ::djinni::JniInterface<::twenty48::cpp::Player, player> {
+class Player final : ::djinni::JniInterface<::twenty48::cpp::Player, Player> {
 public:
     using CppType = std::shared_ptr<::twenty48::cpp::Player>;
     using CppOptType = std::shared_ptr<::twenty48::cpp::Player>;
     using JniType = jobject;
 
-    using Boxed = player;
+    using Boxed = Player;
 
-    ~player();
+    ~Player();
 
-    static CppType toCpp(JNIEnv* jniEnv, JniType j) { return ::djinni::JniClass<player>::get()._fromJava(jniEnv, j); }
-    static ::djinni::LocalRef<JniType> fromCppOpt(JNIEnv* jniEnv, const CppOptType& c) { return {jniEnv, ::djinni::JniClass<player>::get()._toJava(jniEnv, c)}; }
+    static CppType toCpp(JNIEnv* jniEnv, JniType j) { return ::djinni::JniClass<Player>::get()._fromJava(jniEnv, j); }
+    static ::djinni::LocalRef<JniType> fromCppOpt(JNIEnv* jniEnv, const CppOptType& c) { return {jniEnv, ::djinni::JniClass<Player>::get()._toJava(jniEnv, c)}; }
     static ::djinni::LocalRef<JniType> fromCpp(JNIEnv* jniEnv, const CppType& c) { return fromCppOpt(jniEnv, c); }
 
 private:
-    player();
-    friend ::djinni::JniClass<player>;
-    friend ::djinni::JniInterface<::twenty48::cpp::Player, player>;
+    Player();
+    friend ::djinni::JniClass<Player>;
+    friend ::djinni::JniInterface<::twenty48::cpp::Player, Player>;
 
 };
 

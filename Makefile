@@ -5,7 +5,7 @@ valgrind-exe := $(shell command -v valgrind)
 all: test ios_app android_app
 
 clean:  lib2048.gyp third_party/gtest.gyp
-	rm -rf generated-src/*
+	rm -rf generated-src/
 	rm -rf build/*
 	rm -rf android/build/*
 	rm -rf android/app/build/*
@@ -32,11 +32,10 @@ djinni: ./third_party/djinni/src/ third_party/gyp/
 		--jni-out ./generated-src/jni \
 		--jni-namespace twenty48::jni \
 		--ident-jni-file FooBar \
-		--objc-out ./generated-src/objc \
+		--objc-out ./ios/Twenty48/Djinni \
 		--objc-type-prefix T48 \
-		--objcpp-out ./generated-src/objcpp \
+		--objcpp-out ./ios/Twenty48/Djinni \
 		--objcpp-namespace twenty48::objc
-
 
 lib2048.xcodeproj: third_party/gyp/ djinni
 	 ./third_party/gyp/gyp --depth=. -DOS=mac -f xcode \
