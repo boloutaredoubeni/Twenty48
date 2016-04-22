@@ -1,5 +1,5 @@
 #include "player_impl.hpp"
-#include "move.hpp"
+#include "Twenty48/move.hpp"
 
 #include <random>
 #include <algorithm>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "player.hpp"
+#include "Twenty48/player.hpp"
 #include "game.hpp"
 
 namespace twenty48 {

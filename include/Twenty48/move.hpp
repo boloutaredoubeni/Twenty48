@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <functional>
+
 namespace twenty48 { namespace cpp {
 
 enum class Move : int {
@@ -13,3 +15,14 @@ enum class Move : int {
 };
 
 } }  // namespace twenty48::cpp
+
+namespace std {
+
+template <>
+struct hash<::twenty48::cpp::Move> {
+    size_t operator()(::twenty48::cpp::Move type) const {
+        return std::hash<int>()(static_cast<int>(type));
+    }
+};
+
+}  // namespace std

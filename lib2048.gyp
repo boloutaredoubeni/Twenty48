@@ -6,16 +6,13 @@
       'sources': [
         'djinni/twenty_forty_eight.djinni',
         '<!@(python scripts/glob.py src/ *.hpp *.cpp)',
-        '<!@(python scripts/glob.py generated-src/cpp *.hpp *.cpp)',
       ],
       'include_dirs': [
-        'include',
-        'generated-src/cpp/'
+        'include/',
       ],
       'all_dependent_settings': {
         'include_dirs': [
-          'include',
-          # 'generated-src/cpp/'
+          'include/',
         ]
       },
     },
@@ -27,7 +24,7 @@
         'lib2048'
       ],
       'sources': [
-        '<!@(python scripts/glob.py third_party/djinni/support-lib/objc/ *.h *.mm)'
+        '<!@(python scripts/glob.py third_party/djinni/support-lib/objc/ *.h *.mm)',
         '<!@(python scripts/glob.py ./ios/Twenty48/Djinni *.h *.m *.mm)',
       ],
       'include_dirs': [

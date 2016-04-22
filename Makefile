@@ -11,25 +11,27 @@ clean:  lib2048.gyp third_party/gtest.gyp
 	rm -rf android/app/build/*
 	rm -rf android/app/obj/*
 	rm -rf third_party/build/*
+	rm -rf ios/Twenty48/Djinni/*
+	rm -rf include/*
 	rm -rf android/app/src/main/java/com/boloutaredoubeni/twenty48/djinni/*
 	./third_party/gyp/tools/pretty_gyp.py lib2048.gyp > lib_tmp && mv lib_tmp lib2048.gyp
 	./third_party/gyp/tools/pretty_gyp.py third_party/gtest.gyp > gtest_tmp && mv gtest_tmp third_party/gtest.gyp
 
 
 third_party/gyp/:
-	cd third_party/gyp/ && git checkout  -q 0bb67471bca068996e15b56738fa4824dfa19de0
+	cd third_party/gyp/ && git checkout -q 0bb67471bca068996e15b56738fa4824dfa19de0
 
 djinni: ./third_party/djinni/src/ third_party/gyp/
 	./third_party/djinni/src/run \
 		--idl ./djinni/twenty_forty_eight.djinni \
-		--cpp-out ./generated-src/cpp \
+		--cpp-out include/Twenty48 \
 		--cpp-namespace twenty48::cpp \
+		--objcpp-include-cpp-prefix Twenty48/ \
 		--ident-cpp-method FooBar \
 		--ident-cpp-enum FooBar \
-		--cpp-enum-hash-workaround false \
 		--java-out ./android/app/src/main/java/com/boloutaredoubeni/twenty48/djinni \
 		--java-package com.boloutaredoubeni.twenty48.djinni \
-		--jni-out ./generated-src/jni \
+		--jni-out build \
 		--jni-namespace twenty48::jni \
 		--ident-jni-file FooBar \
 		--objc-out ./ios/Twenty48/Djinni \
