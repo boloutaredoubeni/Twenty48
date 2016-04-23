@@ -8,8 +8,9 @@ namespace impl {
 
 class PlayerImpl : public twenty48::Player {
   std::shared_ptr<Game> game_;
+  int64_t moves_made_{0};
 
-public:
+ public:
 #if 0
 #pragma mark -
 #pragma mark Constructors
@@ -33,8 +34,9 @@ public:
   std::vector<int32_t> GameState();
   bool GameOver();
   bool Swipe(twenty48::Move);
+  int64_t MovesMade();
 
-private:
+ private:
 #if 0
 #pragma mark -
 #pragma mark Private Methods
@@ -47,5 +49,5 @@ private:
   bool moveRight() const;
 };
 
-} // namespace impl
-} // namespace twentyfortyeight
+}  // namespace impl
+}  // namespace twentyfortyeight

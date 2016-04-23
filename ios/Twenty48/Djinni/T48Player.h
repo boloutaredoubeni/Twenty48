@@ -5,6 +5,7 @@
 #import <Foundation/Foundation.h>
 @class T48Player;
 
+
 @interface T48Player : NSObject
 
 + (nullable T48Player *)create;
@@ -24,5 +25,7 @@
  * @return bool false if the move was unsuccessful
  */
 - (BOOL)swipe:(T48Move)move;
+
+- (int64_t)movesMade;
 
 @end

@@ -15,4 +15,5 @@ player = interface +c {
   # @param move the direction of movement
   # @return bool false if the move was unsuccessful
   swipe(move: move): bool;
+  moves_made(): i64;
 }

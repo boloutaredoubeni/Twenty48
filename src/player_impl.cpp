@@ -58,18 +58,29 @@ std::vector<int32_t> PlayerImpl::GameState() {
 bool PlayerImpl::GameOver() { return game_->is_over_; }
 
 bool PlayerImpl::Swipe(Move move) {
+  auto has_moved = false;
   switch (move) {
-  case Move::Up:
-    return moveUp();
-  case Move::Down:
-    return moveDown();
-  case Move::Left:
-    return moveLeft();
-  case Move::Right:
-    return moveRight();
+    case Move::Up:
+      has_moved = moveUp();
+      break;
+    case Move::Down:
+      has_moved = moveDown();
+      break;
+    case Move::Left:
+      has_moved = moveLeft();
+      break;
+    case Move::Right:
+      has_moved = moveRight();
+      break;
   }
-  return true;
+
+  if (has_moved) {
+    addTile();
+  }
+  return has_moved;
 }
+
+int64_t PlayerImpl::MovesMade() { return moves_made_; }
 
 void PlayerImpl::addTile() const {
   bool is_new_game = std::all_of(game_->board_.begin(), game_->board_.end(),
@@ -112,22 +123,10 @@ bool PlayerImpl::hasMoves() const {
   return !std::all_of(begin, end, [](int i) { return i > 1; });
 }
 
-bool PlayerImpl::moveUp() const {
-  addTile();
-  return false;
-}
+bool PlayerImpl::moveUp() const { return false; }
 
-bool PlayerImpl::moveDown() const {
-  addTile();
-  return false;
-}
+bool PlayerImpl::moveDown() const { return false; }
 
-bool PlayerImpl::moveLeft() const {
-  addTile();
-  return false;
-}
+bool PlayerImpl::moveLeft() const { return false; }
 
-bool PlayerImpl::moveRight() const {
-  addTile();
-  return false;
-}
+bool PlayerImpl::moveRight() const { return false; }

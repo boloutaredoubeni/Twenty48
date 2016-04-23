@@ -5,6 +5,7 @@
       'type': 'static_library',
       'sources': [
         'djinni/twenty_forty_eight.djinni',
+        '<!@(python scripts/glob.py include/ *.cpp *.hpp)',
         '<!@(python scripts/glob.py src/ *.hpp *.cpp)',
       ],
       'include_dirs': [
