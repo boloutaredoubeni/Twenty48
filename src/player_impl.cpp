@@ -1,8 +1,8 @@
 #include "player_impl.hpp"
 #include "Twenty48/move.hpp"
 
-#include <random>
 #include <algorithm>
+#include <random>
 
 #include <cassert>
 
@@ -59,14 +59,14 @@ bool PlayerImpl::GameOver() { return game_->is_over_; }
 
 bool PlayerImpl::Swipe(Move move) {
   switch (move) {
-    case Move::Up:
-      return moveUp();
-    case Move::Down:
-      return moveDown();
-    case Move::Left:
-      return moveLeft();
-    case Move::Right:
-      return moveRight();
+  case Move::Up:
+    return moveUp();
+  case Move::Down:
+    return moveDown();
+  case Move::Left:
+    return moveLeft();
+  case Move::Right:
+    return moveRight();
   }
   return true;
 }
@@ -78,7 +78,7 @@ void PlayerImpl::addTile() const {
   std::mt19937 generator(rd());
   std::uniform_int_distribution<> rand_dist(dimension * dimension - 1);
   // Loop thru all tiles
-  for (auto& tile : game_->board_) {
+  for (auto &tile : game_->board_) {
     // if it is 0 find an random empty one
     if (!tile) {
       if (rand_dist(generator) >= chance_of_four) {

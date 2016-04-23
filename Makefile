@@ -1,14 +1,23 @@
 
 xb-prettifier := $(shell command -v xcpretty >/dev/null 2>&1 && echo "xcpretty -c" || echo "cat")
 valgrind-exe := $(shell command -v valgrind >/dev/null 2>&1 && echo "valgrind" || echo "")
-
+clang-format := $(shell command -v clang-format >/dev/null 2>&1 && echo "clang-format -i" || echo "touch")
 
 all: test ios_app android_app
 
 format: 
 	./third_party/gyp/tools/pretty_gyp.py lib2048.gyp > lib_tmp && mv lib_tmp lib2048.gyp
 	./third_party/gyp/tools/pretty_gyp.py third_party/gtest.gyp > gtest_tmp && mv gtest_tmp third_party/gtest.gyp
-	$(shell command -v clang-format)
+	${clang-format} src/*.cpp
+	${clang-format} src/*.hpp
+	${clang-format} *.js 
+	${clang-format} ios/Twenty48/**/*.h 
+	${clang-format} ios/Twenty48/*.m 
+	${clang-format} ios/Twenty48/**/*.mm 
+	${clang-format} test/*.cpp 
+	${clang-format} android/jni-src/*.cpp 
+	${clang-format} android/jni-src/*.hpp 
+	${clang-format} android/app/src/main/java/**/**/*.java
 
 clean:  format lib2048.gyp third_party/gtest.gyp
 	rm -rf build/*

@@ -16,10 +16,10 @@ class Game final {
   uint64_t score_{0};
   bool has_won_ = false;
   bool is_over_ = false;
-  GameBoard board_{};  // NOTE: all members are zero
+  GameBoard board_{}; // NOTE: all members are zero
   friend class PlayerImpl;
 
- public:
+public:
 #if 0
 #pragma mark -
 #pragma mark Constructors
@@ -31,5 +31,5 @@ class Game final {
   Game &operator=(Game &&) = default;
   Game &operator=(const Game &) = default;
 };
-}  // namespace twentyfortyeight
-}  // namespace impl
+} // namespace twentyfortyeight
+} // namespace impl

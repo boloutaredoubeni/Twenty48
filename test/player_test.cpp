@@ -30,7 +30,7 @@ TEST(Player, can_notify_view_of_game_board) {
 
 TEST(Player, new_game_adds_a_tile) {
   const auto player = Player::Create();
-  const auto count_values = [](const std::vector<int>& xs) {
+  const auto count_values = [](const std::vector<int> &xs) {
     const auto begin = xs.begin();
     const auto end = xs.end();
     return std::count_if(begin, end,

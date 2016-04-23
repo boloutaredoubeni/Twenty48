@@ -9,7 +9,7 @@ namespace impl {
 class PlayerImpl : public twenty48::Player {
   std::shared_ptr<Game> game_;
 
- public:
+public:
 #if 0
 #pragma mark -
 #pragma mark Constructors
@@ -34,7 +34,7 @@ class PlayerImpl : public twenty48::Player {
   bool GameOver();
   bool Swipe(twenty48::Move);
 
- private:
+private:
 #if 0
 #pragma mark -
 #pragma mark Private Methods
@@ -47,5 +47,5 @@ class PlayerImpl : public twenty48::Player {
   bool moveRight() const;
 };
 
-}  // namespace impl
-}  // namespace twentyfortyeight
+} // namespace impl
+} // namespace twentyfortyeight

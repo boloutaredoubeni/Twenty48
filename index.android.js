@@ -3,14 +3,7 @@
  * https://github.com/facebook/react-native
  */
 
-import React, {
-  AppRegistry,
-  Component,
-  StyleSheet,
-  Text,
-  View,
-  NativeModules
-} from 'react-native';
+import React, {AppRegistry, Component, StyleSheet, Text, View, NativeModules} from 'react-native';
 
 class Twenty48 extends Component {
   render() {
@@ -31,28 +24,26 @@ class Twenty48 extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+  container : {
+    flex : 1,
+    justifyContent : 'center',
+    alignItems : 'center',
+    backgroundColor : '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  welcome : {
+    fontSize : 20,
+    textAlign : 'center',
+    margin : 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  instructions : {
+    textAlign : 'center',
+    color : '#333333',
+    marginBottom : 5,
   },
 });
 
 const player = NativeModules.PlayerManager;
 console.dir(player);
 player.startNewGame();
-
-
 
 AppRegistry.registerComponent('Twenty48', () => Twenty48);
