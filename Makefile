@@ -52,7 +52,7 @@ djinni: ./third_party/djinni/src/ third_party/gyp/
 
 lib2048.xcodeproj: third_party/gyp/ djinni
 	 ./third_party/gyp/gyp --depth=. -DOS=mac -f xcode \
-		--generator-output=./build/mac/ -I./third_party/djinni/common.gypi lib2048.gyp
+		--generator-output=./build/mac/ -I./common.gypi lib2048.gyp
 
 test: test-cpp
 
@@ -63,7 +63,7 @@ test-cpp: lib2048.xcodeproj
 
 ios.xcodeproj: djinni
 	./third_party/gyp/gyp --depth=. -DOS=ios -f xcode \
-		--generator-output=./build/ios/ -I./third_party/djinni/common.gypi lib2048.gyp
+		--generator-output=./build/ios/ -I./common.gypi lib2048.gyp
 
 
 ios: ios.xcodeproj
@@ -73,7 +73,8 @@ ios: ios.xcodeproj
 android: gyp_android
 
 gyp_android: djinni
-	PYTHONPATH=third_party/gyp/pylib ANDROID_BUILD_TOP=$(shell dirname `which ndk-build`) ./third_party/gyp/gyp --depth=. -f android 	-DOS=android -I./third_party/djinni/common.gypi lib2048.gyp --root-target=lib2048_jni
+	PYTHONPATH=third_party/gyp/pylib ANDROID_BUILD_TOP=$(shell dirname `which ndk-build`) ./third_party/gyp/gyp \
+		--depth=. -f android 	-DOS=android -I./common.gypi lib2048.gyp --root-target=lib2048_jni
 
 
 ios_app: ios

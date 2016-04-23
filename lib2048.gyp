@@ -48,14 +48,12 @@
         '-Wl,--build-id,--gc-sections,--exclude-libs,ALL'
       ],
       'sources': [
-        # '<!@(python scripts/glob.py include/ *.hpp *.cpp)',
         '<!@(python scripts/glob.py android/jni-src/ *.hpp *.cpp)',
         '<!@(python scripts/glob.py third_party/djinni/support-lib/jni/ *.hpp *.cpp)',
       ],
       'include_dirs': [
         'include'
       ],
-      'cflags_cc!': ['-Wno-literal-suffix'],
     },
     {
       'target_name': 'test',
