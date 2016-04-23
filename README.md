@@ -1,6 +1,15 @@
 # Twenty48
 
-An example project using React Native for the UI and C++ for the business logic
+An example project using [React Native](https://facebook.github.io/react-native/) for the UI and C++ for the business logic
+via [Djinni](https://github.com/dropbox/djinni)
+
+### Try it Out
+It's not done yet but at this point the React can call C++
+For now you can:
+ ``` 
+ git clone --recursive git@github.com:boloutaredoubeni/Twenty48.git 
+ ```
+
 
 ### Source Files
 ```
@@ -19,3 +28,6 @@ An example project using React Native for the UI and C++ for the business logic
 |- index.*.js -> entry point for React
 
 ```
+
+### License
+MIT
