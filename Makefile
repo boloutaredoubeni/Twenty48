@@ -1,14 +1,16 @@
-
+# Makefile
 xb-prettifier := $(shell command -v xcpretty >/dev/null 2>&1 && echo "xcpretty -c" || echo "cat")
 valgrind-exe := $(shell command -v valgrind >/dev/null 2>&1 && echo "valgrind" || echo "")
 clang-format := $(shell command -v clang-format >/dev/null 2>&1 && echo "clang-format -i -style=file" || echo "touch")
+GYP ?=  ./third_party/gyp
+DJINNI ?= ./third_party/djinni/src/run
 
 all: format test ios_app android_app
 
-format: djinni
+format: $(DJINNI)
 	@echo "Cleaning up Gyp files"
-	@./third_party/gyp/tools/pretty_gyp.py lib2048.gyp > lib_tmp && mv lib_tmp lib2048.gyp
-	@./third_party/gyp/tools/pretty_gyp.py third_party/gtest.gyp > gtest_tmp && mv gtest_tmp third_party/gtest.gyp
+	@$(GYP)/tools/pretty_gyp.py lib2048.gyp > lib_tmp && mv lib_tmp lib2048.gyp
+	@$(GYP)/tools/pretty_gyp.py third_party/gtest.gyp > gtest_tmp && mv gtest_tmp third_party/gtest.gyp
 	@echo "Cleaning up source files via clang-format"
 	@${clang-format} src/*.cpp 
 	@${clang-format} src/*.hpp 
@@ -35,13 +37,13 @@ clean: lib2048.gyp third_party/gtest.gyp
 	@rm -f *.mk
 	
 
-third_party/gyp/:
+$(GYP):
 	@echo "Checking out GYP"
-	@cd third_party/gyp/ && git checkout -q 0bb67471bca068996e15b56738fa4824dfa19de0
+	@cd $(GYP) && git checkout -q 0bb67471bca068996e15b56738fa4824dfa19de0
 
-djinni: ./third_party/djinni/src/ third_party/gyp/
+$(DJINNI): ./third_party/djinni/src/ $(GYP)
 	@echo "Generating interface files" 
-	@./third_party/djinni/src/run \
+	@$(DJINNI) \
 		--idl ./djinni/twenty_forty_eight.djinni \
 		\
 		--cpp-out include/Twenty48 \
@@ -67,8 +69,8 @@ djinni: ./third_party/djinni/src/ third_party/gyp/
 		
 	
 
-lib2048.xcodeproj: third_party/gyp/ djinni
-	 @./third_party/gyp/gyp --depth=. -DOS=mac -f xcode \
+lib2048.xcodeproj: $(GYP) djinni
+	 @$(GYP)/gyp --depth=. -DOS=mac -f xcode \
 		--generator-output=./build/mac/ -I./common.gypi lib2048.gyp
 		
 test: test-cpp
@@ -80,7 +82,7 @@ test-cpp: lib2048.xcodeproj
 
 
 ios.xcodeproj: djinni
-	@./third_party/gyp/gyp --depth=. -DOS=ios -f xcode \
+	@$(GYP)/gyp --depth=. -DOS=ios -f xcode \
 		--generator-output=./build/ios/ -I./common.gypi lib2048.gyp
 
 
@@ -91,7 +93,7 @@ ios: ios.xcodeproj
 android: gyp_android
 
 gyp_android: djinni
-	@PYTHONPATH=third_party/gyp/pylib ANDROID_BUILD_TOP=$(shell dirname `which ndk-build`) ./third_party/gyp/gyp \
+	@PYTHONPATH=$(GYP)/pylib ANDROID_BUILD_TOP=$(shell dirname `which ndk-build`) $(GYP)/gyp \
 		--depth=. -f android 	-DOS=android -I./common.gypi lib2048.gyp --root-target=lib2048_jni
 
 
@@ -103,4 +105,4 @@ android_app: android
 	@echo "Running android project"
 	@react-native run-android
 
-.PHONY: djinni gyp test clean ios android
+.PHONY: $(DJINNI) test clean ios android

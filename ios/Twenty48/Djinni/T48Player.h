@@ -5,7 +5,6 @@
 #import <Foundation/Foundation.h>
 @class T48Player;
 
-
 @interface T48Player : NSObject
 
 + (nullable T48Player *)create;
