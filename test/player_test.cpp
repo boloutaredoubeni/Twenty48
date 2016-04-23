@@ -34,7 +34,7 @@ TEST(Player, new_game_adds_a_tile) {
     const auto begin = xs.begin();
     const auto end = xs.end();
     return std::count_if(begin, end,
-                         [](int i) { return (i > 0) && (i % 2) == 0; });
+                         [](int i) { return (i > 1) && (i % 2) == 0; });
   };
 
   ASSERT_EQ(0, count_values(player->GameState()));

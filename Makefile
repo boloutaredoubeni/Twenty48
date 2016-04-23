@@ -1,7 +1,7 @@
 # Makefile
 xb-prettifier := $(shell command -v xcpretty >/dev/null 2>&1 && echo "xcpretty -c" || echo "cat")
 valgrind-exe := $(shell command -v valgrind >/dev/null 2>&1 && echo "valgrind" || echo "")
-clang-format := $(shell command -v clang-format >/dev/null 2>&1 && echo "clang-format -i -style=file" || echo "touch")
+clang-format := $(shell command -v clang-format >/dev/null 2>&1 && echo "clang-format -i --style=file" || echo "touch")
 GYP ?=  ./third_party/gyp
 DJINNI ?= ./third_party/djinni/src/run
 
@@ -12,16 +12,15 @@ format: $(DJINNI)
 	@$(GYP)/tools/pretty_gyp.py lib2048.gyp > lib_tmp && mv lib_tmp lib2048.gyp
 	@$(GYP)/tools/pretty_gyp.py third_party/gtest.gyp > gtest_tmp && mv gtest_tmp third_party/gtest.gyp
 	@echo "Cleaning up source files via clang-format"
-	@${clang-format} src/*.cpp 
-	@${clang-format} src/*.hpp 
+	# FIXME: no one should care if these fail
+	@${clang-format} src/*
 	@${clang-format} *.js 
 	@${clang-format} ios/Twenty48/**/*.h  
 	@${clang-format} ios/Twenty48/*.m 
 	@${clang-format} ios/Twenty48/**/*.mm
-	@${clang-format} test/*.cpp
-	@${clang-format} android/jni-src/*.cpp 
-	@${clang-format} android/jni-src/*.hpp  
-	@${clang-format} android/app/src/main/java/**/**/*.java
+	@${clang-format} test/*
+	@${clang-format} android/jni-src/*
+	@${clang-format} android/app/src/main/java/com/boloutaredoubeni/twenty48/**/*.java
 
 clean: lib2048.gyp third_party/gtest.gyp
 	@echo "Removing generated files" 

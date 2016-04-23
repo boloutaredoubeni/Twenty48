@@ -29,12 +29,12 @@ PlayerImpl::~PlayerImpl() {}
 #endif
 
 void PlayerImpl::NewGame() {
-  for (auto tile : game_->board_) {
-    tile = 0;
+  for (auto &tile : game_->board_) {
+    tile = 1;
   }
 
   assert(std::all_of(game_->board_.begin(), game_->board_.end(),
-                     [](int i) { return i == 0; }));
+                     [](int i) { return i == 1; }));
 
   addTile();
   game_->score_ = 0;
@@ -73,14 +73,14 @@ bool PlayerImpl::Swipe(Move move) {
 
 void PlayerImpl::addTile() const {
   bool is_new_game = std::all_of(game_->board_.begin(), game_->board_.end(),
-                                 [](int i) { return i == 0; });
+                                 [](int i) { return i == 1; });
   std::random_device rd;
   std::mt19937 generator(rd());
   std::uniform_int_distribution<> rand_dist(dimension * dimension - 1);
   // Loop thru all tiles
   for (auto &tile : game_->board_) {
     // if it is 0 find an random empty one
-    if (!tile) {
+    if (tile == 1) {
       if (rand_dist(generator) >= chance_of_four) {
         tile = 4;
       } else {
@@ -109,7 +109,7 @@ void PlayerImpl::addTile() const {
 bool PlayerImpl::hasMoves() const {
   const auto begin = game_->board_.begin();
   const auto end = game_->board_.end();
-  return !std::all_of(begin, end, [](int i) { return i > 0; });
+  return !std::all_of(begin, end, [](int i) { return i > 1; });
 }
 
 bool PlayerImpl::moveUp() const {

@@ -87,7 +87,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.twenty48"
+        applicationId "com.boloutaredoubeni.twenty48"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -126,14 +126,7 @@ android {
     }
     sourceSets {
         main {
-//            java.srcDirs = ['src/main/java', '../../../generated-src/java']
             jniLibs.srcDirs = ['libs']
-            // jni.srcDirs = [
-            //     // '../../generated-src/jni',
-            //     // '../../src/',
-            //     // '../../third_party/djinni/support-lib/jni/',
-            //     // '../../third_party/djinni/support-lib/',
-            // ]
         }
     }
 }
