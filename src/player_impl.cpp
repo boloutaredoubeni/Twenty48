@@ -77,6 +77,7 @@ bool PlayerImpl::Swipe(Move move) {
   if (has_moved) {
     addTile();
   }
+  unlockTiles();
   return has_moved;
 }
 
@@ -123,10 +124,32 @@ bool PlayerImpl::hasMoves() const {
   return !std::all_of(begin, end, [](int i) { return i > 1; });
 }
 
-bool PlayerImpl::moveUp() const { return false; }
+bool PlayerImpl::moveUp() const {
+  auto board_changed = false;
+  // [*][*][*][4] __\\ [*][8][2][8]
+  // [*][8][2][4] --// [*][*][*][*]
+  // Check 12 - 15 with 8 - 11
+  // merge if possible
+  // then check 8 - 11 with 4 -7
+  // merge
+  // then check 0 - 3 with 4 - 7
+  // remember that this is non-greedy
+  auto check_index = 12;
+  do {
+    // get the a row
+    // get the adjacent row
+    // merge into new row
+    // if merged row equals top row and bottom is not empty board has not
+    // changed
+    check_index -= 4;
+  } while (check_index < 0);
+  return board_changed;
+}
 
 bool PlayerImpl::moveDown() const { return false; }
 
 bool PlayerImpl::moveLeft() const { return false; }
 
 bool PlayerImpl::moveRight() const { return false; }
+
+void PlayerImpl::unlockTiles() const {}

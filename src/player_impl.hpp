@@ -47,6 +47,7 @@ class PlayerImpl : public twenty48::Player {
   bool moveDown() const;
   bool moveLeft() const;
   bool moveRight() const;
+  void unlockTiles() const;
 };
 
 }  // namespace impl
