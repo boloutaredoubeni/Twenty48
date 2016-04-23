@@ -1,1 +1,8 @@
-
+---
+BasedOnStyle: Google
+IndentWidth: 2
+---
+Language: Cpp
+---
+Language: Java
+IndentWidth: 4
