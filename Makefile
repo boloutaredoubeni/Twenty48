@@ -5,7 +5,7 @@ clang-format := $(shell command -v clang-format >/dev/null 2>&1 && echo "clang-f
 GYP ?=  ./third_party/gyp
 DJINNI ?= ./third_party/djinni/src/run
 
-all: format test ios_app android_app
+all: format test ios android
 
 format: $(DJINNI)
 	@echo "Cleaning up Gyp files"
@@ -81,27 +81,20 @@ test-cpp: lib2048.xcodeproj
 		&& ${valgrind-exe} ./build/Debug/test
 
 
-ios.xcodeproj: djinni
+ios.xcodeproj: $(DJINNI)
 	@$(GYP)/gyp --depth=. -DOS=ios -f xcode \
 		--generator-output=./build/ios/ -I./common.gypi lib2048.gyp
-
-
-ios: ios.xcodeproj
 	@xcodebuild -project build/ios/lib2048.xcodeproj/ -configuration Debug -target lib2048_ios | ${xb-prettifier}
 
-
-android: gyp_android
-
-gyp_android: djinni
+gyp_android: $(DJINNI)
 	@PYTHONPATH=$(GYP)/pylib ANDROID_BUILD_TOP=$(shell dirname `which ndk-build`) $(GYP)/gyp \
 		--depth=. -f android 	-DOS=android -I./common.gypi lib2048.gyp --root-target=lib2048_jni
 
-
-ios_app: ios
+ios: ios.xcodeproj
 	@echo "Building ios app"
 	@xcodebuild -workspace ios/Twenty48.xcworkspace -scheme Twenty48 -configuration Debug -sdk iphonesimulator | ${xb-prettifier}
 	
-android_app: android
+android: gyp_android
 	@echo "Running android project"
 	@react-native run-android
 
