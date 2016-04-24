@@ -24,5 +24,5 @@ struct Tile {
   Tile &operator=(Tile &&) = default;
   Tile &operator=(const Tile &) = default;
 };
-}  // namespace impl
-}  // namespace twenty48
+} // namespace impl
+} // namespace twenty48

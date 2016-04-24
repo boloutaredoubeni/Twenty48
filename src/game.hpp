@@ -2,8 +2,8 @@
 
 #include "tile.hpp"
 
-#include <array>
 #include <algorithm>
+#include <array>
 
 #include <cstdint>
 
@@ -22,7 +22,7 @@ class Game final {
   GameBoard board_{};
   friend class PlayerImpl;
 
- public:
+public:
 #if 0
 #pragma mark -
 #pragma mark Constructors
@@ -34,5 +34,5 @@ class Game final {
   Game &operator=(Game &&) = default;
   Game &operator=(const Game &) = default;
 };
-}  // namespace twentyfortyeight
-}  // namespace impl
+} // namespace twentyfortyeight
+} // namespace impl

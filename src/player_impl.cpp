@@ -22,9 +22,7 @@ std::shared_ptr<Player> Player::Create() {
 PlayerImpl::PlayerImpl() {
   game_ = std::make_shared<Game>();
   std::for_each(game_->board_.begin(), game_->board_.end(),
-                [](auto &tile) {
-                  tile = Tile();
-                });
+                [](auto &tile) { tile = Tile(); });
   assert(std::all_of(game_->board_.begin(), game_->board_.end(),
                      [](const auto &i) { return i.value_ == 1; }));
 }
@@ -59,9 +57,7 @@ bool PlayerImpl::HasWon() { return game_->has_won_; }
 std::vector<int32_t> PlayerImpl::GameState() {
   std::vector<int32_t> game_state(16);
   std::transform(game_->board_.begin(), game_->board_.end(), game_state.begin(),
-                 [](const auto& tile) {
-                   return tile.value_;
-                 });
+                 [](const auto &tile) { return tile.value_; });
   assert(game_state.size() == 16);
   return game_state;
 }
@@ -71,18 +67,18 @@ bool PlayerImpl::GameOver() { return game_->is_over_; }
 bool PlayerImpl::Swipe(Move move) {
   auto has_moved = false;
   switch (move) {
-    case Move::Up:
-      has_moved = moveUp();
-      break;
-    case Move::Down:
-      has_moved = moveDown();
-      break;
-    case Move::Left:
-      has_moved = moveLeft();
-      break;
-    case Move::Right:
-      has_moved = moveRight();
-      break;
+  case Move::Up:
+    has_moved = moveUp();
+    break;
+  case Move::Down:
+    has_moved = moveDown();
+    break;
+  case Move::Left:
+    has_moved = moveLeft();
+    break;
+  case Move::Right:
+    has_moved = moveRight();
+    break;
   }
 
   if (has_moved) {
@@ -168,4 +164,8 @@ bool PlayerImpl::moveLeft() const { return false; }
 
 bool PlayerImpl::moveRight() const { return false; }
 
-void PlayerImpl::unlockTiles() const {}
+void PlayerImpl::unlockTiles() const {
+  for (auto& tile : game_->board_) {
+    tile.locked_ = false;
+  }
+}
