@@ -13,7 +13,7 @@ namespace impl {
 const static uint8_t dimension = 4;
 const static uint8_t chance_of_four = 15;
 
-using GameBoard = std::array<Tile, dimension * dimension>;
+using GameBoard = std::array<std::shared_ptr<Tile>, dimension * dimension>;
 
 class Game final {
   uint64_t score_{0};
@@ -22,7 +22,7 @@ class Game final {
   GameBoard board_{};
   friend class PlayerImpl;
 
-public:
+ public:
 #if 0
 #pragma mark -
 #pragma mark Constructors
@@ -34,5 +34,5 @@ public:
   Game &operator=(Game &&) = default;
   Game &operator=(const Game &) = default;
 };
-} // namespace twentyfortyeight
-} // namespace impl
+}  // namespace twentyfortyeight
+}  // namespace impl

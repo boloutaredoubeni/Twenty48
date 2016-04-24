@@ -16,7 +16,7 @@ class Tile {
 #pragma mark -
 #pragma mark Constructors
 #endif
-public:
+ public:
   Tile();
   explicit Tile(int32_t);
   ~Tile() {}
@@ -27,13 +27,13 @@ public:
 
 #if 0
 #pragma mark -
-#pragma mark Public Method
+#pragma mark Public Methods
 #endif
   virtual void Init();
   virtual void Increase();
   virtual int8_t Value() const;
   virtual void Unlock();
-  virtual void Combine(Tile &tile);
+  virtual bool Locked() const;
 };
-} // namespace impl
-} // namespace twenty48
+}  // namespace impl
+}  // namespace twenty48

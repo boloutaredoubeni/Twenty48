@@ -2,6 +2,7 @@
 #include "Twenty48/move.hpp"
 
 #include <algorithm>
+#include <iterator>
 #include <random>
 
 #include <cassert>
@@ -15,24 +16,6 @@ using namespace twenty48::impl;
 #endif
 
 using TileIterator = std::array<Tile, 16>::iterator;
-
-namespace {
-static bool merge_vertical(TileIterator start, TileIterator end,
-                           TileIterator adj_start, TileIterator adj_end) {
-  assert(std::distance(start, end) == 4);
-  assert(std::distance(adj_start, adj_end) == 4);
-  auto rows_merged = false;
-  while (start != end && adj_start != adj_end) {
-    assert(start != adj_start);
-    if ((start->Value() == adj_start->Value()) && (start->Value() != 1)) {
-      start->Combine(*adj_start);
-    }
-    ++start;
-    ++adj_start;
-  }
-  return rows_merged;
-};
-} // namespace
 
 #if 0
 #pragma mark -
@@ -60,9 +43,7 @@ PlayerImpl::~PlayerImpl() {}
 #endif
 
 void PlayerImpl::NewGame() {
-  for (auto &tile : game_->board_) {
-    tile.Init();
-  }
+  game_->board_.fill(Tile());
 
   assert(std::all_of(game_->board_.begin(), game_->board_.end(),
                      [](const auto &i) { return i.Value() == 1; }));
@@ -96,18 +77,18 @@ bool PlayerImpl::Swipe(Move move) {
     return false;
   }
   switch (move) {
-  case Move::Up:
-    has_moved = moveUp();
-    break;
-  case Move::Down:
-    has_moved = moveDown();
-    break;
-  case Move::Left:
-    has_moved = moveLeft();
-    break;
-  case Move::Right:
-    has_moved = moveRight();
-    break;
+    case Move::Up:
+      has_moved = moveUp();
+      break;
+    case Move::Down:
+      has_moved = moveDown();
+      break;
+    case Move::Left:
+      has_moved = moveLeft();
+      break;
+    case Move::Right:
+      has_moved = moveRight();
+      break;
   }
 
   if (has_moved) {
@@ -176,21 +157,33 @@ bool PlayerImpl::moveUp() const {
   // merge
   // then check 0 - 3 with 4 - 7
   // remember that this is non-greedy thus [4][4][4][4] !=> [*][*][8][8]
-  auto check_index = 12;
-  do {
-    // get the a row
-    auto it_begin = game_->board_.begin() + check_index;
-    auto it_end = it_begin + 4;
-    // get the adjacent row
-    auto jt_begin = game_->board_.begin() + (check_index - 4);
-    auto jt_end = game_->board_.end() + 4;
-    assert(it_begin->Value() == jt_end->Value());
+  auto check_index = 8;
+  while (check_index >= 0) {
+    // get the a slice
+    std::array<Tile, 8> modified;
     // merge into new row
     // if merged row equals top row and bottom is not empty board has not
     // changed
-    board_changed = merge_vertical(it_begin, it_end, jt_begin, jt_end);
+    for (auto start = game_->board_.begin() + check_index,
+              end = game_->board_.begin() + check_index + 8;
+         start != end; ++start) {
+      auto next = start + 4;
+      assert(*next != nullptr);
+      if (start->Value() != next->Value()) {
+        continue;
+      }
+      if (start->Locked() || next->Locked()) {
+        continue;
+      }
+      if (start->Value() == 1) {
+        continue;
+      }
+      next->Init();
+      start->Increase();
+      board_changed = true;
+    }
     check_index -= 4;
-  } while (check_index <= 0);
+  }
   return board_changed;
 }
 
