@@ -12,7 +12,7 @@ import com.boloutaredoubeni.twenty48.djinni.Player;
  */
 public class PlayerManager extends ReactContextBaseJavaModule {
 
-  private final static String  TAG = "PlayerManager";
+  private final static String TAG = "PlayerManager";
 
   static {
     try {
@@ -25,15 +25,13 @@ public class PlayerManager extends ReactContextBaseJavaModule {
 
   Player player;
 
-  public PlayerManager(ReactApplicationContext context) {
-    super(context);
-  }
-  
+  public PlayerManager(ReactApplicationContext context) { super(context); }
+
   @Override
   public String getName() {
     return "PlayerManager";
   }
-  
+
   @ReactMethod
   public void startNewGame() {
     if (player == null) {

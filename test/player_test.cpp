@@ -1,10 +1,12 @@
 #include <gtest/gtest.h>
 
+#include "Twenty48/Move.hpp"
 #include "player_impl.hpp"
 
 #include <algorithm>
 
 using namespace twenty48;
+
 
 #if 0
 #pragma mark -
@@ -20,6 +22,7 @@ TEST(Player, new_game) {
   ASSERT_EQ(0, player->Score());
   ASSERT_FALSE(player->GameOver());
   ASSERT_FALSE(player->HasWon());
+  ASSERT_EQ(0, player->MovesMade());
 }
 
 TEST(Player, can_notify_view_of_game_board) {
@@ -34,12 +37,25 @@ TEST(Player, new_game_adds_a_tile) {
     const auto begin = xs.begin();
     const auto end = xs.end();
     return std::count_if(begin, end,
-                         [](int i) { return (i > 0) && (i % 2) == 0; });
+                         [](int i) { return (i > 1) && (i % 2) == 0; });
   };
 
   ASSERT_EQ(0, count_values(player->GameState()));
   player->NewGame();
   ASSERT_EQ(2, count_values(player->GameState()));
+}
+
+TEST(Player, can_move_up) {
+  const auto player = Player::Create();
+  ASSERT_GE(-1, player->MovesMade());
+  const auto prev = player->GameState();
+  ASSERT_FALSE(player->Swipe(Move::Up));
+  ASSERT_GE(-1, player->MovesMade());
+  player->NewGame();
+  // FIXME: this result is intended to be random. Create a fixture to normalize behaviour
+  ASSERT_TRUE(player->Swipe(Move::Up));
+  ASSERT_EQ(1, player->MovesMade());
+  ASSERT_GE(0, player->Score());
 }
 
 TEST(Player, can_move_tiles) {

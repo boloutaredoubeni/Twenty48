@@ -32,6 +32,8 @@ public:
      * @return bool false if the move was unsuccessful
      */
     virtual bool Swipe(Move move) = 0;
+
+    virtual int64_t MovesMade() = 0;
 };
 
 }  // namespace twenty48

@@ -23,6 +23,8 @@ public abstract class Player {
      */
     public abstract boolean swipe(Move move);
 
+    public abstract long movesMade();
+
     public static native Player create();
 
     private static final class CppProxy extends Player
@@ -95,5 +97,13 @@ public abstract class Player {
             return native_swipe(this.nativeRef, move);
         }
         private native boolean native_swipe(long _nativeRef, Move move);
+
+        @Override
+        public long movesMade()
+        {
+            assert !this.destroyed.get() : "trying to use a destroyed object";
+            return native_movesMade(this.nativeRef);
+        }
+        private native long native_movesMade(long _nativeRef);
     }
 }
