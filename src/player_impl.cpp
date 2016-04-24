@@ -29,21 +29,19 @@ std::shared_ptr<Player> Player::Create() {
 
 PlayerImpl::PlayerImpl() {
   game_ = std::make_shared<Game>();
-  std::for_each(game_->board_.begin(), game_->board_.end(),
-                [](auto &tile) { tile = Tile(); });
-  assert(std::all_of(game_->board_.begin(), game_->board_.end(),
-                     [](const auto &i) { return i.Value() == 1; }));
 }
 
 PlayerImpl::~PlayerImpl() {}
 
 #if 0
 #pragma mark -
-#pragma mark PublicMethods
+#pragma mark Public Methods
 #endif
 
 void PlayerImpl::NewGame() {
-  game_->board_.fill(Tile());
+  for (auto& tile : game_->board_) {
+    tile.Init();
+  }
 
   assert(std::all_of(game_->board_.begin(), game_->board_.end(),
                      [](const auto &i) { return i.Value() == 1; }));
@@ -63,6 +61,9 @@ bool PlayerImpl::HasWon() { return game_->has_won_; }
 
 std::vector<int32_t> PlayerImpl::GameState() {
   std::vector<int32_t> game_state(16);
+  if (moves_made_ == -1) {
+    return game_state;
+  }
   std::transform(game_->board_.begin(), game_->board_.end(), game_state.begin(),
                  [](const auto &tile) { return tile.Value(); });
   assert(game_state.size() == 16);
@@ -73,7 +74,7 @@ bool PlayerImpl::GameOver() { return game_->is_over_; }
 
 bool PlayerImpl::Swipe(Move move) {
   auto has_moved = false;
-  if (moves_made_ == 1) {
+  if (moves_made_ == -1) {
     return false;
   }
   switch (move) {
@@ -160,7 +161,6 @@ bool PlayerImpl::moveUp() const {
   auto check_index = 8;
   while (check_index >= 0) {
     // get the a slice
-    std::array<Tile, 8> modified;
     // merge into new row
     // if merged row equals top row and bottom is not empty board has not
     // changed
@@ -168,18 +168,18 @@ bool PlayerImpl::moveUp() const {
               end = game_->board_.begin() + check_index + 8;
          start != end; ++start) {
       auto next = start + 4;
-      assert(*next != nullptr);
-      if (start->Value() != next->Value()) {
+//      assert(next != nullptr);
+      if ((*start).Value() != (*next).Value()) {
         continue;
       }
-      if (start->Locked() || next->Locked()) {
+      if ((*start).Locked() || (*next).Locked()) {
         continue;
       }
-      if (start->Value() == 1) {
+      if ((*start).Value() == 1) {
         continue;
       }
-      next->Init();
-      start->Increase();
+      (*next).Init();
+      (*start).Increase();
       board_changed = true;
     }
     check_index -= 4;

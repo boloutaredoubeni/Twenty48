@@ -13,7 +13,7 @@ namespace impl {
 const static uint8_t dimension = 4;
 const static uint8_t chance_of_four = 15;
 
-using GameBoard = std::array<std::shared_ptr<Tile>, dimension * dimension>;
+using GameBoard = std::array<Tile, dimension * dimension>;
 
 class Game final {
   uint64_t score_{0};

@@ -83,5 +83,25 @@
         '<!@(python scripts/glob.py test/ *.cpp)'
       ],
     },
+    {
+      'target_name': 'xctest_runner',
+      'type': 'loadable_module',
+      'mac_xctest_bundle': 1,
+      'cflags_cc!': [ '-Werror', '-Wextra' ],
+      'xcode_settings': {
+        'OTHER_CPLUSPLUSFLAGS!' : ['-Werror', '-Wextra'],
+      },
+      'dependencies': [
+        'lib2048',
+        'third_party/gtest.gyp:gtest',
+      ],
+      'include_dirs': [
+        'test',
+      ],
+      'sources': [
+        '<!@(python scripts/glob.py test *.cpp *.hpp)',
+        'third_party/xcode-googletest/Bundle/GoogleTests.mm',
+      ]
+    },
   ],
 }
