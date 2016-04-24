@@ -19,7 +19,15 @@ std::shared_ptr<Player> Player::Create() {
   return std::make_shared<PlayerImpl>();
 }
 
-PlayerImpl::PlayerImpl() { game_ = std::make_shared<Game>(); }
+PlayerImpl::PlayerImpl() {
+  game_ = std::make_shared<Game>();
+  std::for_each(game_->board_.begin(), game_->board_.end(),
+                [](auto &tile) {
+                  tile = Tile();
+                });
+  assert(std::all_of(game_->board_.begin(), game_->board_.end(),
+                     [](const auto &i) { return i.value_ == 1; }));
+}
 
 PlayerImpl::~PlayerImpl() {}
 
@@ -30,11 +38,11 @@ PlayerImpl::~PlayerImpl() {}
 
 void PlayerImpl::NewGame() {
   for (auto &tile : game_->board_) {
-    tile = 1;
+    tile.value_ = 1;
   }
 
   assert(std::all_of(game_->board_.begin(), game_->board_.end(),
-                     [](int i) { return i == 1; }));
+                     [](const auto &i) { return i.value_ == 1; }));
 
   addTile();
   game_->score_ = 0;
@@ -49,10 +57,13 @@ int64_t PlayerImpl::Score() {
 bool PlayerImpl::HasWon() { return game_->has_won_; }
 
 std::vector<int32_t> PlayerImpl::GameState() {
-  const auto game_board =
-      std::vector<int32_t>(game_->board_.begin(), game_->board_.end());
-  assert(game_board.size() == 16);
-  return game_board;
+  std::vector<int32_t> game_state(16);
+  std::transform(game_->board_.begin(), game_->board_.end(), game_state.begin(),
+                 [](const auto& tile) {
+                   return tile.value_;
+                 });
+  assert(game_state.size() == 16);
+  return game_state;
 }
 
 bool PlayerImpl::GameOver() { return game_->is_over_; }
@@ -83,20 +94,25 @@ bool PlayerImpl::Swipe(Move move) {
 
 int64_t PlayerImpl::MovesMade() { return moves_made_; }
 
+#if 0
+#pragma mark -
+#pragma mark Private Methods
+#endif
+
 void PlayerImpl::addTile() const {
   bool is_new_game = std::all_of(game_->board_.begin(), game_->board_.end(),
-                                 [](int i) { return i == 1; });
+                                 [](const auto i) { return i.value_ == 1; });
   std::random_device rd;
   std::mt19937 generator(rd());
   std::uniform_int_distribution<> rand_dist(dimension * dimension - 1);
   // Loop thru all tiles
   for (auto &tile : game_->board_) {
     // if it is 0 find an random empty one
-    if (tile == 1) {
+    if (tile.value_ == 1) {
       if (rand_dist(generator) >= chance_of_four) {
-        tile = 4;
+        tile.value_ = 4;
       } else {
-        tile = 2;
+        tile.value_ = 2;
       }
       // FIXME(boloutaredoubeni): select a random tile instead of the first one
       // that is found
@@ -113,7 +129,7 @@ void PlayerImpl::addTile() const {
     }
 
     assert(std::any_of(game_->board_.begin(), game_->board_.end(),
-                       [](int i) { return i > 0; }));
+                       [](const auto i) { return i.value_ > 0; }));
   }
   game_->is_over_ = true;
 }
@@ -121,7 +137,7 @@ void PlayerImpl::addTile() const {
 bool PlayerImpl::hasMoves() const {
   const auto begin = game_->board_.begin();
   const auto end = game_->board_.end();
-  return !std::all_of(begin, end, [](int i) { return i > 1; });
+  return !std::all_of(begin, end, [](const auto i) { return i.value_ > 1; });
 }
 
 bool PlayerImpl::moveUp() const {
