@@ -8,7 +8,7 @@ namespace impl {
 
 class PlayerImpl : public twenty48::Player {
   std::shared_ptr<Game> game_;
-  int64_t moves_made_{0};
+  int64_t moves_made_{-1};
 
 public:
 #if 0
@@ -28,26 +28,26 @@ public:
 #pragma mark Public Methods
 #endif
 
-  void NewGame();
-  int64_t Score();
-  bool HasWon();
-  std::vector<int32_t> GameState();
-  bool GameOver();
-  bool Swipe(twenty48::Move);
-  int64_t MovesMade();
+  virtual void NewGame();
+  virtual int64_t Score();
+  virtual bool HasWon();
+  virtual std::vector<int32_t> GameState();
+  virtual bool GameOver();
+  virtual bool Swipe(twenty48::Move);
+  virtual int64_t MovesMade();
 
 private:
 #if 0
 #pragma mark -
 #pragma mark Private Methods
 #endif
-  void addTile() const;
-  bool hasMoves() const;
-  bool moveUp() const;
-  bool moveDown() const;
-  bool moveLeft() const;
-  bool moveRight() const;
-  void unlockTiles() const;
+  virtual void addTile() const;
+  virtual bool hasMoves() const;
+  virtual bool moveUp() const;
+  virtual bool moveDown() const;
+  virtual bool moveLeft() const;
+  virtual bool moveRight() const;
+  virtual void unlockTiles() const;
 };
 
 } // namespace impl

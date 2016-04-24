@@ -56,8 +56,11 @@ TEST(Player, new_game_adds_a_tile) {
 // NOTE: these tests fail when its not the first move in the game
 TEST(Player, can_move_up) {
   const auto player = Player::Create();
-  ASSERT_GE(0, player->MovesMade());
+  ASSERT_GE(-1, player->MovesMade());
   const auto prev = player->GameState();
+  ASSERT_FALSE(player->Swipe(Move::Up));
+  ASSERT_GE(-1, player->MovesMade());
+  player->NewGame();
   ASSERT_TRUE(player->Swipe(Move::Up));
   // ASSERT_EQ(1, player->MovesMade());
   // ASSERT_GE(0, player->Score());

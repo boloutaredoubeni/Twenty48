@@ -27,7 +27,9 @@
         # do _not_ put defines here, unless you add them in cflags as well
         # ios/clang doesn't respect them :(
         'defines': [ 'DEBUG=1' ],
-        'cflags' : [ '-g', '-O0', '-DDEBUG=1' ],
+        'cflags' : [ '-g',
+        '-O0',
+        '-DDEBUG=1' ],
         'xcode_settings': {
           'ONLY_ACTIVE_ARCH': 'YES',
         },

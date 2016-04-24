@@ -70,7 +70,7 @@ $(DJINNI): ./third_party/djinni/src/ $(GYP)
 
 lib2048.xcodeproj: $(GYP) $(DJINNI)
 	 @$(GYP)/gyp --depth=. -DOS=mac -f xcode \
-		--generator-output=./build/mac/ -I./common.gypi lib2048.gyp
+		--generator-output=./build/mac/ lib2048.gyp
 
 test: test-cpp
 
@@ -82,12 +82,12 @@ test-cpp: lib2048.xcodeproj
 
 ios.xcodeproj: $(DJINNI)
 	@$(GYP)/gyp --depth=. -DOS=ios -f xcode \
-		--generator-output=./build/ios/ -I./common.gypi lib2048.gyp
+		--generator-output=./build/ios/ lib2048.gyp
 	@xcodebuild -project build/ios/lib2048.xcodeproj/ -configuration Debug -target lib2048_ios | ${xb-prettifier}
 
 gyp_android: $(DJINNI)
 	@PYTHONPATH=$(GYP)/pylib ANDROID_BUILD_TOP=$(shell dirname `which ndk-build`) $(GYP)/gyp \
-		--depth=. -f android 	-DOS=android -I./common.gypi lib2048.gyp --root-target=lib2048_jni
+		--depth=. -f android 	-DOS=android lib2048.gyp --root-target=lib2048_jni
 
 ios: ios.xcodeproj
 	@echo "Building ios app"
