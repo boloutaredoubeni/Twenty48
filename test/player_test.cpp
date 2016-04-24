@@ -7,14 +7,6 @@
 
 using namespace twenty48;
 
-namespace {
-static bool verify_tiles_moved_up(const std::vector<int> &prev,
-                                  const std::vector<int> &next) {
-  std::vector<int> top_row_prev(prev.begin(), prev.begin() + 3);
-  std::vector<int> top_row_next(next.begin(), prev.begin() + 3);
-  return top_row_prev != top_row_next;
-}
-} // namespace
 
 #if 0
 #pragma mark -
@@ -53,7 +45,6 @@ TEST(Player, new_game_adds_a_tile) {
   ASSERT_EQ(2, count_values(player->GameState()));
 }
 
-// NOTE: these tests fail when its not the first move in the game
 TEST(Player, can_move_up) {
   const auto player = Player::Create();
   ASSERT_GE(-1, player->MovesMade());
@@ -61,10 +52,10 @@ TEST(Player, can_move_up) {
   ASSERT_FALSE(player->Swipe(Move::Up));
   ASSERT_GE(-1, player->MovesMade());
   player->NewGame();
+  // FIXME: this result is intended to be random. Create a fixture to normalize behaviour
   ASSERT_TRUE(player->Swipe(Move::Up));
-  // ASSERT_EQ(1, player->MovesMade());
-  // ASSERT_GE(0, player->Score());
-  // ASSERT_TRUE(verify_tiles_moved_up(prev, player->GameState()));
+  ASSERT_EQ(1, player->MovesMade());
+  ASSERT_GE(0, player->Score());
 }
 
 TEST(Player, can_move_tiles) {

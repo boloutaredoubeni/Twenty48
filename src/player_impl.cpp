@@ -27,9 +27,7 @@ std::shared_ptr<Player> Player::Create() {
   return std::make_shared<PlayerImpl>();
 }
 
-PlayerImpl::PlayerImpl() {
-  game_ = std::make_shared<Game>();
-}
+PlayerImpl::PlayerImpl() { game_ = std::make_shared<Game>(); }
 
 PlayerImpl::~PlayerImpl() {}
 
@@ -39,7 +37,7 @@ PlayerImpl::~PlayerImpl() {}
 #endif
 
 void PlayerImpl::NewGame() {
-  for (auto& tile : game_->board_) {
+  for (auto &tile : game_->board_) {
     tile.Init();
   }
 
@@ -158,17 +156,16 @@ bool PlayerImpl::moveUp() const {
   // merge
   // then check 0 - 3 with 4 - 7
   // remember that this is non-greedy thus [4][4][4][4] !=> [*][*][8][8]
-  auto check_index = 8;
-  while (check_index >= 0) {
+  for (auto check_index = 8; check_index >= 0; check_index -= 4) {
     // get the a slice
     // merge into new row
     // if merged row equals top row and bottom is not empty board has not
     // changed
     for (auto start = game_->board_.begin() + check_index,
-              end = game_->board_.begin() + check_index + 8;
+              end = game_->board_.begin() + check_index + 4;
          start != end; ++start) {
-      auto next = start + 4;
-//      assert(next != nullptr);
+      auto next = end + 1;
+      assert(next != nullptr);
       if ((*start).Value() != (*next).Value()) {
         continue;
       }
@@ -182,7 +179,6 @@ bool PlayerImpl::moveUp() const {
       (*start).Increase();
       board_changed = true;
     }
-    check_index -= 4;
   }
   return board_changed;
 }
