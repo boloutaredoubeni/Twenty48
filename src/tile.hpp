@@ -30,6 +30,8 @@ public:
 #pragma mark Public Methods
 #endif
   virtual void Init();
+
+  virtual void Init(uint8_t);
   virtual void Increase();
   virtual int8_t Value() const;
   virtual void Unlock();

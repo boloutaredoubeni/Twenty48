@@ -155,10 +155,9 @@ void PlayerImpl::addTile() const {
     // that is found
     if (tile.Value() == 1) {
       if (rand_dist(generator) >= chance_of_four) {
-        tile.Increase();
-        tile.Increase();
+        tile.Init(4);
       } else {
-        tile.Increase();
+        tile.Init(2);
       }
       ZF_LOGI("Add a tile");
     }
