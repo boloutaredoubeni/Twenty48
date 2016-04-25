@@ -35,7 +35,7 @@ public:
   virtual bool GameOver();
   virtual bool Swipe(twenty48::Move);
   virtual int64_t MovesMade();
-  virtual void SetGame(std::array<uint32_t, dimension * dimension>);
+  virtual void SetGame(std::array<uint16_t, dimension * dimension>);
 
 private:
 #if 0

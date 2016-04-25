@@ -6,6 +6,7 @@
 #include <algorithm>
 
 using namespace twenty48;
+using namespace twenty48::impl;
 
 #if 0
 #pragma mark -
@@ -22,6 +23,12 @@ TEST(Player, new_game) {
   ASSERT_FALSE(player->GameOver());
   ASSERT_FALSE(player->HasWon());
   ASSERT_EQ(0, player->MovesMade());
+}
+
+TEST(PlayerImpl, can_set_game) {
+  const auto player = Player::Create();
+  const auto player_impl = std::static_pointer_cast<PlayerImpl>(player);
+  player_impl->SetGame(std::array<uint16_t, dimension * dimension>{});
 }
 
 TEST(Player, can_notify_view_of_game_board) {

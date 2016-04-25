@@ -100,7 +100,13 @@ bool PlayerImpl::Swipe(Move move) {
 int64_t PlayerImpl::MovesMade() { return moves_made_; }
 
 void PlayerImpl::SetGame(
-    std::array<uint32_t, dimension * dimension> new_game_board) {
+    std::array<uint16_t, dimension * dimension> new_game_board) {
+  // check if all tiles are a power of 2
+  if (!std::all_of(new_game_board.begin(), new_game_board.end(),
+                   [](int x) { return ((x & (x - 1)) && (x > 0)); })) {
+    NewGame();
+    return;
+  }
   std::transform(new_game_board.begin(), new_game_board.end(),
                  game_->board_.begin(),
                  [](const auto &val) { return Tile(val); });
