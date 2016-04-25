@@ -44,15 +44,19 @@ void PlayerImpl::NewGame() {
   for (auto &tile : game_->board_) {
     tile.Init();
   }
+  ZF_LOGI("Initialized game tiles");
 
   assert(std::all_of(game_->board_.begin(), game_->board_.end(),
                      [](const auto &i) { return i.Value() == 1; }));
 
   addTile();
   game_->score_ = 0;
-  ++moves_made_;
-  ZF_LOGI("New Game Created -- score:%llu\t moves:%lld\t is_over:%d\t, win:%d",
-          game_->score_, moves_made_, game_->is_over_, game_->has_won_);
+  moves_made_ = 0;
+  ZF_LOGI("New Game Created -- score:%llu moves:%lld is_over:%d, win:%d, tiles "
+          "on board: %ld",
+          game_->score_, moves_made_, game_->is_over_, game_->has_won_,
+          std::count_if(game_->board_.begin(), game_->board_.end(),
+                        [](const auto &tile) { return tile.Value() > 1; }));
 }
 
 int64_t PlayerImpl::Score() {
@@ -113,11 +117,12 @@ bool PlayerImpl::Swipe(Move move) {
 int64_t PlayerImpl::MovesMade() { return moves_made_; }
 
 void PlayerImpl::SetGame(
-    std::array<uint16_t, dimension * dimension> new_game_board) {
+    const std::array<uint16_t, dimension * dimension> &new_game_board) {
   // check if all tiles are a power of 2
-  if (std::any_of(new_game_board.begin(), new_game_board.end(),
-                  [](int x) { return !((x & (x - 1)) && (x > 0)); })) {
+  if (std::none_of(new_game_board.begin(), new_game_board.end(),
+                   [](int x) { return ((x > 0) && (x & (x - 1))); })) {
     ZF_LOGW("Attempted add invalid game state, correcting...");
+    unlockTiles();
     NewGame();
     return;
   }
@@ -127,7 +132,9 @@ void PlayerImpl::SetGame(
   assert(std::equal(new_game_board.begin(), new_game_board.end(),
                     game_->board_.begin(),
                     [](int i, const Tile &tile) { return i == tile.Value(); }));
-  ZF_LOGI("Reset the game board");
+  ZF_LOGI("Reset the game board, tiles: %ld",
+          std::count_if(game_->board_.begin(), game_->board_.end(),
+                        [](const auto &tile) { return tile.Value() > 1; }));
 }
 
 #if 0

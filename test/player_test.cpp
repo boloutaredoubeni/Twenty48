@@ -27,15 +27,17 @@ protected:
     ASSERT_FALSE(player_->GameOver());
     ASSERT_FALSE(player_->HasWon());
     ASSERT_EQ(0, player_->MovesMade());
+    ASSERT_EQ(2, TileCount());
   }
 
-  virtual int8_t TileCount() const {
+  virtual int16_t TileCount() const {
     const auto game_state = player_->GameState();
     return std::count_if(game_state.begin(), game_state.end(),
                          [](int i) { return (i > 1) && ((i % 2) == 0); });
   }
 
-  virtual void SetGameBoard(std::array<uint16_t, dimension * dimension> state) {
+  virtual void
+  SetGameBoard(const std::array<uint16_t, dimension * dimension> &state) {
     std::static_pointer_cast<PlayerImpl>(player_)->SetGame(state);
   }
 };
@@ -47,6 +49,7 @@ TEST_F(PlayerTest, can_use_set_game) {
 
 TEST_F(PlayerTest, cant_set_game_to_invalid_state) {
   SetGameBoard(std::array<uint16_t, dimension * dimension>{});
+  ASSERT_EQ(0, player_->MovesMade());
   ASSERT_EQ(2, TileCount());
 }
 
