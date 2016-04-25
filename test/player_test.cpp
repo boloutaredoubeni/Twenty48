@@ -7,7 +7,6 @@
 
 using namespace twenty48;
 
-
 #if 0
 #pragma mark -
 #pragma mark New Game Tests
@@ -52,7 +51,8 @@ TEST(Player, can_move_up) {
   ASSERT_FALSE(player->Swipe(Move::Up));
   ASSERT_GE(-1, player->MovesMade());
   player->NewGame();
-  // FIXME: this result is intended to be random. Create a fixture to normalize behaviour
+  // FIXME: this result is intended to be random. Create a fixture to normalize
+  // behaviour
   ASSERT_TRUE(player->Swipe(Move::Up));
   ASSERT_EQ(1, player->MovesMade());
   ASSERT_GE(0, player->Score());

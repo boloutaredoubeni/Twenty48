@@ -76,18 +76,18 @@ bool PlayerImpl::Swipe(Move move) {
     return false;
   }
   switch (move) {
-    case Move::Up:
-      has_moved = moveUp();
-      break;
-    case Move::Down:
-      has_moved = moveDown();
-      break;
-    case Move::Left:
-      has_moved = moveLeft();
-      break;
-    case Move::Right:
-      has_moved = moveRight();
-      break;
+  case Move::Up:
+    has_moved = moveUp();
+    break;
+  case Move::Down:
+    has_moved = moveDown();
+    break;
+  case Move::Left:
+    has_moved = moveLeft();
+    break;
+  case Move::Right:
+    has_moved = moveRight();
+    break;
   }
 
   if (has_moved) {
@@ -98,6 +98,16 @@ bool PlayerImpl::Swipe(Move move) {
 }
 
 int64_t PlayerImpl::MovesMade() { return moves_made_; }
+
+void PlayerImpl::SetGame(
+    std::array<uint32_t, dimension * dimension> new_game_board) {
+  std::transform(new_game_board.begin(), new_game_board.end(),
+                 game_->board_.begin(),
+                 [](const auto &val) { return Tile(val); });
+  assert(std::equal(new_game_board.begin(), new_game_board.end(),
+                    game_->board_.begin(),
+                    [](int i, const Tile &tile) { return i == tile.Value(); }));
+}
 
 #if 0
 #pragma mark -

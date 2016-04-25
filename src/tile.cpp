@@ -8,7 +8,8 @@ Tile::Tile() {}
 Tile::Tile(int32_t value) : value_(value) {}
 
 void Tile::Increase() {
-  if (locked_) return;
+  if (locked_)
+    return;
   value_ <<= 1;
   locked_ = true;
 }

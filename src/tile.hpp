@@ -16,7 +16,7 @@ class Tile {
 #pragma mark -
 #pragma mark Constructors
 #endif
- public:
+public:
   Tile();
   explicit Tile(int32_t);
   ~Tile() {}
@@ -35,5 +35,5 @@ class Tile {
   virtual void Unlock();
   virtual bool Locked() const;
 };
-}  // namespace impl
-}  // namespace twenty48
+} // namespace impl
+} // namespace twenty48
