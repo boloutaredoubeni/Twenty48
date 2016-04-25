@@ -46,8 +46,8 @@ TEST_F(PlayerTest, can_use_set_game) {
 }
 
 TEST_F(PlayerTest, cant_set_game_to_invalid_state) {
-    SetGameBoard(std::array<uint16_t, dimension * dimension>{});
-    ASSERT_EQ(2, TileCount());
+  SetGameBoard(std::array<uint16_t, dimension * dimension>{});
+  ASSERT_EQ(2, TileCount());
 }
 
 TEST_F(PlayerTest, can_notify_view_of_game_board) {
