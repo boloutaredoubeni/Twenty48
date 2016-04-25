@@ -94,6 +94,8 @@ bool PlayerImpl::Swipe(Move move) {
     addTile();
   }
   unlockTiles();
+assert(std::any_of(game_->board_.begin(), game_->board_.end(),
+                       [](const auto &i) { return i.Value() > 1; }));
   return has_moved;
 }
 

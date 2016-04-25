@@ -6,7 +6,7 @@
 namespace twenty48 {
 namespace impl {
 
-class PlayerImpl : public twenty48::Player {
+class PlayerImpl final : public twenty48::Player {
   std::shared_ptr<Game> game_;
   int64_t moves_made_{-1};
 

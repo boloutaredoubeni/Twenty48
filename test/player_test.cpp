@@ -7,65 +7,70 @@
 
 using namespace twenty48;
 using namespace twenty48::impl;
+using namespace ::testing;
 
 #if 0
 #pragma mark -
-#pragma mark New Game Tests
-Verify how the program behaves when the player starts a new game
+#pragma mark Player Fixture
 #endif
 
-TEST(Player, ctor_dtor) { const auto player = Player::Create(); }
+namespace {
+class PlayerTest : public Test {
+  protected:
+    std::shared_ptr<Player> player_;
+    
+    PlayerTest() {
+        player_ = Player::Create();
+    }
+    
+    virtual void SetUp() override {
+        player_->NewGame();
+        ASSERT_EQ(0, player_->Score());
+        ASSERT_FALSE(player_->GameOver());
+        ASSERT_FALSE(player_->HasWon());
+        ASSERT_EQ(0, player_->MovesMade());
+    }
+    
+    virtual int8_t TileCount() const {
+        const auto game_state = player_->GameState();
+        return std::count_if(game_state.begin(), game_state.end(),
+                             [](int i) { return (i > 1) && (i % 2) == 0; });
+    }
+    
+};
+} // namespace
 
-TEST(Player, new_game) {
-  const auto player = Player::Create();
-  player->NewGame();
-  ASSERT_EQ(0, player->Score());
-  ASSERT_FALSE(player->GameOver());
-  ASSERT_FALSE(player->HasWon());
-  ASSERT_EQ(0, player->MovesMade());
+
+TEST_F(PlayerTest, can_use_set_game) {
+  std::static_pointer_cast<PlayerImpl>(player_)->SetGame(std::array<uint16_t, dimension * dimension>{});
 }
 
-TEST(PlayerImpl, can_set_game) {
-  const auto player = Player::Create();
-  const auto player_impl = std::static_pointer_cast<PlayerImpl>(player);
-  player_impl->SetGame(std::array<uint16_t, dimension * dimension>{});
+TEST_F(PlayerTest, cant_set_game_to_invalid_state) {
+  
 }
 
-TEST(Player, can_notify_view_of_game_board) {
-  const auto player = Player::Create();
-  const auto board = player->GameState();
+TEST_F(PlayerTest, can_notify_view_of_game_board) {
+  const auto board = player_->GameState();
   ASSERT_EQ(16, board.size());
 }
 
-TEST(Player, new_game_adds_a_tile) {
-  const auto player = Player::Create();
-  const auto count_values = [](const std::vector<int> &xs) {
-    const auto begin = xs.begin();
-    const auto end = xs.end();
-    return std::count_if(begin, end,
-                         [](int i) { return (i > 1) && (i % 2) == 0; });
-  };
-
-  ASSERT_EQ(0, count_values(player->GameState()));
-  player->NewGame();
-  ASSERT_EQ(2, count_values(player->GameState()));
+TEST_F(PlayerTest, new_game_adds_tiles) {
+  ASSERT_EQ(2, TileCount());
 }
 
-TEST(Player, can_move_up) {
-  const auto player = Player::Create();
-  ASSERT_GE(-1, player->MovesMade());
-  const auto prev = player->GameState();
-  ASSERT_FALSE(player->Swipe(Move::Up));
-  ASSERT_GE(-1, player->MovesMade());
-  player->NewGame();
+TEST_F(PlayerTest, can_move_up) {
+  ASSERT_GE(0, player_->MovesMade());
+  const auto prev = player_->GameState();
+  ASSERT_FALSE(player_->Swipe(Move::Up));
+  ASSERT_GE(0, player_->MovesMade());
   // FIXME: this result is intended to be random. Create a fixture to normalize
   // behaviour
-  ASSERT_TRUE(player->Swipe(Move::Up));
-  ASSERT_EQ(1, player->MovesMade());
-  ASSERT_GE(0, player->Score());
+  ASSERT_TRUE(player_->Swipe(Move::Up));
+  ASSERT_EQ(1, player_->MovesMade());
+  ASSERT_GE(0, player_->Score());
 }
 
-TEST(Player, can_move_tiles) {
+TEST_F(PlayerTest, can_move_tiles) {
   // TODO(boloutaredoubeni): assert that there are two tiles or that the
   // combined tiles is
   // TODO(boloutaredoubeni): assert that the score is changed
