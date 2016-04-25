@@ -16,37 +16,38 @@ using namespace ::testing;
 
 namespace {
 class PlayerTest : public Test {
-  protected:
-    std::shared_ptr<Player> player_;
-    
-    PlayerTest() {
-        player_ = Player::Create();
-    }
-    
-    virtual void SetUp() override {
-        player_->NewGame();
-        ASSERT_EQ(0, player_->Score());
-        ASSERT_FALSE(player_->GameOver());
-        ASSERT_FALSE(player_->HasWon());
-        ASSERT_EQ(0, player_->MovesMade());
-    }
-    
-    virtual int8_t TileCount() const {
-        const auto game_state = player_->GameState();
-        return std::count_if(game_state.begin(), game_state.end(),
-                             [](int i) { return (i > 1) && (i % 2) == 0; });
-    }
-    
+protected:
+  std::shared_ptr<Player> player_;
+
+  PlayerTest() { player_ = Player::Create(); }
+
+  virtual void SetUp() override {
+    player_->NewGame();
+    ASSERT_EQ(0, player_->Score());
+    ASSERT_FALSE(player_->GameOver());
+    ASSERT_FALSE(player_->HasWon());
+    ASSERT_EQ(0, player_->MovesMade());
+  }
+
+  virtual int8_t TileCount() const {
+    const auto game_state = player_->GameState();
+    return std::count_if(game_state.begin(), game_state.end(),
+                         [](int i) { return (i > 1) && ((i % 2) == 0); });
+  }
+
+  virtual void SetGameBoard(std::array<uint16_t, dimension * dimension> state) {
+    std::static_pointer_cast<PlayerImpl>(player_)->SetGame(state);
+  }
 };
 } // namespace
 
-
 TEST_F(PlayerTest, can_use_set_game) {
-  std::static_pointer_cast<PlayerImpl>(player_)->SetGame(std::array<uint16_t, dimension * dimension>{});
+  SetGameBoard(std::array<uint16_t, dimension * dimension>{});
 }
 
 TEST_F(PlayerTest, cant_set_game_to_invalid_state) {
-  
+    SetGameBoard(std::array<uint16_t, dimension * dimension>{});
+    ASSERT_EQ(2, TileCount());
 }
 
 TEST_F(PlayerTest, can_notify_view_of_game_board) {
@@ -54,9 +55,7 @@ TEST_F(PlayerTest, can_notify_view_of_game_board) {
   ASSERT_EQ(16, board.size());
 }
 
-TEST_F(PlayerTest, new_game_adds_tiles) {
-  ASSERT_EQ(2, TileCount());
-}
+TEST_F(PlayerTest, new_game_adds_tiles) { ASSERT_EQ(2, TileCount()); }
 
 TEST_F(PlayerTest, can_move_up) {
   ASSERT_GE(0, player_->MovesMade());

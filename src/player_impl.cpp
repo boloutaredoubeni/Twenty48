@@ -1,6 +1,8 @@
 #include "player_impl.hpp"
 #include "Twenty48/move.hpp"
 
+#include "zf_log.h"
+
 #include <algorithm>
 #include <iterator>
 #include <random>
@@ -47,6 +49,7 @@ void PlayerImpl::NewGame() {
   addTile();
   game_->score_ = 0;
   ++moves_made_;
+    ZF_LOGI("New Game Created -- score: %llu, moves: %lld, is_over: %d, win: %d", game_->score_, moves_made_, game_->is_over_, game_->has_won_);
 }
 
 int64_t PlayerImpl::Score() {
@@ -94,8 +97,8 @@ bool PlayerImpl::Swipe(Move move) {
     addTile();
   }
   unlockTiles();
-assert(std::any_of(game_->board_.begin(), game_->board_.end(),
-                       [](const auto &i) { return i.Value() > 1; }));
+  assert(std::any_of(game_->board_.begin(), game_->board_.end(),
+                     [](const auto &i) { return i.Value() > 1; }));
   return has_moved;
 }
 
@@ -104,8 +107,8 @@ int64_t PlayerImpl::MovesMade() { return moves_made_; }
 void PlayerImpl::SetGame(
     std::array<uint16_t, dimension * dimension> new_game_board) {
   // check if all tiles are a power of 2
-  if (!std::all_of(new_game_board.begin(), new_game_board.end(),
-                   [](int x) { return ((x & (x - 1)) && (x > 0)); })) {
+  if (std::any_of(new_game_board.begin(), new_game_board.end(),
+                   [](int x) { return !((x & (x - 1)) && (x > 0)); })) {
     NewGame();
     return;
   }
