@@ -1,84 +1,39 @@
-import React, {Component, StyleSheet, Text, View, NativeModules, NativeEventEmitter, TouchableOpacity} from 'react-native';
-
+import React, {Component, StyleSheet, Text, View, Navigator} from 'react-native';
+import HomeScreen from './HomeScreen';
 
 // TODO(boloutaredoubeni): Button to navigate to game
 // TODO(boloutaredoubeni): Button for game info and how to play
 export default class App extends Component {
-  
   constructor(props) {
     super(props);
-    // this.subscription = NativeEventEmitter.addListener('ScoreChange', (score) => console.log(score));
-    this.player = NativeModules.PlayerManager;
+    // this.subscription = NativeEventEmitter.addListener('ScoreChange', (score)
+    // => console.log(score));
+    this.state = {};
   }
-  
+
   render() {
+    return(
+      // clang-format off
+      <Navigator
+        initialRoute = {{ component: HomeScreen, type: "right" }} 
+        renderScene = { this._renderScene } />
+  );
+  // clang-format on
+  }
+  
+  _renderScene(route, navigator) {
+    const RouteComponent = route.component;
+    // clang-format off
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          2048
-        </Text>
-        <View>
-          {this.renderStartButton()}
-        </View>
-        <View>
-          {this.renderInfoButton()}
-        </View>
-      </View>
+      <RouteComponent {...route.props}
+        navigator={navigator}
+        route={route} />
+      
     );
-  }
-  
-  componentWillUnmount() {
-    // subscription.remove();
-  }
-  
-  renderStartButton() {
-    // TODO(boloutaredoubeni): style this
-    return (
-      <TouchableOpacity onPress={this._startGame()}>
-        <Text style={styles.instructions}>
-          Play!
-        </Text>
-      </TouchableOpacity>
-    );
-  }
-  
-  renderInfoButton() {
-    return (
-      <TouchableOpacity onPress={this._showInfo()}>
-        <Text style={styles.instructions}>
-          About
-        </Text>
-      </TouchableOpacity>
-    );
-  }
-  
-  _startGame() {
-    console.log("Clicked on start game");
-  }
-  
-  _showInfo() {
-    console.log("Showinng info");
+    // clang-format on
   }
 }
-
-
-const styles = StyleSheet.create({
-  container : {
-    flex : 1,
-    justifyContent : 'center',
-    alignItems : 'center',
-    backgroundColor : '#F5FCFF',
-  },
-  welcome : {
-    fontSize : 20,
-    textAlign : 'center',
-    margin : 10,
-  },
-  instructions : {
-    textAlign : 'center',
-    color : '#333333',
-    marginBottom : 5,
-  },
-});
+  
+  
 
 
