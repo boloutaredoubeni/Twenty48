@@ -1,5 +1,5 @@
 import React, {Component, StyleSheet, Text, View, Navigator} from 'react-native';
-import HomeScreen from './HomeScreen';
+import {HomeScreen} from './routes';
 
 // TODO(boloutaredoubeni): Button to navigate to game
 // TODO(boloutaredoubeni): Button for game info and how to play
@@ -23,12 +23,12 @@ export default class App extends Component {
   
   _renderScene(route, navigator) {
     const RouteComponent = route.component;
+    console.dir(RouteComponent);
     // clang-format off
     return (
       <RouteComponent {...route.props}
         navigator={navigator}
         route={route} />
-      
     );
     // clang-format on
   }
