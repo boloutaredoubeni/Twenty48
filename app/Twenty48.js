@@ -1,11 +1,18 @@
-import React, {Component} from 'react-native';
+import React, {Component,  Text, View, NativeModules, NativeEventEmitter} from 'react-native';
+import AppStyleSheet from './styles';
 
 class Twenty48 extends Component {
+  
+  constructor() {
+    super();
+    this.subscription = NativeEventEmitter.addListener('ScoreChange', (score) => console.log(score));
+    this.player = NativeModules.PlayerManager;
+  }
+  
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
         </Text>
         <Text style={styles.instructions}>
           To get started, edit index.android.js
@@ -16,4 +23,10 @@ class Twenty48 extends Component {
       </View>
     );
   }
+  
+  componentWillUnmount() {
+    subscription.remove();
+  }
 }
+
+module.export = Twenty48;

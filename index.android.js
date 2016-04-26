@@ -25,8 +25,6 @@ class Twenty48 extends Component {
   }
 }
 
-
-
 const player = NativeModules.PlayerManager;
 console.dir(player);
 player.startNewGame();
