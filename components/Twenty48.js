@@ -23,10 +23,12 @@ export default class App extends Component {
         <Text style={styles.instructions}>
           Shake or press menu button for dev menu
         </Text>
-        renderButton();
       </View>
-      
     );
+  }
+  
+  componentWillUnmount() {
+    // subscription.remove();
   }
   
   renderButton() {
@@ -36,16 +38,7 @@ export default class App extends Component {
           Play!
         </Text>
       </TouchableOpacity>
-    )
-  }
-  
-  componentWillUnmount() {
-    // subscription.remove();
-  }
-  
-  _startGame() {
-    console.log("The button has been clicked");
-    player.newGame();
+    );
   }
 }
 
