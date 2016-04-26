@@ -1,11 +1,11 @@
 import React, {Component,  Text, View, NativeModules, NativeEventEmitter} from 'react-native';
-import AppStyleSheet from './styles';
+import style from './styles';
 
-class Twenty48 extends Component {
+export default class App extends Component {
   
-  constructor() {
-    super();
-    this.subscription = NativeEventEmitter.addListener('ScoreChange', (score) => console.log(score));
+  constructor(props) {
+    super(props);
+    // this.subscription = NativeEventEmitter.addListener('ScoreChange', (score) => console.log(score));
     this.player = NativeModules.PlayerManager;
   }
   
@@ -29,4 +29,3 @@ class Twenty48 extends Component {
   }
 }
 
-module.export = Twenty48;

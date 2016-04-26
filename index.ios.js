@@ -6,6 +6,6 @@
 
 import React, {AppRegistry} from 'react-native';
 
-import {Twenty48} from './app/Twenty48';
+import App from './app/Twenty48';
 
-AppRegistry.registerComponent('Twenty48', () => Twenty48);
+AppRegistry.registerComponent('Twenty48', () => App);
