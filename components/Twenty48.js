@@ -17,12 +17,12 @@ export default class App extends Component {
         <Text style={styles.welcome}>
           2048
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
+        <View>
+          {this.renderStartButton()}
+        </View>
+        <View>
+          {this.renderInfoButton()}
+        </View>
       </View>
     );
   }
@@ -31,7 +31,8 @@ export default class App extends Component {
     // subscription.remove();
   }
   
-  renderButton() {
+  renderStartButton() {
+    // TODO(boloutaredoubeni): style this
     return (
       <TouchableOpacity onPress={this._startGame()}>
         <Text style={styles.instructions}>
@@ -39,6 +40,24 @@ export default class App extends Component {
         </Text>
       </TouchableOpacity>
     );
+  }
+  
+  renderInfoButton() {
+    return (
+      <TouchableOpacity onPress={this._showInfo()}>
+        <Text style={styles.instructions}>
+          About
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+  
+  _startGame() {
+    console.log("Clicked on start game");
+  }
+  
+  _showInfo() {
+    console.log("Showinng info");
   }
 }
 
