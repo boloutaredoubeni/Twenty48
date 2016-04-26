@@ -4,19 +4,21 @@
  * @flow
  */
 
-import React, {AppRegistry, Component, StyleSheet, Text, View, NativeModules,} from 'react-native';
+import React, {AppRegistry, Component, Text, View, NativeModules,} from 'react-native';
+
+import AppStyleSheet from './app/styles';
 
 class Twenty48 extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
+      <View style={AppStyleSheet.container}>
+        <Text style={AppStyleSheet.welcome}>
           Welcome to React Native!
         </Text>
-        <Text style={styles.instructions}>
+        <Text style={AppStyleSheet.instructions}>
           To get started, edit index.ios.js
         </Text>
-        <Text style={styles.instructions}>
+        <Text style={AppStyleSheet.instructions}>
           Press Cmd+R to reload,{
       '\n'}
           Cmd+D or shake for dev menu
@@ -26,24 +28,6 @@ class Twenty48 extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container : {
-    flex : 1,
-    justifyContent : 'center',
-    alignItems : 'center',
-    backgroundColor : '#F5FCFF',
-  },
-  welcome : {
-    fontSize : 20,
-    textAlign : 'center',
-    margin : 10,
-  },
-  instructions : {
-    textAlign : 'center',
-    color : '#333333',
-    marginBottom : 5,
-  },
-});
 
 const PlayerManager = NativeModules.PlayerManager;
 PlayerManager.startNewGame();

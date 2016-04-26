@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		001D0BF41CC718640049AA5B /* PlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 001D0BF31CC718640049AA5B /* PlayerManager.m */; };
-		009AD34A1CC73355009772FA /* lib2048_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 009AD3471CC73355009772FA /* lib2048_ios.a */; };
-		009AD34E1CC73488009772FA /* lib2048.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 009AD34D1CC73488009772FA /* lib2048.a */; };
-		009AD3501CC73497009772FA /* libdjinni_objc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 009AD34F1CC73497009772FA /* libdjinni_objc.a */; };
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
 		00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
@@ -25,6 +22,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.mm */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		5550B72A1CCEDA570022D0EA /* lib2048_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5550B7271CCEDA570022D0EA /* lib2048_ios.a */; };
+		5550B72B1CCEDA570022D0EA /* lib2048.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5550B7281CCEDA570022D0EA /* lib2048.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -112,9 +111,6 @@
 		001D0BF21CC718640049AA5B /* PlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerManager.h; path = Twenty48/PlayerManager.h; sourceTree = "<group>"; };
 		001D0BF31CC718640049AA5B /* PlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerManager.m; path = Twenty48/PlayerManager.m; sourceTree = "<group>"; };
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		009AD3471CC73355009772FA /* lib2048_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = lib2048_ios.a; path = "../build/Debug-iphoneos/lib2048_ios.a"; sourceTree = "<group>"; };
-		009AD34D1CC73488009772FA /* lib2048.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = lib2048.a; path = "../../../../Library/Developer/Xcode/DerivedData/Twenty48-fzpjlipvzmwugpatczdjveolijic/Build/Products/Debug-iphonesimulator/lib2048.a"; sourceTree = "<group>"; };
-		009AD34F1CC73497009772FA /* libdjinni_objc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdjinni_objc.a; path = "../third_party/djinni/support-lib/build/Default/libdjinni_objc.a"; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
 		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
 		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
@@ -133,6 +129,12 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Twenty48/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = main.mm; path = Twenty48/main.mm; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		5550B7271CCEDA570022D0EA /* lib2048_ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = lib2048_ios.a; path = "../../../../Library/Developer/Xcode/DerivedData/Twenty48-fmstpjwebupstagjeuiuryahnfwz/Build/Products/Debug-iphonesimulator/lib2048_ios.a"; sourceTree = "<group>"; };
+		5550B7281CCEDA570022D0EA /* lib2048.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = lib2048.a; path = "../../../../Library/Developer/Xcode/DerivedData/Twenty48-fmstpjwebupstagjeuiuryahnfwz/Build/Products/Debug-iphonesimulator/lib2048.a"; sourceTree = "<group>"; };
+		5550B7311CCEDD250022D0EA /* T48Move.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = T48Move.h; path = Twenty48/Djinni/T48Move.h; sourceTree = "<group>"; };
+		5550B7321CCEDD250022D0EA /* T48Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = T48Player.h; path = Twenty48/Djinni/T48Player.h; sourceTree = "<group>"; };
+		5550B7331CCEDD250022D0EA /* T48Player+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "T48Player+Private.h"; path = "Twenty48/Djinni/T48Player+Private.h"; sourceTree = "<group>"; };
+		5550B7341CCEDD250022D0EA /* T48Player+Private.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "T48Player+Private.mm"; path = "Twenty48/Djinni/T48Player+Private.mm"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,9 +151,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				009AD3501CC73497009772FA /* libdjinni_objc.a in Frameworks */,
-				009AD34E1CC73488009772FA /* lib2048.a in Frameworks */,
-				009AD34A1CC73355009772FA /* lib2048_ios.a in Frameworks */,
+				5550B72A1CCEDA570022D0EA /* lib2048_ios.a in Frameworks */,
+				5550B72B1CCEDA570022D0EA /* lib2048.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -244,6 +245,10 @@
 		13B07FAE1A68108700A75B9A /* Twenty48 */ = {
 			isa = PBXGroup;
 			children = (
+				5550B7311CCEDD250022D0EA /* T48Move.h */,
+				5550B7321CCEDD250022D0EA /* T48Player.h */,
+				5550B7331CCEDD250022D0EA /* T48Player+Private.h */,
+				5550B7341CCEDD250022D0EA /* T48Player+Private.mm */,
 				001D0BF21CC718640049AA5B /* PlayerManager.h */,
 				001D0BF31CC718640049AA5B /* PlayerManager.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -301,10 +306,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				009AD34F1CC73497009772FA /* libdjinni_objc.a */,
-				009AD34D1CC73488009772FA /* lib2048.a */,
-				009AD3471CC73355009772FA /* lib2048_ios.a */,
 				13B07FAE1A68108700A75B9A /* Twenty48 */,
+				5550B7271CCEDA570022D0EA /* lib2048_ios.a */,
+				5550B7281CCEDA570022D0EA /* lib2048.a */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* Twenty48Tests */,
 				83CBBA001A601CBA00E9B192 /* Products */,

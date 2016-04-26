@@ -1,11 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-
-import React, {AppRegistry, Component, StyleSheet, Text, View, NativeModules} from 'react-native';
-
-import AppStyleSheet from './app/styles';
+import React, {Component} from 'react-native';
 
 class Twenty48 extends Component {
   render() {
@@ -24,11 +17,3 @@ class Twenty48 extends Component {
     );
   }
 }
-
-
-
-const player = NativeModules.PlayerManager;
-console.dir(player);
-player.startNewGame();
-
-AppRegistry.registerComponent('Twenty48', () => Twenty48);

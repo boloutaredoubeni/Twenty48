@@ -147,13 +147,7 @@ task copyDownloadableDepsToLibs(type: Copy) {
 task ndkBuild(type: CrossPlatformExec) {
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
-//    def sdkDir = properties.getProperty('sdk.dir')
-    def ndkLoc = properties.getProperty('ndk.dir')
-    String MainDirectory = System.getProperty("user.dir") + '/app/'
-    File ndkDir = new File(ndkLoc)
-    if (ndkDir == null) {
-        ndkDir = file(System.env.NDK_ROOT)
-    }
+    def ndkDir = properties.getProperty('ndk.dir')
 
     if (ndkDir == null) {
         def gradle_project_root = project.rootProject.rootDir

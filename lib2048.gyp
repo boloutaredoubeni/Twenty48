@@ -26,19 +26,19 @@
       'target_name': 'lib2048_ios',
       'type': 'static_library',
       'dependencies': [
-        './third_party/djinni/support-lib/support_lib.gyp:djinni_objc',
+        'third_party/djinni/support-lib/support_lib.gyp:djinni_objc',
         'lib2048'
       ],
       'sources': [
         '<!@(python scripts/glob.py third_party/djinni/support-lib/objc/ *.h *.mm)',
-        '<!@(python scripts/glob.py ./ios/Twenty48/Djinni *.h *.m *.mm)',
+        '<!@(python scripts/glob.py ios/Twenty48/Djinni *.h *.m *.mm)',
       ],
       'include_dirs': [
-        './ios/Twenty48/Djinni'
+        'ios/Twenty48/Djinni'
       ],
       'all_dependent_settings': {
         'include_dirs': [
-          './ios/Twenty48/Djinni'
+          'ios/Twenty48/Djinni'
         ],
       },
     },
