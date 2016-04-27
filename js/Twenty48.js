@@ -9,9 +9,7 @@ import React, {
   View,
   Navigator
 } from 'react-native';
-import {
-  HomeScreen
-} from './navigation/routes';
+import HomeScreen from './routes';
 // clang-format on
 
 // TODO(boloutaredoubeni): Button to navigate to game
@@ -28,7 +26,10 @@ export default class App extends Component {
     // clang-format off
     return (
       <Navigator
-        initialRoute={{ component: HomeScreen, type: "right"}}
+        initialRoute={{
+          component: HomeScreen,
+          type: "right"
+        }}
         renderScene={ this._renderScene }/>
     );
     // clang-format on

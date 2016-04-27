@@ -15,7 +15,7 @@ format: $(DJINNI)
 	# FIXME: no one should care if these fail
 	@${clang-format} src/*
 	@${clang-format} *.js
-	@${clang-format} components/*.js
+	@${clang-format} js/*.js
 	@${clang-format} ios/Twenty48/**/*.h
 	@${clang-format} ios/Twenty48/*.m
 	@${clang-format} ios/Twenty48/**/*.mm

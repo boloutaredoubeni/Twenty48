@@ -28,7 +28,7 @@ RCT_EXPORT_METHOD(newGame) {
   RCTLogInfo(@"Starting a new game");
 }
 
-RCT_EXPORT_METHOD(swipe:(T48Move)direction) {
+RCT_EXPORT_METHOD(swipe : (T48Move)direction) {
   if (!_player) {
     RCTLogError(@"Attempting to move tiles for a uninitialized game");
     return;
@@ -40,6 +40,5 @@ RCT_EXPORT_METHOD(swipe:(T48Move)direction) {
 #pragma mark -
 #pragma mark Event Listeners
 #endif
-
 
 @end
