@@ -1,5 +1,16 @@
-import React, {Component, StyleSheet, Text, View, Navigator} from 'react-native';
-import {HomeScreen} from './routes';
+/** @flow */
+// clang-format off
+import React, {
+  Component,
+  StyleSheet,
+  Text,
+  View,
+  Navigator
+} from 'react-native';
+import {
+  HomeScreen
+} from './routes';
+// clang-format on
 
 // TODO(boloutaredoubeni): Button to navigate to game
 // TODO(boloutaredoubeni): Button for game info and how to play
@@ -12,15 +23,15 @@ export default class App extends Component {
   }
 
   render() {
-    return(
-      // clang-format off
+    // clang-format off
+    return (
       <Navigator
-        initialRoute = {{ component: HomeScreen, type: "right" }} 
-        renderScene = { this._renderScene } />
-  );
-  // clang-format on
+        initialRoute={{ component: HomeScreen, type: "right"}}
+        renderScene={ this._renderScene }/>
+    );
+    // clang-format on
   }
-  
+
   _renderScene(route, navigator) {
     const RouteComponent = route.component;
     console.dir(RouteComponent);
@@ -33,7 +44,3 @@ export default class App extends Component {
     // clang-format on
   }
 }
-  
-  
-
-

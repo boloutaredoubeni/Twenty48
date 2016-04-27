@@ -1,11 +1,10 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, {AppRegistry} from 'react-native';
+/** @flow */
+// clang-format off
+import React, {
+  AppRegistry
+} from 'react-native';
 
 import App from './components/Twenty48';
+// clang-format on
 
 AppRegistry.registerComponent('Twenty48', () => App);
