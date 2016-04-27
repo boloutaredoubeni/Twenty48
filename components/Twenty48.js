@@ -1,4 +1,6 @@
 /** @flow */
+
+'use strict';
 // clang-format off
 import React, {
   Component,
@@ -9,7 +11,7 @@ import React, {
 } from 'react-native';
 import {
   HomeScreen
-} from './routes';
+} from './navigation/routes';
 // clang-format on
 
 // TODO(boloutaredoubeni): Button to navigate to game
@@ -34,7 +36,6 @@ export default class App extends Component {
 
   _renderScene(route, navigator) {
     const RouteComponent = route.component;
-    console.dir(RouteComponent);
     // clang-format off
     return (
       <RouteComponent {...route.props}

@@ -1,4 +1,7 @@
-/** @flow */
+/**
+  * (c) Boloutare Doubeni 2016
+  * @flow
+  */
 // clang-format off
 import React, {
   AppRegistry

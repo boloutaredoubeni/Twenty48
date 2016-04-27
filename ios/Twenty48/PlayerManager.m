@@ -1,3 +1,6 @@
+/**
+ * (c) Boloutare Doubeni 2016
+ */
 #include "PlayerManager.h"
 #include "T48Player.h"
 
@@ -12,6 +15,11 @@
 
 RCT_EXPORT_MODULE()
 
+#if 0
+#pragma mark -
+#pragma mark Export Methods
+#endif
+
 RCT_EXPORT_METHOD(newGame) {
   if (!_player) {
     _player = [T48Player create];
@@ -20,12 +28,18 @@ RCT_EXPORT_METHOD(newGame) {
   RCTLogInfo(@"Starting a new game");
 }
 
-- (void)scoreChangedEvent:(NSNotification *)notification {
-  NSString *eventName = notification.userInfo[@"name"];
-  [self.bridge.eventDispatcher sendAppEventWithName:@"ScoreChange"
-                                               body:@{
-                                                 @"name" : eventName
-                                               }];
+RCT_EXPORT_METHOD(swipe:(T48Move)direction) {
+  if (!_player) {
+    RCTLogError(@"Attempting to move tiles for a uninitialized game");
+    return;
+  }
+  [_player swipe:direction];
 }
+
+#if 0
+#pragma mark -
+#pragma mark Event Listeners
+#endif
+
 
 @end

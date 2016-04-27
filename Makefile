@@ -92,7 +92,7 @@ gyp_android: $(DJINNI)
 
 ios: ios.xcodeproj
 	@echo "Building ios app"
-	@xcodebuild -workspace ios/Twenty48.xcworkspace -scheme Twenty48 -configuration Debug -sdk iphonesimulator | ${xb-prettifier}
+	@react-native run ios | ${xb-prettifier}
 
 android: gyp_android
 	@echo "Running android project"
