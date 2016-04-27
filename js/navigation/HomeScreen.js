@@ -13,8 +13,8 @@ import React, {
   View,
   TouchableOpacity,
 } from 'react-native';
-import { GameScreen } from './GameScreen';
-import { InfoScreen } from './InfoScreen';
+import GameScreen  from './GameScreen';
+import InfoScreen  from './InfoScreen';
 // clang-format on
 
 
