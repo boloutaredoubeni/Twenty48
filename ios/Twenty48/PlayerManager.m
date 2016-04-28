@@ -2,6 +2,8 @@
  * (c) Boloutare Doubeni 2016
  */
 #include "PlayerManager.h"
+#include "RCTConvert+T48Move.h"
+#include "T48Move+Constants.h"
 #include "T48Player.h"
 
 #import "RCTEventDispatcher.h"
@@ -28,12 +30,23 @@ RCT_EXPORT_METHOD(newGame) {
   RCTLogInfo(@"Starting a new game");
 }
 
-RCT_EXPORT_METHOD(swipe : (T48Move)direction) {
+// clang-format off
+RCT_EXPORT_METHOD(swipe:(T48Move)direction) {
+  // clang-format on
   if (!_player) {
     RCTLogError(@"Attempting to move tiles for a uninitialized game");
     return;
   }
   [_player swipe:direction];
+}
+
+- (NSDictionary *)constantsToExport {
+  return @{
+    MOVE_UP : @(T48MoveUp),
+    MOVE_DOWN : @(T48MoveDown),
+    MOVE_LEFT : @(T48MoveLeft),
+    MOVE_RIGHT : @(T48MoveRight)
+  };
 }
 
 #if 0

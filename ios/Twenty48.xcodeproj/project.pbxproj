@@ -24,6 +24,7 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		5550B72A1CCEDA570022D0EA /* lib2048_ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5550B7271CCEDA570022D0EA /* lib2048_ios.a */; };
 		5550B72B1CCEDA570022D0EA /* lib2048.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5550B7281CCEDA570022D0EA /* lib2048.a */; };
+		555F0E8B1CD18DE700C05FA6 /* RCTConvert+T48Move.m in Sources */ = {isa = PBXBuildFile; fileRef = 555F0E8A1CD18DE700C05FA6 /* RCTConvert+T48Move.m */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +136,9 @@
 		5550B7321CCEDD250022D0EA /* T48Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = T48Player.h; path = Twenty48/Djinni/T48Player.h; sourceTree = "<group>"; };
 		5550B7331CCEDD250022D0EA /* T48Player+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "T48Player+Private.h"; path = "Twenty48/Djinni/T48Player+Private.h"; sourceTree = "<group>"; };
 		5550B7341CCEDD250022D0EA /* T48Player+Private.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "T48Player+Private.mm"; path = "Twenty48/Djinni/T48Player+Private.mm"; sourceTree = "<group>"; };
+		555F0E8A1CD18DE700C05FA6 /* RCTConvert+T48Move.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RCTConvert+T48Move.m"; path = "Twenty48/RCTConvert+T48Move.m"; sourceTree = "<group>"; };
+		555F0E961CD18E1C00C05FA6 /* RCTConvert+T48Move.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RCTConvert+T48Move.h"; path = "Twenty48/RCTConvert+T48Move.h"; sourceTree = "<group>"; };
+		555F0E971CD1904400C05FA6 /* T48Move+Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "T48Move+Constants.h"; path = "Twenty48/T48Move+Constants.h"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -258,6 +262,9 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.mm */,
+				555F0E8A1CD18DE700C05FA6 /* RCTConvert+T48Move.m */,
+				555F0E961CD18E1C00C05FA6 /* RCTConvert+T48Move.h */,
+				555F0E971CD1904400C05FA6 /* T48Move+Constants.h */,
 			);
 			name = Twenty48;
 			sourceTree = "<group>";
@@ -566,6 +573,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.mm in Sources */,
 				001D0BF41CC718640049AA5B /* PlayerManager.m in Sources */,
+				555F0E8B1CD18DE700C05FA6 /* RCTConvert+T48Move.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
