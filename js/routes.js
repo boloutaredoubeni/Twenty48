@@ -36,7 +36,7 @@ class GameScreen extends Component {
     this.state.player.newGame();
     this.state.subscription = NativeAppEventEmitter.addListener(
         'ScoreChanged', (score) => {this.state.score = score});
-    this.state.player.swipe();
+    this.state.player.swipe(this.state.player.MoveUp);
   }
 
   render() {
