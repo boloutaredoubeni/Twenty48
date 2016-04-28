@@ -38,6 +38,7 @@ RCT_EXPORT_METHOD(swipe:(T48Move)direction) {
     return;
   }
   [_player swipe:direction];
+  [self notifyGameState];
 }
 
 - (NSDictionary *)constantsToExport {
@@ -53,5 +54,20 @@ RCT_EXPORT_METHOD(swipe:(T48Move)direction) {
 #pragma mark -
 #pragma mark Event Listeners
 #endif
+
+- (void)notifyGameState {
+  NSNumber *score = [NSNumber numberWithLong:[_player score]];
+  NSNumber *game_over = [NSNumber numberWithBool:[_player gameOver]];
+  NSNumber *moves_made = [NSNumber numberWithLong:[_player movesMade]];
+  NSNumber *player_won = [NSNumber numberWithBool:[_player hasWon]];
+  [self.bridge.eventDispatcher sendAppEventWithName:@"ScoreChanged"
+                                               body:@{
+                                                 @"score" : score,
+                                                 @"gameOver" : game_over,
+                                                 @"gameBoard": [_player gameState],
+                                                 @"movesMade": moves_made,
+                                                 @"hasWon": player_won
+                                               }];
+}
 
 @end

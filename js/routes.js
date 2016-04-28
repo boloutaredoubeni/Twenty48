@@ -24,19 +24,24 @@ class GameScreen extends Component {
     // this.subscription = NativeEventEmitter.addListener('ScoreChange', (score)
     // => console.log(score));
     this.state = {
-      player : NativeModules.PlayerManager,
-      subscription : {},
-      score : 0,
+        score: 0,
+        gameOver: false,
+        movesMade: 0,
+        gameBoard: []
     };
+    this.player = NativeModules.PlayerManager;
+    this.subscription = {};
     this.x = 0;
     this.y = 0;
   }
 
   componentWillMount() {
-    this.state.player.newGame();
-    this.state.subscription = NativeAppEventEmitter.addListener(
-        'ScoreChanged', (score) => {this.state.score = score});
-    this.state.player.swipe(this.state.player.MoveUp);
+    this.player.newGame();
+    this.subscription = NativeAppEventEmitter.addListener(
+        'ScoreChanged', (game) => {
+          this.setState(game);
+        });
+    this.player.swipe(this.player.MoveUp);
   }
 
   render() {
@@ -45,8 +50,11 @@ class GameScreen extends Component {
           <View
             onTouchStart={(event) => this._touchStart(event)}
             onTouchEnd={(event) => this._touchEnd(event)}>
-            <Text>Game is here</Text>
-            <Text>Score </Text>
+            <Text>Score: {this.state.score}</Text>
+            <Text>Moves: {this.state.movesMade}</Text>
+            <Text>GameOver: {this.state.gameOver}</Text>
+            <Text>GameBoard: {this.state.gameBoard}</Text>
+            {/*<Text>Winner: {this.state.hasWon}</Text>*/}
           </View>
       );
       // clang-format on
@@ -54,7 +62,7 @@ class GameScreen extends Component {
 
   componentWillUnmount() {
       try {
-        this.state.subscription.remove();
+        this.subscription.remove();
       } catch (e) {
         console.error(e);
       }
@@ -90,7 +98,7 @@ class GameScreen extends Component {
   }
 
   _isGameOver() {
-    const _player = this.state.player;
+    const _player = this.player;
     if (_player == null) {
       console.error("The player value is null");
       return true;
