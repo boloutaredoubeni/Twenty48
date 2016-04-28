@@ -84,7 +84,7 @@ test-cpp: lib2048.xcodeproj
 ios.xcodeproj: $(DJINNI)
 	@$(GYP)/gyp --depth=. -DOS=ios -f xcode \
 		--generator-output=./build/ios/ lib2048.gyp
-	@xcodebuild -project build/ios/lib2048.xcodeproj/ -configuration Debug -target lib2048_ios | ${xb-prettifier}
+	@xcodebuild -project build/ios/lib2048.xcodeproj/ -configuration Release -target lib2048_ios | ${xb-prettifier}
 
 gyp_android: $(DJINNI)
 	@PYTHONPATH=$(GYP)/pylib ANDROID_BUILD_TOP=$(shell dirname `which ndk-build`) $(GYP)/gyp \

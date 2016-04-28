@@ -1,7 +1,5 @@
 #include "tile.hpp"
 
-#include "zf_log.h"
-#define ZF_LOG_TAG "Twenty48"
 
 #include <cassert>
 
@@ -12,7 +10,6 @@ Tile::Tile(int32_t value) : value_(value) {}
 
 void Tile::Increase() {
   if (locked_) {
-    ZF_LOGW("Tile is locked");
     return;
   }
   value_ <<= 1;

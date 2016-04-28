@@ -1,7 +1,6 @@
 #include "player_impl.hpp"
 #include "Twenty48/move.hpp"
 
-#include "zf_log.h"
 
 #include <algorithm>
 #include <iterator>
@@ -9,7 +8,6 @@
 
 #include <cassert>
 
-#define ZF_LOG_TAG "Twenty48"
 
 using namespace twenty48;
 using namespace twenty48::impl;
@@ -44,7 +42,6 @@ void PlayerImpl::NewGame() {
   for (auto &tile : game_->board_) {
     tile.Init();
   }
-  ZF_LOGI("Initialized game tiles");
 
   assert(std::all_of(game_->board_.begin(), game_->board_.end(),
                      [](const auto &i) { return i.Value() == 1; }));
@@ -52,17 +49,11 @@ void PlayerImpl::NewGame() {
   addTile();
   game_->score_ = 0;
   moves_made_ = 0;
-  ZF_LOGI("New Game Created -- score:%llu moves:%lld is_over:%d, win:%d, tiles "
-          "on board: %ld",
-          game_->score_, moves_made_, game_->is_over_, game_->has_won_,
-          std::count_if(game_->board_.begin(), game_->board_.end(),
-                        [](const auto &tile) { return tile.Value() > 1; }));
 }
 
 int64_t PlayerImpl::Score() {
   const auto score = game_->score_;
   assert(score >= 0);
-  ZF_LOGI("The score is: %llu", game_->score_);
   return score;
 }
 
@@ -71,14 +62,11 @@ bool PlayerImpl::HasWon() { return game_->has_won_; }
 std::vector<int32_t> PlayerImpl::GameState() {
   std::vector<int32_t> game_state(16);
   if (moves_made_ == -1) {
-    ZF_LOGW("The player is trying to play the game before it is initialized");
     return game_state;
   }
   std::transform(game_->board_.begin(), game_->board_.end(), game_state.begin(),
                  [](const auto &tile) { return tile.Value(); });
   assert(game_state.size() == 16);
-  ZF_LOGI("Game -- score:%llu\t moves:%lld\t is_over:%d\t, win:%d",
-          game_->score_, moves_made_, game_->is_over_, game_->has_won_);
   return game_state;
 }
 
@@ -87,7 +75,6 @@ bool PlayerImpl::GameOver() { return game_->is_over_; }
 bool PlayerImpl::Swipe(Move move) {
   auto has_moved = false;
   if (moves_made_ == -1) {
-    ZF_LOGW("The player is trying to play the game before it is initialized");
     return has_moved;
   }
   switch (move) {
@@ -121,7 +108,6 @@ void PlayerImpl::SetGame(
   // check if all tiles are a power of 2
   if (std::none_of(new_game_board.begin(), new_game_board.end(),
                    [](int x) { return ((x > 0) && (x & (x - 1))); })) {
-    ZF_LOGW("Attempted add invalid game state, correcting...");
     unlockTiles();
     NewGame();
     return;
@@ -132,9 +118,6 @@ void PlayerImpl::SetGame(
   assert(std::equal(new_game_board.begin(), new_game_board.end(),
                     game_->board_.begin(),
                     [](int i, const Tile &tile) { return i == tile.Value(); }));
-  ZF_LOGI("Reset the game board, tiles: %ld",
-          std::count_if(game_->board_.begin(), game_->board_.end(),
-                        [](const auto &tile) { return tile.Value() > 1; }));
 }
 
 #if 0
@@ -159,7 +142,6 @@ void PlayerImpl::addTile() const {
       } else {
         tile.Init(2);
       }
-      ZF_LOGI("Add a tile");
     }
 
     if (is_new_game) {
@@ -169,7 +151,6 @@ void PlayerImpl::addTile() const {
     }
 
     if (hasMoves()) {
-      ZF_LOGI("Player has viable moves");
       return;
     }
 
@@ -178,8 +159,6 @@ void PlayerImpl::addTile() const {
   }
 
   game_->is_over_ = true;
-  ZF_LOGI("Game -- score:%llu\t moves:%lld\t is_over:%d\t, win:%d",
-          game_->score_, moves_made_, game_->is_over_, game_->has_won_);
 }
 
 bool PlayerImpl::hasMoves() const {
@@ -198,7 +177,6 @@ bool PlayerImpl::moveUp() const {
   // merge
   // then check 0 - 3 with 4 - 7
   // remember that this is non-greedy thus [4][4][4][4] !=> [*][*][8][8]
-  ZF_LOGI("Player wants to move up");
   for (auto check_index = 8; check_index >= 0; check_index -= 4) {
     // get the a slice
     // merge into new row
@@ -220,11 +198,9 @@ bool PlayerImpl::moveUp() const {
       }
       (*next).Init();
       (*start).Increase();
-      ZF_LOGI("The board has changed");
       board_changed = true;
     }
   }
-  ZF_LOGI("Player moved up?: %d", board_changed);
   return board_changed;
 }
 
@@ -238,5 +214,4 @@ void PlayerImpl::unlockTiles() const {
   for (auto &tile : game_->board_) {
     tile.Unlock();
   }
-  ZF_LOGD("Unlock tiles");
 }
