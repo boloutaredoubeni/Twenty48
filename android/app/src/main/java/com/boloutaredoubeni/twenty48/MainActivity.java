@@ -1,4 +1,4 @@
-package com.twenty48;
+package com.boloutaredoubeni.twenty48;
 
 import com.boloutaredoubeni.twenty48.reactmodules.PlayerReactPackage;
 import com.facebook.react.ReactActivity;

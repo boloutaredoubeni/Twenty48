@@ -4,7 +4,8 @@
     # enable android short names (not full paths) for linking libraries
     "android_unmangled_name": 1,
     'cflags':    [ '-gdwarf-2', '-Werror', '-Wall', '-Wextra', '-Wno-missing-field-initializers' ],
-    'cflags_cc': [ '-std=c++1y', '-frtti', '-fexceptions', '-D' ],
+    'cflags_cc': [ '-std=c++1y', '-frtti', '-fexceptions'],
+    'cflags_cc!': ['-fno-rtti'],
     'xcode_settings': {
       'OTHER_CFLAGS' : ['-Wall'],
       'OTHER_CPLUSPLUSFLAGS' : ['-Wall'],
@@ -27,9 +28,7 @@
         # do _not_ put defines here, unless you add them in cflags as well
         # ios/clang doesn't respect them :(
         'defines': [ 'DEBUG=1' ],
-        'cflags' : [ '-g',
-        '-O0',
-        '-DDEBUG=1' ],
+        'cflags' : [ '-g', '-O0', '-DDEBUG=1' ],
         'xcode_settings': {
           'ONLY_ACTIVE_ARCH': 'YES',
         },

@@ -1,5 +1,5 @@
 FORCE_GYP := $(shell make -C ../../GypAndroid.mk)
-APP_ABI := arm64-v8a
+APP_ABI := all
 APP_OPTIM := release
 NDK_TOOLCHAIN_VERSION := clang
 # APP_PLATFORM := android-21

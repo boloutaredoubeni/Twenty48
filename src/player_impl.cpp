@@ -1,13 +1,11 @@
 #include "player_impl.hpp"
 #include "Twenty48/move.hpp"
 
-
 #include <algorithm>
 #include <iterator>
 #include <random>
 
 #include <cassert>
-
 
 using namespace twenty48;
 using namespace twenty48::impl;

@@ -1,6 +1,5 @@
 #include "tile.hpp"
 
-
 #include <cassert>
 
 using namespace twenty48::impl;
