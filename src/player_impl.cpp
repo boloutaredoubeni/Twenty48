@@ -91,6 +91,7 @@ bool PlayerImpl::Swipe(Move move) {
   }
 
   if (has_moved) {
+    ++moves_made_;
     addTile();
   }
   unlockTiles();

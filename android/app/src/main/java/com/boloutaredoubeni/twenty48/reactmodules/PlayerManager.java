@@ -2,11 +2,17 @@ package com.boloutaredoubeni.twenty48.reactmodules;
 
 import android.util.Log;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.boloutaredoubeni.twenty48.djinni.Player;
 import com.boloutaredoubeni.twenty48.djinni.Move;
+import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.modules.core.RCTNativeAppEventEmitter;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -58,6 +64,8 @@ public class PlayerManager extends ReactContextBaseJavaModule {
       return;
     }
     player.swipe(move);
+    notifyGameChanged(getReactApplicationContext(), "ScoreChanged",
+                      getGameStateParams());
   }
 
   @Nullable
@@ -88,5 +96,25 @@ public class PlayerManager extends ReactContextBaseJavaModule {
     default:
       return null;
     }
+  }
+
+  private void notifyGameChanged(ReactContext reactContext, String eventName,
+                                 @Nullable WritableMap params) {
+    reactContext.getJSModule(RCTNativeAppEventEmitter.class)
+        .emit(eventName, params);
+  }
+
+  private WritableMap getGameStateParams() {
+    final WritableMap params = Arguments.createMap();
+    final WritableArray gameBoard = Arguments.createArray();
+    for (final int tile : player.gameState()) {
+      gameBoard.pushInt(tile);
+    }
+    params.putDouble("score", (double)player.score());
+    params.putBoolean("gameOver", player.gameOver());
+    params.putBoolean("hasWon", player.hasWon());
+    params.putDouble("movesMade", (double)player.movesMade());
+    params.putArray("gameBoard", gameBoard);
+    return params;
   }
 }

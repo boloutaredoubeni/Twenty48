@@ -23,12 +23,7 @@ class GameScreen extends Component {
     super(props);
     // this.subscription = NativeEventEmitter.addListener('ScoreChange', (score)
     // => console.log(score));
-    this.state = {
-        score: 0,
-        gameOver: false,
-        movesMade: 0,
-        gameBoard: []
-    };
+    this.state = {score : 0, gameOver : false, movesMade : 0, gameBoard : []};
     this.player = NativeModules.PlayerManager;
     this.subscription = {};
     this.x = 0;
@@ -38,9 +33,7 @@ class GameScreen extends Component {
   componentWillMount() {
     this.player.newGame();
     this.subscription = NativeAppEventEmitter.addListener(
-        'ScoreChanged', (game) => {
-          this.setState(game);
-        });
+        'ScoreChanged', (game) => { this.setState(game); });
     this.player.swipe(this.player.MoveUp);
   }
 
