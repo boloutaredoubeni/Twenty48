@@ -39,7 +39,7 @@ make test
     |_ jni-src/ -> JNI C++ files
 |_ js/ -> react native components
 |_ djinni/ -> Interface definitions
-|_ include/ -> Generated C++ classes, structs, etc...
+|_ include/Twenty48 -> Generated C++ classes, structs, etc...
 |_ ios/Twenty48/ -> Native Module code for ios
     |_ Djinni/ -> Generated Obj-C and Obj-C++
 |_ src/ -> Implemented C++ files

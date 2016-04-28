@@ -20,7 +20,6 @@ public class PlayerManager extends ReactContextBaseJavaModule {
 
   private final static String TAG = "PlayerManager";
 
-
   static {
     try {
       System.loadLibrary("2048_jni");
@@ -73,21 +72,21 @@ public class PlayerManager extends ReactContextBaseJavaModule {
   }
 
   private Move convertToMove(int direction) {
-    if (direction < 0  || direction > 3) {
+    if (direction < 0 || direction > 3) {
       Log.e(TAG, "Invalid direction");
       return null;
     }
-    switch (direction){
-      case 0:
-        return Move.UP;
-      case 1:
-        return Move.DOWN;
-      case 2:
-        return Move.LEFT;
-      case 3:
-        return Move.RIGHT;
-      default:
-        return null;
+    switch (direction) {
+    case 0:
+      return Move.UP;
+    case 1:
+      return Move.DOWN;
+    case 2:
+      return Move.LEFT;
+    case 3:
+      return Move.RIGHT;
+    default:
+      return null;
     }
   }
 }
