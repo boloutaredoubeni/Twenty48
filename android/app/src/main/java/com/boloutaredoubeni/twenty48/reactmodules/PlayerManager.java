@@ -6,6 +6,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.boloutaredoubeni.twenty48.djinni.Player;
+import com.boloutaredoubeni.twenty48.djinni.Move;
 
 /**
  * Copyright 2016 Boloutare Doubeni
@@ -33,11 +34,20 @@ public class PlayerManager extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void startNewGame() {
+  public void newGame() {
     if (player == null) {
       player = Player.create();
     }
     player.newGame();
     Log.i(TAG, "The game has been created!!");
+  }
+
+  @ReactMethod
+  public void swipe(Move move) {
+    if (player ==  null) {
+      Log.e(TAG, "The player attempted to swipe on an uninitialized board");
+      return;
+    }
+    player.swipe(move);
   }
 }
