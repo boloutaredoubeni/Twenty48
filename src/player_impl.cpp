@@ -6,6 +6,7 @@
 #include <random>
 
 #include <cassert>
+#include <cstdio>
 
 using namespace twenty48;
 using namespace twenty48::impl;
@@ -103,19 +104,19 @@ bool PlayerImpl::Swipe(Move move) {
 int64_t PlayerImpl::MovesMade() const { return moves_made_; }
 
 void PlayerImpl::SetGame(
-    const std::array<uint16_t, dimension * dimension> &new_game_board) {
+    const std::array<uint16_t, dimension * dimension> &game_board) {
   // check if all tiles are a power of 2
-  if (std::none_of(new_game_board.begin(), new_game_board.end(),
+  if (std::none_of(game_board.begin(), game_board.end(),
                    [](int x) { return ((x > 0) && (x & (x - 1))); })) {
-    unlockTiles();
+    // #if defined (DEBUG) || (!NDEBUG)
+    printf("Invalid\n");
+    // #endif
     NewGame();
     return;
   }
-  std::transform(new_game_board.begin(), new_game_board.end(),
-                 game_->board_.begin(),
+  std::transform(game_board.begin(), game_board.end(), game_->board_.begin(),
                  [](const auto &val) { return Tile(val); });
-  assert(std::equal(new_game_board.begin(), new_game_board.end(),
-                    game_->board_.begin(),
+  assert(std::equal(game_board.begin(), game_board.end(), game_->board_.begin(),
                     [](int i, const Tile &tile) { return i == tile.Value(); }));
 }
 
@@ -148,7 +149,7 @@ void PlayerImpl::addTile() const {
           std::chrono::system_clock::now().time_since_epoch().count();
       std::default_random_engine generator(seed);
       std::uniform_real_distribution<double> distribution(0.0, 1.0);
-      game_->board_[idx].Init((distribution(generator) >= 0.9) ? 4 : 2);
+      game_->board_[idx].Init((distribution(generator) >= 0.95) ? 4 : 2);
     }
 
     if (is_new_game) {
@@ -194,12 +195,15 @@ bool PlayerImpl::moveUp() const {
       auto next = end + 1;
       assert(next != nullptr);
       if ((*start).Value() != (*next).Value()) {
+        printf("start: %d, next: %d\n", (*start).Value(), (*next).Value());
         continue;
       }
       if ((*start).Locked() || (*next).Locked()) {
+        printf("start: %d, next: %d\n", (*start).Value(), (*next).Value());
         continue;
       }
       if ((*start).Value() == 1) {
+        printf("start: %d, next: %d\n", (*start).Value(), (*next).Value());
         continue;
       }
       (*next).Init();

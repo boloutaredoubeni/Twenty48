@@ -67,6 +67,10 @@ TEST_F(PlayerTest, cant_set_game_to_invalid_state) {
   SetGameBoard(std::array<uint16_t, dimension * dimension>{});
   ASSERT_EQ(0, player_->MovesMade());
   ASSERT_EQ(2, TileCount());
+  SetGameBoard(std::array<uint16_t, dimension * dimension>{
+      {/* row 1 */ 0, 1, 2, 3, /* row 2 */ 4, 5, 6, 7, /* row 3*/ 8, 9, 1, 2,
+       /* row 4 */ 3, 4, 5, 6}});
+  ASSERT_EQ(2, TileCount());
 }
 
 TEST_F(PlayerTest, can_notify_view_of_game_board) {
@@ -77,19 +81,19 @@ TEST_F(PlayerTest, can_notify_view_of_game_board) {
 TEST_F(PlayerTest, new_game_adds_tiles) { ASSERT_EQ(2, TileCount()); }
 
 TEST_F(PlayerTest, can_move_up) {
-  {
-    SetGameBoard(std::array<uint16_t, dimension * dimension>{
-        {4, 1, 1, 1, 4, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1}});
-    ASSERT_TRUE(player_->Swipe(Move::Up));
-    std::vector<int16_t> end_state{
-        {4, 1, 1, 1, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
-    ASSERT_EQ(end_state, player_->GameState());
 
-    ASSERT_EQ(8, player_->Score());
-    ASSERT_GT(0, player_->MovesMade());
-    ASSERT_FALSE(player_->GameOver());
-    ASSERT_FALSE(player_->HasWon());
-  }
+  const auto set_state = std::array<uint16_t, dimension * dimension>{
+      {4, 1, 1, 1, 4, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1}};
+  SetGameBoard(set_state);
+  ASSERT_EQ(set_state, convert_vec_to_array(player_->GameState()));
+  ASSERT_TRUE(player_->Swipe(Move::Up));
+  std::vector<int16_t> end_state{{4, 1, 1, 1, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+  ASSERT_EQ(end_state, player_->GameState());
+
+  ASSERT_EQ(8, player_->Score());
+  ASSERT_GT(0, player_->MovesMade());
+  ASSERT_FALSE(player_->GameOver());
+  ASSERT_FALSE(player_->HasWon());
 }
 
 TEST_F(PlayerTest, can_move_tiles) {
