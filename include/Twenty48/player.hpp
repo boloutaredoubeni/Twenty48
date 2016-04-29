@@ -23,7 +23,7 @@ public:
 
     virtual bool HasWon() const = 0;
 
-    virtual std::vector<int32_t> GameState() const = 0;
+    virtual std::vector<int16_t> GameState() const = 0;
 
     virtual bool GameOver() const = 0;
 

@@ -57,8 +57,8 @@ int64_t PlayerImpl::Score() const {
 
 bool PlayerImpl::HasWon() const { return game_->has_won_; }
 
-std::vector<int32_t> PlayerImpl::GameState() const {
-  std::vector<int32_t> game_state(16);
+std::vector<int16_t> PlayerImpl::GameState() const {
+  std::vector<int16_t> game_state(16);
   if (moves_made_ == -1) {
     return game_state;
   }
@@ -127,20 +127,28 @@ void PlayerImpl::SetGame(
 void PlayerImpl::addTile() const {
   bool is_new_game = std::all_of(game_->board_.begin(), game_->board_.end(),
                                  [](const auto i) { return i.Value() == 1; });
-  std::random_device rd;
-  std::mt19937 generator(rd());
-  std::uniform_int_distribution<> rand_dist(dimension * dimension - 1);
+
   // Loop thru all tiles
   for (auto &tile : game_->board_) {
-    // if it is 1 find an random empty one
-    // FIXME(boloutaredoubeni): select a random tile instead of the first one
-    // that is found
+    // if it is 1, find an random empty one
     if (tile.Value() == 1) {
-      if (rand_dist(generator) >= chance_of_four) {
-        tile.Init(4);
-      } else {
-        tile.Init(2);
-      }
+      size_t idx;
+      do {
+        unsigned seed =
+            std::chrono::system_clock::now().time_since_epoch().count();
+        std::default_random_engine generator(seed);
+        std::uniform_int_distribution<size_t> distribution(
+            0, dimension * dimension - 1);
+        idx = distribution(generator);
+        assert(idx >= 0 && idx < dimension * dimension);
+      } while (game_->board_[idx].Value() > 1);
+
+      // Assign the 'empty' tile a value
+      unsigned seed =
+          std::chrono::system_clock::now().time_since_epoch().count();
+      std::default_random_engine generator(seed);
+      std::uniform_real_distribution<double> distribution(0.0, 1.0);
+      game_->board_[idx].Init((distribution(generator) >= 0.9) ? 4 : 2);
     }
 
     if (is_new_game) {
@@ -149,12 +157,11 @@ void PlayerImpl::addTile() const {
       continue;
     }
 
+    assert(std::any_of(game_->board_.begin(), game_->board_.end(),
+                       [](const auto i) { return i.Value() > 1; }));
     if (hasMoves()) {
       return;
     }
-
-    assert(std::any_of(game_->board_.begin(), game_->board_.end(),
-                       [](const auto i) { return i.Value() > 1; }));
   }
 
   game_->is_over_ = true;
@@ -175,7 +182,7 @@ bool PlayerImpl::moveUp() const {
   // then check 8 - 11 with 4 -7
   // merge
   // then check 0 - 3 with 4 - 7
-  // remember that this is non-greedy thus [4][4][4][4] !=> [*][*][8][8]
+  // remember that this is non-greedy thus [4][4][4][4] => [*][*][8][8]
   for (auto check_index = 8; check_index >= 0; check_index -= 4) {
     // get the a slice
     // merge into new row
@@ -197,6 +204,7 @@ bool PlayerImpl::moveUp() const {
       }
       (*next).Init();
       (*start).Increase();
+      game_->score_ += (*start).Value();
       board_changed = true;
     }
   }

@@ -31,7 +31,7 @@ public:
   virtual void NewGame();
   virtual int64_t Score() const;
   virtual bool HasWon() const;
-  virtual std::vector<int32_t> GameState() const;
+  virtual std::vector<int16_t> GameState() const;
   virtual bool GameOver() const;
   virtual bool Swipe(twenty48::Move);
   virtual int64_t MovesMade() const;

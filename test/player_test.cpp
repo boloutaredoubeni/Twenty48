@@ -41,10 +41,26 @@ protected:
     std::static_pointer_cast<PlayerImpl>(player_)->SetGame(state);
   }
 };
+
+auto convert_vec_to_array(const std::vector<int16_t> &v)
+    -> std::array<uint16_t, dimension * dimension> {
+  std::array<uint16_t, dimension * dimension> out{};
+  if (v.size() != 16) {
+    return out;
+  }
+  std::copy(v.begin(), v.end(), out.begin());
+  return out;
+}
 } // namespace
 
 TEST_F(PlayerTest, can_use_set_game) {
-  SetGameBoard(std::array<uint16_t, dimension * dimension>{});
+  const auto new_state = std::array<uint16_t, dimension * dimension>{};
+  SetGameBoard(new_state);
+  player_->NewGame();
+  const auto new_game = convert_vec_to_array(player_->GameState());
+  const auto end_state = convert_vec_to_array(player_->GameState());
+  ASSERT_NE(end_state, new_state);
+  ASSERT_NE(new_game, new_state);
 }
 
 TEST_F(PlayerTest, cant_set_game_to_invalid_state) {
@@ -61,15 +77,19 @@ TEST_F(PlayerTest, can_notify_view_of_game_board) {
 TEST_F(PlayerTest, new_game_adds_tiles) { ASSERT_EQ(2, TileCount()); }
 
 TEST_F(PlayerTest, can_move_up) {
-  ASSERT_GE(0, player_->MovesMade());
-  const auto prev = player_->GameState();
-  ASSERT_FALSE(player_->Swipe(Move::Up));
-  ASSERT_GE(0, player_->MovesMade());
-  // FIXME: this result is intended to be random. Create a fixture to normalize
-  // behaviour
-  ASSERT_TRUE(player_->Swipe(Move::Up));
-  ASSERT_EQ(1, player_->MovesMade());
-  ASSERT_GE(0, player_->Score());
+  {
+    SetGameBoard(std::array<uint16_t, dimension * dimension>{
+        {4, 1, 1, 1, 4, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1}});
+    ASSERT_TRUE(player_->Swipe(Move::Up));
+    std::vector<int16_t> end_state{
+        {4, 1, 1, 1, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+    ASSERT_EQ(end_state, player_->GameState());
+
+    ASSERT_EQ(8, player_->Score());
+    ASSERT_GT(0, player_->MovesMade());
+    ASSERT_FALSE(player_->GameOver());
+    ASSERT_FALSE(player_->HasWon());
+  }
 }
 
 TEST_F(PlayerTest, can_move_tiles) {
