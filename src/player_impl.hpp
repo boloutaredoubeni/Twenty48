@@ -29,12 +29,12 @@ public:
 #endif
 
   virtual void NewGame();
-  virtual int64_t Score();
-  virtual bool HasWon();
-  virtual std::vector<int32_t> GameState();
-  virtual bool GameOver();
+  virtual int64_t Score() const;
+  virtual bool HasWon() const;
+  virtual std::vector<int32_t> GameState() const;
+  virtual bool GameOver() const;
   virtual bool Swipe(twenty48::Move);
-  virtual int64_t MovesMade();
+  virtual int64_t MovesMade() const;
   virtual void SetGame(const std::array<uint16_t, dimension * dimension> &);
 
 private:

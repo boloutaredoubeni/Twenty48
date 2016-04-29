@@ -19,13 +19,13 @@ public:
 
     virtual void NewGame() = 0;
 
-    virtual int64_t Score() = 0;
+    virtual int64_t Score() const = 0;
 
-    virtual bool HasWon() = 0;
+    virtual bool HasWon() const = 0;
 
-    virtual std::vector<int32_t> GameState() = 0;
+    virtual std::vector<int32_t> GameState() const = 0;
 
-    virtual bool GameOver() = 0;
+    virtual bool GameOver() const = 0;
 
     /**
      * @param move the direction of movement
@@ -33,7 +33,7 @@ public:
      */
     virtual bool Swipe(Move move) = 0;
 
-    virtual int64_t MovesMade() = 0;
+    virtual int64_t MovesMade() const = 0;
 };
 
 }  // namespace twenty48

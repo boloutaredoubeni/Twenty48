@@ -8,12 +8,12 @@ move = enum {
 player = interface +c {
   static create(): player;
   new_game();
-  score(): i64;
-  has_won(): bool;
-  game_state(): list<i32>;
-  game_over(): bool;
+  const score(): i64;
+  const has_won(): bool;
+  const game_state(): list<i32>;
+  const game_over(): bool;
   # @param move the direction of movement
   # @return bool false if the move was unsuccessful
   swipe(move: move): bool;
-  moves_made(): i64;
+  const moves_made(): i64;
 }

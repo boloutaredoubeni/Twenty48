@@ -49,15 +49,15 @@ void PlayerImpl::NewGame() {
   moves_made_ = 0;
 }
 
-int64_t PlayerImpl::Score() {
+int64_t PlayerImpl::Score() const {
   const auto score = game_->score_;
   assert(score >= 0);
   return score;
 }
 
-bool PlayerImpl::HasWon() { return game_->has_won_; }
+bool PlayerImpl::HasWon() const { return game_->has_won_; }
 
-std::vector<int32_t> PlayerImpl::GameState() {
+std::vector<int32_t> PlayerImpl::GameState() const {
   std::vector<int32_t> game_state(16);
   if (moves_made_ == -1) {
     return game_state;
@@ -68,7 +68,7 @@ std::vector<int32_t> PlayerImpl::GameState() {
   return game_state;
 }
 
-bool PlayerImpl::GameOver() { return game_->is_over_; }
+bool PlayerImpl::GameOver() const { return game_->is_over_; }
 
 bool PlayerImpl::Swipe(Move move) {
   auto has_moved = false;
@@ -100,7 +100,7 @@ bool PlayerImpl::Swipe(Move move) {
   return has_moved;
 }
 
-int64_t PlayerImpl::MovesMade() { return moves_made_; }
+int64_t PlayerImpl::MovesMade() const { return moves_made_; }
 
 void PlayerImpl::SetGame(
     const std::array<uint16_t, dimension * dimension> &new_game_board) {
