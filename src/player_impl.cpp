@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iterator>
 #include <random>
+#include <chrono>
 
 #include <cassert>
 #include <cstdio>
@@ -16,7 +17,12 @@ using namespace twenty48::impl;
 #pragma mark Helpers
 #endif
 
-using TileIterator = std::array<Tile, 16>::iterator;
+namespace {
+  auto is_valid(uint16_t val) -> decltype((val > 1) && !(val & (val -1))) {
+    // NOTE: 1 is a power of two, but not tile == 1
+    return (val > 1) && !(val & (val -1));
+  }
+}
 
 #if 0
 #pragma mark -
@@ -43,7 +49,7 @@ void PlayerImpl::NewGame() {
   }
 
   assert(std::all_of(game_->board_.begin(), game_->board_.end(),
-                     [](const auto &i) { return i.Value() == 1; }));
+                     [](const auto &i) { return !i.Value(); }));
 
   addTile();
   game_->score_ = 0;
@@ -97,7 +103,7 @@ bool PlayerImpl::Swipe(Move move) {
   }
   unlockTiles();
   assert(std::any_of(game_->board_.begin(), game_->board_.end(),
-                     [](const auto &i) { return i.Value() > 1; }));
+                     [](const auto &i) { return is_valid(i.Value()); }));
   return has_moved;
 }
 
@@ -106,8 +112,8 @@ int64_t PlayerImpl::MovesMade() const { return moves_made_; }
 void PlayerImpl::SetGame(
     const std::array<uint16_t, dimension * dimension> &game_board) {
   // check if all tiles are a power of 2
-  if (std::none_of(game_board.begin(), game_board.end(),
-                   [](int x) { return ((x > 0) && (x & (x - 1))); })) {
+  if (std::any_of(game_board.begin(), game_board.end(),
+                   [](int x) { return !((x > 1) && !(x & (x - 1))); })) {
     // #if defined (DEBUG) || (!NDEBUG)
     printf("Invalid\n");
     // #endif
@@ -127,12 +133,12 @@ void PlayerImpl::SetGame(
 
 void PlayerImpl::addTile() const {
   bool is_new_game = std::all_of(game_->board_.begin(), game_->board_.end(),
-                                 [](const auto i) { return i.Value() == 1; });
+                                 [](const auto i) { return !i.Value(); });
 
   // Loop thru all tiles
   for (auto &tile : game_->board_) {
     // if it is 1, find an random empty one
-    if (tile.Value() == 1) {
+    if (!tile.Value()) {
       size_t idx;
       do {
         unsigned seed =
@@ -142,7 +148,7 @@ void PlayerImpl::addTile() const {
             0, dimension * dimension - 1);
         idx = distribution(generator);
         assert(idx >= 0 && idx < dimension * dimension);
-      } while (game_->board_[idx].Value() > 1);
+      } while (!game_->board_[idx].Value());
 
       // Assign the 'empty' tile a value
       unsigned seed =
@@ -159,7 +165,7 @@ void PlayerImpl::addTile() const {
     }
 
     assert(std::any_of(game_->board_.begin(), game_->board_.end(),
-                       [](const auto i) { return i.Value() > 1; }));
+                       [](const auto& i) { return is_valid(i.Value()) ; }));
     if (hasMoves()) {
       return;
     }
@@ -171,7 +177,7 @@ void PlayerImpl::addTile() const {
 bool PlayerImpl::hasMoves() const {
   const auto begin = game_->board_.begin();
   const auto end = game_->board_.end();
-  return !std::all_of(begin, end, [](const auto i) { return i.Value() > 1; });
+  return !std::all_of(begin, end, [](const auto &i) { return is_valid(i.Value()); });
 }
 
 bool PlayerImpl::moveUp() const {

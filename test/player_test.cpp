@@ -33,7 +33,7 @@ protected:
   virtual int16_t TileCount() const {
     const auto game_state = player_->GameState();
     return std::count_if(game_state.begin(), game_state.end(),
-                         [](int i) { return (i > 1) && ((i % 2) == 0); });
+                         [](int x) { return ((x > 1) && !(x & (x - 1))); });
   }
 
   virtual void
@@ -83,11 +83,14 @@ TEST_F(PlayerTest, new_game_adds_tiles) { ASSERT_EQ(2, TileCount()); }
 TEST_F(PlayerTest, can_move_up) {
 
   const auto set_state = std::array<uint16_t, dimension * dimension>{
-      {4, 1, 1, 1, 4, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 1}};
+      {/* row 1*/ 4, 1, 1, 1, /* row 2 */ 4, 1, 1, 1, /* row 2 */ 4, 1, 1, 1,
+       /* row 4 */ 1, 1, 1, 1}};
   SetGameBoard(set_state);
   ASSERT_EQ(set_state, convert_vec_to_array(player_->GameState()));
   ASSERT_TRUE(player_->Swipe(Move::Up));
-  std::vector<int16_t> end_state{{4, 1, 1, 1, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+  std::vector<int16_t> end_state{{/* row 1*/ 4, 1, 1, 1, /* row 2 */ 8, 1, 1, 1,
+                                  /* row 2 */ 1, 1, 1, 1, /* row 4 */ 1, 1, 1,
+                                  1}};
   ASSERT_EQ(end_state, player_->GameState());
 
   ASSERT_EQ(8, player_->Score());

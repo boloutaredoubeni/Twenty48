@@ -3,9 +3,10 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, T48Move) {
-  T48MoveUp,
-  T48MoveDown,
-  T48MoveLeft,
-  T48MoveRight,
+typedef NS_ENUM(NSInteger, T48Move)
+{
+    T48MoveUp,
+    T48MoveDown,
+    T48MoveLeft,
+    T48MoveRight,
 };
