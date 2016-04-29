@@ -7,7 +7,7 @@ move = enum {
 
 player = interface +c {
   static create(): player;
-  new_game();
+  const new_game();
   const score(): i64;
   const has_won(): bool;
   const game_state(): list<i16>;

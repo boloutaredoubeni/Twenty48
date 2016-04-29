@@ -2,9 +2,9 @@
 #include "Twenty48/move.hpp"
 
 #include <algorithm>
+#include <chrono>
 #include <iterator>
 #include <random>
-#include <chrono>
 
 #include <cassert>
 #include <cstdio>
@@ -18,11 +18,11 @@ using namespace twenty48::impl;
 #endif
 
 namespace {
-  auto is_valid(uint16_t val) -> decltype((val > 1) && !(val & (val -1))) {
-    // NOTE: 1 is a power of two, but not tile == 1
-    return (val > 1) && !(val & (val -1));
-  }
+auto is_valid(uint16_t val) -> decltype((val > 1) && !(val & (val - 1))) {
+  // NOTE: 1 is a power of two, but not tile == 1
+  return (val > 1) && !(val & (val - 1));
 }
+} // namespace
 
 #if 0
 #pragma mark -
@@ -43,9 +43,9 @@ PlayerImpl::~PlayerImpl() {}
 #pragma mark Public Methods
 #endif
 
-void PlayerImpl::NewGame() {
+void PlayerImpl::NewGame() const {
   for (auto &tile : game_->board_) {
-    tile.Init();
+    tile.Reset();
   }
 
   assert(std::all_of(game_->board_.begin(), game_->board_.end(),
@@ -53,7 +53,6 @@ void PlayerImpl::NewGame() {
 
   addTile();
   game_->score_ = 0;
-  moves_made_ = 0;
 }
 
 int64_t PlayerImpl::Score() const {
@@ -66,9 +65,6 @@ bool PlayerImpl::HasWon() const { return game_->has_won_; }
 
 std::vector<int16_t> PlayerImpl::GameState() const {
   std::vector<int16_t> game_state(16);
-  if (moves_made_ == -1) {
-    return game_state;
-  }
   std::transform(game_->board_.begin(), game_->board_.end(), game_state.begin(),
                  [](const auto &tile) { return tile.Value(); });
   assert(game_state.size() == 16);
@@ -110,10 +106,14 @@ bool PlayerImpl::Swipe(Move move) {
 int64_t PlayerImpl::MovesMade() const { return moves_made_; }
 
 void PlayerImpl::SetGame(
-    const std::array<uint16_t, dimension * dimension> &game_board) {
+    const std::array<uint16_t, dimension * dimension> &game_board) const {
+  const auto all_power_of_two =
+      std::all_of(game_board.begin(), game_board.end(),
+                  [](int x) { return !(x & (x - 1)); });
+  const auto tile_count = std::count_if(game_board.begin(), game_board.end(),
+                                        [](int x) { return x > 1; });
   // check if all tiles are a power of 2
-  if (std::any_of(game_board.begin(), game_board.end(),
-                   [](int x) { return !((x > 1) && !(x & (x - 1))); })) {
+  if (!all_power_of_two || !tile_count) {
     // #if defined (DEBUG) || (!NDEBUG)
     printf("Invalid\n");
     // #endif
@@ -147,15 +147,11 @@ void PlayerImpl::addTile() const {
         std::uniform_int_distribution<size_t> distribution(
             0, dimension * dimension - 1);
         idx = distribution(generator);
-        assert(idx >= 0 && idx < dimension * dimension);
-      } while (!game_->board_[idx].Value());
+        assert(idx >= 0 && (idx < dimension * dimension));
+      } while (game_->board_[idx].Value());
 
       // Assign the 'empty' tile a value
-      unsigned seed =
-          std::chrono::system_clock::now().time_since_epoch().count();
-      std::default_random_engine generator(seed);
-      std::uniform_real_distribution<double> distribution(0.0, 1.0);
-      game_->board_[idx].Init((distribution(generator) >= 0.95) ? 4 : 2);
+      game_->board_[idx].Init();
     }
 
     if (is_new_game) {
@@ -165,7 +161,7 @@ void PlayerImpl::addTile() const {
     }
 
     assert(std::any_of(game_->board_.begin(), game_->board_.end(),
-                       [](const auto& i) { return is_valid(i.Value()) ; }));
+                       [](const auto &i) { return is_valid(i.Value()); }));
     if (hasMoves()) {
       return;
     }
@@ -177,7 +173,8 @@ void PlayerImpl::addTile() const {
 bool PlayerImpl::hasMoves() const {
   const auto begin = game_->board_.begin();
   const auto end = game_->board_.end();
-  return !std::all_of(begin, end, [](const auto &i) { return is_valid(i.Value()); });
+  return !std::all_of(begin, end,
+                      [](const auto &i) { return is_valid(i.Value()); });
 }
 
 bool PlayerImpl::moveUp() const {
@@ -198,23 +195,24 @@ bool PlayerImpl::moveUp() const {
     for (auto start = game_->board_.begin() + check_index,
               end = game_->board_.begin() + check_index + 4;
          start != end; ++start) {
-      auto next = end + 1;
+      auto next = end;
       assert(next != nullptr);
       if ((*start).Value() != (*next).Value()) {
-        printf("start: %d, next: %d\n", (*start).Value(), (*next).Value());
+        printf("Values are not equal: start: %d, next: %d\n", (*start).Value(), (*next).Value());
         continue;
       }
       if ((*start).Locked() || (*next).Locked()) {
-        printf("start: %d, next: %d\n", (*start).Value(), (*next).Value());
+        printf("Value is locked: start: %d, next: %d\n", (*start).Value(), (*next).Value());
         continue;
       }
-      if ((*start).Value() == 1) {
-        printf("start: %d, next: %d\n", (*start).Value(), (*next).Value());
+      if (!(*start).Value()) {
+        printf("Value is zero: start: %d, next: %d\n", (*start).Value(), (*next).Value());
         continue;
       }
-      (*next).Init();
+      (*next).Reset();
       (*start).Increase();
       game_->score_ += (*start).Value();
+        printf("Increase tile to %d, The score is %llu\n", (*start).Value(), game_->score_);
       board_changed = true;
     }
   }

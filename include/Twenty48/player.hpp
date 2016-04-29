@@ -17,7 +17,7 @@ public:
 
     static std::shared_ptr<Player> Create();
 
-    virtual void NewGame() = 0;
+    virtual void NewGame() const = 0;
 
     virtual int64_t Score() const = 0;
 

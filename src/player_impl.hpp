@@ -8,7 +8,7 @@ namespace impl {
 
 class PlayerImpl final : public twenty48::Player {
   std::shared_ptr<Game> game_;
-  int64_t moves_made_{-1};
+  int64_t moves_made_{};
 
 public:
 #if 0
@@ -28,14 +28,15 @@ public:
 #pragma mark Public Methods
 #endif
 
-  virtual void NewGame();
+  virtual void NewGame() const;
   virtual int64_t Score() const;
   virtual bool HasWon() const;
   virtual std::vector<int16_t> GameState() const;
   virtual bool GameOver() const;
   virtual bool Swipe(twenty48::Move);
   virtual int64_t MovesMade() const;
-  virtual void SetGame(const std::array<uint16_t, dimension * dimension> &);
+  virtual void
+  SetGame(const std::array<uint16_t, dimension * dimension> &) const;
 
 private:
 #if 0
