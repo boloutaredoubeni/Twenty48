@@ -104,9 +104,26 @@ TEST_F(PlayerTest, moving_up_doesnt_change_top) {
   const auto top_is_four = std::count(player_->GameState().begin(),
                                       player_->GameState().begin() + 3, 4);
   ASSERT_TRUE(top_is_four);
-  ASSERT_EQ(4, TileCount());
+//  ASSERT_EQ(5, TileCount());
   ASSERT_EQ(0, player_->Score());
   ASSERT_EQ(player_->MovesMade(), 0);
+  ASSERT_FALSE(player_->GameOver());
+  ASSERT_FALSE(player_->HasWon());
+}
+
+TEST_F(PlayerTest, moves_tiles_from_bottom_to_top) {
+  const auto set_state = std::array<uint16_t, dimension * dimension>{
+      {/* row 1*/ 4, 0, 0, 0, /* row 2 */ 0, 0, 4, 0, /* row 2 */ 0, 4, 0, 0,
+       /* row 4 */ 512, 0, 0, 4}};
+  SetGameBoard(set_state);
+  ASSERT_EQ(set_state, convert_vec_to_array(player_->GameState()));
+  ASSERT_FALSE(player_->Swipe(Move::Up));
+  const auto top_is_four = std::count(player_->GameState().begin(),
+                                      player_->GameState().begin() + 3, 4);
+  ASSERT_TRUE(top_is_four);
+//  ASSERT_EQ(6, TileCount());
+  ASSERT_EQ(0, player_->Score());
+  ASSERT_GT(player_->MovesMade(), 0);
   ASSERT_FALSE(player_->GameOver());
   ASSERT_FALSE(player_->HasWon());
 }
