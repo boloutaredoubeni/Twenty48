@@ -137,7 +137,7 @@ void PlayerImpl::addTile() const {
 
   // Loop thru all tiles
   for (auto &tile : game_->board_) {
-    // if it is 1, find an random empty one
+    // if it is 0, find an random empty one
     if (!tile.Value()) {
       size_t idx;
       do {
@@ -148,10 +148,10 @@ void PlayerImpl::addTile() const {
             0, dimension * dimension - 1);
         idx = distribution(generator);
         assert(idx >= 0 && (idx < dimension * dimension));
-      } while (game_->board_[idx].Value());
+      } while (game_->board_.at(idx).Value());
 
       // Assign the 'empty' tile a value
-      game_->board_[idx].Init();
+      game_->board_.at(idx).Init();
     }
 
     if (is_new_game) {
@@ -198,21 +198,25 @@ bool PlayerImpl::moveUp() const {
       auto next = end;
       assert(next != nullptr);
       if ((*start).Value() != (*next).Value()) {
-        printf("Values are not equal: start: %d, next: %d\n", (*start).Value(), (*next).Value());
+        printf("Values are not equal: start: %d, next: %d\n", (*start).Value(),
+               (*next).Value());
         continue;
       }
       if ((*start).Locked() || (*next).Locked()) {
-        printf("Value is locked: start: %d, next: %d\n", (*start).Value(), (*next).Value());
+        printf("Value is locked: start: %d, next: %d\n", (*start).Value(),
+               (*next).Value());
         continue;
       }
       if (!(*start).Value()) {
-        printf("Value is zero: start: %d, next: %d\n", (*start).Value(), (*next).Value());
+        printf("Value is zero: start: %d, next: %d\n", (*start).Value(),
+               (*next).Value());
         continue;
       }
       (*next).Reset();
       (*start).Increase();
       game_->score_ += (*start).Value();
-        printf("Increase tile to %d, The score is %llu\n", (*start).Value(), game_->score_);
+      printf("Increase tile to %d, The score is %llu\n", (*start).Value(),
+             game_->score_);
       board_changed = true;
     }
   }

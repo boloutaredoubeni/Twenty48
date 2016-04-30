@@ -29,7 +29,7 @@ public:
 #pragma mark -
 #pragma mark Public Methods
 #endif
-    virtual void Reset();
+  virtual void Reset();
   virtual void Init();
   virtual void Increase();
   virtual int8_t Value() const;

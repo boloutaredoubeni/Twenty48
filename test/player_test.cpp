@@ -75,7 +75,7 @@ TEST_F(PlayerTest, cant_set_game_to_invalid_state) {
 
 TEST_F(PlayerTest, new_game_adds_tiles) { ASSERT_EQ(2, TileCount()); }
 
-TEST_F(PlayerTest, can_move_up) {
+TEST_F(PlayerTest, can_move_up_veritically) {
 
   const auto set_state = std::array<uint16_t, dimension * dimension>{
       {/* row 1*/ 4, 0, 0, 0, /* row 2 */ 4, 0, 0, 0, /* row 2 */ 4, 0, 0, 0,
@@ -83,13 +83,30 @@ TEST_F(PlayerTest, can_move_up) {
   SetGameBoard(set_state);
   ASSERT_EQ(set_state, convert_vec_to_array(player_->GameState()));
   ASSERT_TRUE(player_->Swipe(Move::Up));
-  std::vector<int16_t> end_state{{/* row 1*/ 4, 0, 0, 0, /* row 2 */ 8, 0, 0, 0,
-                                  /* row 2 */ 0, 0, 0, 0, /* row 4 */ 0, 0, 0,
-                                  0}};
-  ASSERT_EQ(end_state, player_->GameState());
-
+  const auto first = player_->GameState().at(0);
+  const auto second = player_->GameState().at(4);
+  ASSERT_EQ(first, 4);
+  ASSERT_EQ(second, 8);
   ASSERT_EQ(8, player_->Score());
   ASSERT_GT(player_->MovesMade(), 0);
+  //    ASSERT_EQ(3, TileCount());
+  ASSERT_FALSE(player_->GameOver());
+  ASSERT_FALSE(player_->HasWon());
+}
+
+TEST_F(PlayerTest, moving_up_doesnt_change_top) {
+  const auto set_state = std::array<uint16_t, dimension * dimension>{
+      {/* row 1*/ 4, 4, 4, 4, /* row 2 */ 0, 0, 0, 0, /* row 2 */ 0, 0, 0, 0,
+       /* row 4 */ 0, 0, 0, 0}};
+  SetGameBoard(set_state);
+  ASSERT_EQ(set_state, convert_vec_to_array(player_->GameState()));
+  ASSERT_FALSE(player_->Swipe(Move::Up));
+  const auto top_is_four = std::count(player_->GameState().begin(),
+                                      player_->GameState().begin() + 3, 4);
+  ASSERT_TRUE(top_is_four);
+  ASSERT_EQ(4, TileCount());
+  ASSERT_EQ(0, player_->Score());
+  ASSERT_EQ(player_->MovesMade(), 0);
   ASSERT_FALSE(player_->GameOver());
   ASSERT_FALSE(player_->HasWon());
 }

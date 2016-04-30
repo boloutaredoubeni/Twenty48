@@ -10,3 +10,6 @@
 [submodule "third_party/xcode-googletest"]
 	path = third_party/xcode-googletest
 	url = https://github.com/mattstevens/xcode-googletest.git
+[submodule "third_party/dropbox/nn"]
+	path = third_party/dropbox/nn
+	url = git@github.com:dropbox/nn.git
