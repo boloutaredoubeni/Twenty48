@@ -113,17 +113,17 @@ class InfoScreen extends Component {
     // clang-format off
     return (
       <View style={styles.container}>
-      <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => this._goHome()}>
-        <Text style={styles.instructions}>
-              Back
-        </Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => this._goHome()}>
+          <Text style={styles.instructions}>
+                Back
+          </Text>
+        </TouchableOpacity>
         <Text>About 2048</Text>
       </View>
     );
-    // clang-format on
+            // clang-format on
   }
 
   _goHome() { this.props.navigator.pop(); }
@@ -198,13 +198,13 @@ const colors = {
   wistful : '#AEA8D3',
   salem : '#1E824C',
   burntOrange : '#D35400',
-  porcelain: '#ECF0F1',
+  porcelain : '#ECF0F1',
 }
 
 const buttonAttrs = {
   border : {
     radius : 6,
-    width: 2,
+    width : 2,
   },
   margin : 5,
   fontSize : 25,
