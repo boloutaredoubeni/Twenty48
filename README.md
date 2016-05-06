@@ -50,7 +50,7 @@ make test
 ```
 
 ### Screenshot
-![](screenshots/iphone-homescreen.png =480x270)
+![](screenshots/iphone-homescreen.png)
 
 ### License
 MIT
