@@ -4,9 +4,9 @@
 package com.boloutaredoubeni.twenty48.djinni;
 
 public enum Move {
-  UP,
-  DOWN,
-  LEFT,
-  RIGHT,
-  ;
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    ;
 }

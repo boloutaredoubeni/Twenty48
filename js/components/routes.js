@@ -15,14 +15,17 @@ import React, {
   NativeModules,
   NativeAppEventEmitter,
 } from 'react-native';
+import { GameBoard } from './GameBoard';
 // clang-format on
 
+
+/**
+ * Controller for the GameView
+ */
 class GameScreen extends Component {
 
   constructor(props) {
     super(props);
-    // this.subscription = NativeEventEmitter.addListener('ScoreChange', (score)
-    // => console.log(score));
     this.state = {score : 0, gameOver : false, movesMade : 0, gameBoard : []};
     this.player = NativeModules.PlayerManager;
     this.subscription = {};
@@ -34,7 +37,6 @@ class GameScreen extends Component {
     this.player.newGame();
     this.subscription = NativeAppEventEmitter.addListener(
         'ScoreChanged', (game) => { this.setState(game); });
-    this.player.swipe(this.player.MoveUp);
   }
 
   render() {
@@ -46,7 +48,12 @@ class GameScreen extends Component {
             <Text>Score: {this.state.score}</Text>
             <Text>Moves: {this.state.movesMade}</Text>
             <Text>GameOver: {this.state.gameOver}</Text>
-            <Text>GameBoard: {this.state.gameBoard}</Text>
+            <TouchableOpacity onPress={() => this._goHome()}>
+              <Text style={styles.instructions}>
+                    Home!
+              </Text>
+            </TouchableOpacity>
+            {/*<GameBoard />*/}
             {/*<Text>Winner: {this.state.hasWon}</Text>*/}
           </View>
       );
@@ -61,16 +68,20 @@ class GameScreen extends Component {
       }
   }
 
+  _goHome() {
+    this.props.navigator.pop();
+  }
+
   _touchStart(event) {
     // FIXME check if the player can move i.e game over
-    if (this._isGameOver()) return;
+    if (this.state.gameOver) return;
     this.x = event.nativeEvent.pageX;
     this.y = event.nativeEvent.pageY;
-    console.log("Start touch event at (" + x + "," + y + ")");
+    console.log("Start touch event at (" + this.x + "," + this.y + ")");
   }
 
   _touchEnd(event) {
-    if (this._isGameOver()) return;
+    if (this.state.gameOver) return;
     const dx = event.nativeEvent.pageX - this.x;
     const dy = event.nativeEvent.pageY - this.y;
 
@@ -81,54 +92,45 @@ class GameScreen extends Component {
       direction = dy > 0 ? 3 : 1;
     }
 
-    if (direction !== -1) {
-      console.log("End touch event at (" + x + "," + y + ")");
+    if (direction != -1) {
+      console.log("End touch event at (" + this.x + "," + this.y + ")");
       // TODO send the swipe event and redraw the view, update the score.
       console.log("Move in direction " + direction);
       return;
-  }
+    }
     console.error("Undefined touch event");
   }
-
-  _isGameOver() {
-    const _player = this.player;
-    if (_player == null) {
-      console.error("The player value is null");
-      return true;
-    }
-    /* FIXME get the game over message from internal object */
-    return false;
-  }
-
 }
 
+/**
+ * Controller for the About/Info Screen
+ */
 class InfoScreen extends Component {
-
-  constructor(props) {
-    super(props);
-    // this.subscription = NativeEventEmitter.addListener('ScoreChange', (score)
-    // => console.log(score));
-    this.state = {};
-  }
 
   render() {
     // clang-format off
     return (
       <View>
+      <TouchableOpacity onPress={() => this._goHome()}>
+        <Text style={styles.instructions}>
+              Home!
+        </Text>
+      </TouchableOpacity>
         <Text>About 2048</Text>
       </View>
     );
     // clang-format on
   }
+
+  _goHome() {
+    this.props.navigator.pop();
+  }
 }
 
+/**
+ * The initial screen for the application
+ */
 export default class HomeScreen extends Component {
-  constructor(props) {
-    super(props);
-    // this.subscription = NativeEventEmitter.addListener('ScoreChange', (score)
-    // => console.log(score));
-    this.state = {};
-  }
 
   render() {
     // clang-format off
@@ -153,7 +155,7 @@ export default class HomeScreen extends Component {
     // clang-format off
     return (
       <TouchableOpacity onPress={() => this._startGame()}>
-        <Text style = {styles.instructions}>
+        <Text style={styles.instructions}>
                 Play!
         </Text>
       </TouchableOpacity>

@@ -9,19 +9,14 @@ import React, {
   View,
   Navigator
 } from 'react-native';
-import HomeScreen from './routes';
+import HomeScreen from './components/routes';
 // clang-format on
 
-// TODO(boloutaredoubeni): Button to navigate to game
-// TODO(boloutaredoubeni): Button for game info and how to play
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    // this.subscription = NativeEventEmitter.addListener('ScoreChange', (score)
-    // => console.log(score));
-    this.state = {};
-  }
 
+/**
+ * The root component for the application
+ */
+export default class App extends Component {
   render() {
     // clang-format off
     return (
@@ -41,7 +36,12 @@ export default class App extends Component {
     return (
       <RouteComponent {...route.props}
         navigator={navigator}
-        route={route} />
+        route={route}
+        onBack={() => {
+          if (route.index > 0) {
+            navigator.pop();
+          }
+        }} />
     );
     // clang-format on
   }
