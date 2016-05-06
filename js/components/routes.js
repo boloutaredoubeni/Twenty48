@@ -18,7 +18,6 @@ import React, {
 import { GameBoard } from './GameBoard';
 // clang-format on
 
-
 /**
  * Controller for the GameView
  */
@@ -48,7 +47,9 @@ class GameScreen extends Component {
             <Text>Score: {this.state.score}</Text>
             <Text>Moves: {this.state.movesMade}</Text>
             <Text>GameOver: {this.state.gameOver}</Text>
-            <TouchableOpacity onPress={() => this._goHome()}>
+            <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => this._goHome()}>
               <Text style={styles.instructions}>
                     Home!
               </Text>
@@ -111,7 +112,9 @@ class InfoScreen extends Component {
     // clang-format off
     return (
       <View>
-      <TouchableOpacity onPress={() => this._goHome()}>
+      <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => this._goHome()}>
         <Text style={styles.instructions}>
               Home!
         </Text>
@@ -122,9 +125,7 @@ class InfoScreen extends Component {
     // clang-format on
   }
 
-  _goHome() {
-    this.props.navigator.pop();
-  }
+  _goHome() { this.props.navigator.pop(); }
 }
 
 /**
@@ -135,14 +136,14 @@ export default class HomeScreen extends Component {
   render() {
     // clang-format off
     return (
-      <View style = {styles.container}>
-        <Text style = {styles.welcome}>
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
             2048
         </Text>
-        <View>
+        <View style={styles.playButton}>
           {this.renderStartButton()}
         </View>
-        <View>
+        <View style={styles.infoButton}>
           {this.renderInfoButton()}
         </View>
       </View>
@@ -190,21 +191,59 @@ export default class HomeScreen extends Component {
   }
 }
 
+const colors = {
+  buttercup : '#F39C12',
+  jade : '#00B16A',
+  wistful : '#AEA8D3',
+  salem : '#1E824C',
+  burntOrange : '#D35400',
+  porcelain: '#ECF0F1',
+}
+
+const buttonAttrs = {
+  border : {
+    radius : 6,
+    width: 2,
+  },
+  margin : 5,
+  fontSize : 25,
+}
+
 const styles = StyleSheet.create({
   container : {
     flex : 1,
     justifyContent : 'center',
     alignItems : 'center',
-    backgroundColor : '#F5FCFF',
+    backgroundColor : colors.wistful,
   },
   welcome : {
-    fontSize : 20,
+    fontSize : 40,
     textAlign : 'center',
     margin : 10,
   },
   instructions : {
     textAlign : 'center',
-    color : '#333333',
-    marginBottom : 5,
+    color : colors.porcelain,
+    fontSize : 20,
+    margin : 10,
   },
+  playButton : {
+    borderRadius : buttonAttrs.border.radius,
+    borderWidth : buttonAttrs.border.width,
+    borderColor : colors.salem,
+    backgroundColor : colors.jade,
+    margin : buttonAttrs.margin,
+  },
+  infoButton : {
+    borderRadius : buttonAttrs.border.radius,
+    borderWidth : buttonAttrs.border.width,
+    borderColor : colors.burntOrange,
+    backgroundColor : colors.buttercup,
+    margin : buttonAttrs.margin,
+  },
+  backButton : {
+    borderRadius: buttonAttrs.border.radius,
+    borderWidth : buttonAttrs.border.width,
+    margin : buttonAttrs.margin,
+  }
 });

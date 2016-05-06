@@ -12,7 +12,6 @@ import React, {
 import HomeScreen from './components/routes';
 // clang-format on
 
-
 /**
  * The root component for the application
  */
