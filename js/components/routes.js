@@ -42,8 +42,9 @@ class GameScreen extends Component {
     // clang-format off
       return (
           <View
-            onTouchStart={(event) => this._touchStart(event)}
-            onTouchEnd={(event) => this._touchEnd(event)}>
+              style={styles.container}
+              onTouchStart={(event) => this._touchStart(event)}
+              onTouchEnd={(event) => this._touchEnd(event)}>
             <Text>Score: {this.state.score}</Text>
             <Text>Moves: {this.state.movesMade}</Text>
             <Text>GameOver: {this.state.gameOver}</Text>
@@ -51,7 +52,7 @@ class GameScreen extends Component {
                 style={styles.backButton}
                 onPress={() => this._goHome()}>
               <Text style={styles.instructions}>
-                    Home!
+                    Back
               </Text>
             </TouchableOpacity>
             {/*<GameBoard />*/}
@@ -111,12 +112,12 @@ class InfoScreen extends Component {
   render() {
     // clang-format off
     return (
-      <View>
+      <View style={styles.container}>
       <TouchableOpacity
           style={styles.backButton}
           onPress={() => this._goHome()}>
         <Text style={styles.instructions}>
-              Home!
+              Back
         </Text>
       </TouchableOpacity>
         <Text>About 2048</Text>
@@ -242,8 +243,6 @@ const styles = StyleSheet.create({
     margin : buttonAttrs.margin,
   },
   backButton : {
-    borderRadius: buttonAttrs.border.radius,
-    borderWidth : buttonAttrs.border.width,
     margin : buttonAttrs.margin,
   }
 });
