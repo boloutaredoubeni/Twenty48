@@ -29,7 +29,8 @@ make android
 ```
 make test
 ```
-### Source Directory
+
+### Project Structure
 ```
 .
 |_ android/
@@ -47,6 +48,9 @@ make test
 |_ index.*.js -> entry point for React
 
 ```
+
+### Screenshot
+![](screenshots/iphone-homescreen.png)
 
 ### License
 MIT
