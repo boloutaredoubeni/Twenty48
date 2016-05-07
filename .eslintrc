@@ -1,13 +1,44 @@
 {
+  "parser": "babel-eslint",
   "plugins": [
+    "flowtype",
     "react",
     "react-native"
   ],
-  "ecmaFeatures": {
-    "jsx": true
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true,
+        "modules": true
+    }
   },
   "rules": {
     "react-native/no-unused-styles": 2,
-    "react-native/split-platform-components": 2
+    "react-native/split-platform-components": 2,
+    "flowtype/require-parameter-type": 1,
+    "flowtype/require-return-type": [
+            1,
+            "always",
+            {
+                "annotateUndefined": "never"
+            }
+    ],
+    "flowtype/space-after-type-colon": [
+            1,
+            "always"
+    ],
+    "flowtype/space-before-type-colon": [
+            1,
+            "never"
+    ],
+    "flowtype/type-id-match": [
+            1,
+            "^([A-Z][a-z0-9]+)+Type$"
+    ]
+  },
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": false
+    }
   }
 }

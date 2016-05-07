@@ -15,7 +15,7 @@ import React, {
   NativeModules,
   NativeAppEventEmitter,
 } from 'react-native';
-import { GameBoard } from './GameBoard';
+import GameBoard from './GameBoard';
 // clang-format on
 
 /**
@@ -23,7 +23,18 @@ import { GameBoard } from './GameBoard';
  */
 class GameScreen extends Component {
 
-  constructor(props) {
+  state: {
+    score : number,
+    gameOver : boolean,
+    movesMade : 0,
+    gameBoard : Array<number>
+  };
+  player: NativeModules.PlayerManager;
+  subscription: any;
+  x: number;
+  y: number;
+
+  constructor(props: any) {
     super(props);
     this.state = {score : 0, gameOver : false, movesMade : 0, gameBoard : []};
     this.player = NativeModules.PlayerManager;
@@ -35,27 +46,27 @@ class GameScreen extends Component {
   componentWillMount() {
     this.player.newGame();
     this.subscription = NativeAppEventEmitter.addListener(
-        'ScoreChanged', (game) => { this.setState(game); });
+        'ScoreChanged', (game: any) => { this.setState(game); });
   }
 
-  render() {
+  render(): React.Element {
     // clang-format off
       return (
           <View
               style={styles.container}
-              onTouchStart={(event) => this._touchStart(event)}
-              onTouchEnd={(event) => this._touchEnd(event)}>
+              onTouchStart={(event: any): void => this._touchStart(event)}
+              onTouchEnd={(event: any): void => this._touchEnd(event)}>
             <Text>Score: {this.state.score}</Text>
             <Text>Moves: {this.state.movesMade}</Text>
             <Text>GameOver: {this.state.gameOver}</Text>
             <TouchableOpacity
                 style={styles.backButton}
-                onPress={() => this._goHome()}>
+                onPress={(): void => this._goHome()}>
               <Text style={styles.instructions}>
                     Back
               </Text>
             </TouchableOpacity>
-            {/*<GameBoard />*/}
+            <GameBoard />
             {/*<Text>Winner: {this.state.hasWon}</Text>*/}
           </View>
       );
@@ -74,7 +85,7 @@ class GameScreen extends Component {
     this.props.navigator.pop();
   }
 
-  _touchStart(event) {
+  _touchStart(event: any) {
     // FIXME check if the player can move i.e game over
     if (this.state.gameOver) return;
     this.x = event.nativeEvent.pageX;
@@ -82,7 +93,7 @@ class GameScreen extends Component {
     console.log("Start touch event at (" + this.x + "," + this.y + ")");
   }
 
-  _touchEnd(event) {
+  _touchEnd(event: any) {
     if (this.state.gameOver) return;
     const dx = event.nativeEvent.pageX - this.x;
     const dy = event.nativeEvent.pageY - this.y;
@@ -109,13 +120,13 @@ class GameScreen extends Component {
  */
 class InfoScreen extends Component {
 
-  render() {
+  render(): React.Element {
     // clang-format off
     return (
       <View style={styles.container}>
         <TouchableOpacity
             style={styles.backButton}
-            onPress={() => this._goHome()}>
+            onPress={(): void => this._goHome()}>
           <Text style={styles.instructions}>
                 Back
           </Text>
@@ -134,7 +145,7 @@ class InfoScreen extends Component {
  */
 export default class HomeScreen extends Component {
 
-  render() {
+  render(): React.Element {
     // clang-format off
     return (
       <View style={styles.container}>
@@ -152,11 +163,11 @@ export default class HomeScreen extends Component {
     // clang-format on
   }
 
-  renderStartButton() {
+  renderStartButton(): React.Element {
     // TODO(boloutaredoubeni): style this
     // clang-format off
     return (
-      <TouchableOpacity onPress={() => this._startGame()}>
+      <TouchableOpacity onPress={(): void => this._startGame()}>
         <Text style={styles.instructions}>
                 Play!
         </Text>
@@ -165,10 +176,10 @@ export default class HomeScreen extends Component {
     //   clang-format on
   }
 
-  renderInfoButton() {
+  renderInfoButton(): React.Element {
       // clang-format off
     return (
-     <TouchableOpacity onPress={() => this._showInfo()}>
+     <TouchableOpacity onPress={(): void => this._showInfo()}>
         <Text style={styles.instructions}>
                 About
         </Text>
