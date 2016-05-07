@@ -10,4 +10,4 @@ import React, {
 import App from './js/Twenty48';
 // clang-format on
 
-AppRegistry.registerComponent('Twenty48', () => App);
+AppRegistry.registerComponent('Twenty48', (): any => App);

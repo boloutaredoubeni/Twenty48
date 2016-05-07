@@ -11,7 +11,6 @@ namespace twenty48 {
 namespace impl {
 
 const static uint8_t dimension = 4;
-const static uint8_t chance_of_four = 15;
 
 using GameBoard = std::array<Tile, dimension * dimension>;
 

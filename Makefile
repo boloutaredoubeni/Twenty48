@@ -4,6 +4,7 @@ valgrind-exe := $(shell command -v valgrind >/dev/null 2>&1 && echo "valgrind" |
 clang-format := $(shell command -v clang-format >/dev/null 2>&1 && echo "clang-format -i --style=file" || echo "touch")
 GYP ?=  ./third_party/gyp
 DJINNI ?= ./third_party/djinni/src/run
+eslint := $(shell command -v node >/dev/null 2>&1 && echo "node node_modules/eslint/bin/eslint --fix" || echo "touch")
 
 all: format test ios android
 
@@ -22,6 +23,7 @@ format: $(DJINNI)
 	@${clang-format} test/*
 	@${clang-format} android/jni-src/*
 	@${clang-format} android/app/src/main/java/com/boloutaredoubeni/twenty48/**/*.java
+	@${eslint} index.*.js js/
 
 clean: lib2048.gyp third_party/gtest.gyp
 	@echo "Removing generated files"

@@ -16,7 +16,7 @@ import HomeScreen from './components/routes';
  * The root component for the application
  */
 export default class App extends Component {
-  render() {
+  render(): React.Element {
     // clang-format off
     return (
       <Navigator
@@ -29,7 +29,7 @@ export default class App extends Component {
     // clang-format on
   }
 
-  _renderScene(route, navigator) {
+  _renderScene(route: any, navigator: any): React.Element {
     const RouteComponent = route.component;
     // clang-format off
     return (

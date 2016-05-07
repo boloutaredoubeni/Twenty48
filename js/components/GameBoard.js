@@ -4,11 +4,15 @@
 'use strict';
 
 // clang-format off
-import React, { View, Component, StyleSheet } from 'react-native';
+import React, {
+  View,
+  Component,
+  StyleSheet
+} from 'react-native';
 // clang-format on
 
 class Cell extends Component {
-  render() {
+  render(): React.Element {
     return (
         // clang-format off
       <View />
@@ -18,17 +22,18 @@ class Cell extends Component {
 }
 
 class Tile extends Component {
-  render() {
+  render(): React.Element {
     return (
         // clang-format off
-      <Text/>
+      <View>
+      </View>
         // clang-format on
         );
   }
 }
 
 export default class GameBoard extends Component {
-  render() {
+  render(): React.Element {
     return (
         // clang-format off
       /* TODO init with tiles */
