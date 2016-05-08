@@ -33,11 +33,26 @@ class Tile extends Component {
 }
 
 export default class GameBoard extends Component {
+
+  props: {
+    tiles: Array<number>
+  };
+  x: number;
+  y: number;
+
+  constructor(props: any) {
+    super(props);
+    this.x = 0;
+    this.y = 0;
+  }
+
   render(): React.Element {
+    let tiles = this.props.tiles;
     return (
         // clang-format off
       /* TODO init with tiles */
-      <View>
+      <View
+        >
         <View></View>
         <View></View>
         <View></View>
@@ -46,4 +61,6 @@ export default class GameBoard extends Component {
       // clang-format on
     );
   }
+
+  
 }

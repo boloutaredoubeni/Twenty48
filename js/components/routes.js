@@ -66,7 +66,7 @@ class GameScreen extends Component {
                     Back
               </Text>
             </TouchableOpacity>
-            <GameBoard />
+            <GameBoard tiles={this.state.gameBoard}/>
             {/*<Text>Winner: {this.state.hasWon}</Text>*/}
           </View>
       );
