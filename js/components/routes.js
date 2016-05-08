@@ -56,6 +56,8 @@ class GameScreen extends Component {
     this.state = {score : 0, gameOver : false, movesMade : 0, gameBoard : []};
     this.player = NativeModules.PlayerManager;
     this.subscription = {};
+    this.x = 0;
+    this.y = 0;
   }
 
   componentWillMount() {
@@ -79,9 +81,9 @@ class GameScreen extends Component {
               </Text>
             </TouchableOpacity>
             <GameBoard
-              tiles={this.state.gameBoard}
-              onTouchStart={(event: any): void => this._touchStart(event)}
-              onTouchEnd={(event: any): void => this._touchEnd(event)}/>
+                tiles={this.state.gameBoard}
+                onTouchStart={(event: any): void => this._touchStart(event)}
+                onTouchEnd={(event: any): void => this._touchEnd(event)}/>
             {/*<Text>Winner: {this.state.hasWon}</Text>*/}
           </View>
       );
