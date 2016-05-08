@@ -13,7 +13,6 @@ format: $(DJINNI)
 	@$(GYP)/tools/pretty_gyp.py lib2048.gyp > lib_tmp && mv lib_tmp lib2048.gyp
 	@$(GYP)/tools/pretty_gyp.py third_party/gtest.gyp > gtest_tmp && mv gtest_tmp third_party/gtest.gyp
 	@echo "Cleaning up source files via clang-format"
-	# FIXME: no one should care if these fail
 	@${clang-format} src/*
 	@${clang-format} *.js
 	@${clang-format} js/**/*.js
@@ -23,7 +22,7 @@ format: $(DJINNI)
 	@${clang-format} test/*
 	@${clang-format} android/jni-src/*
 	@${clang-format} android/app/src/main/java/com/boloutaredoubeni/twenty48/**/*.java
-	@${eslint} index.*.js js/
+	@${eslint} index.*.js *.js js/
 
 clean: lib2048.gyp third_party/gtest.gyp
 	@echo "Removing generated files"
