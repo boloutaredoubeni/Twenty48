@@ -18,6 +18,23 @@ import React, {
 import GameBoard from './GameBoard';
 // clang-format on
 
+const Direction: any = {
+  None : 0,
+  Up : 1,
+  Down : 2,
+  Left : 3,
+  Right : 4,
+};
+
+// clang-format off
+type Move =
+  | Direction.None
+  | Direction.Up
+  | Direction.Down
+  | Direction.Right
+  | Direction.Left;
+// clang-format on
+
 /**
  * Controller for the GameView
  */
@@ -39,8 +56,6 @@ class GameScreen extends Component {
     this.state = {score : 0, gameOver : false, movesMade : 0, gameBoard : []};
     this.player = NativeModules.PlayerManager;
     this.subscription = {};
-    this.x = 0;
-    this.y = 0;
   }
 
   componentWillMount() {
@@ -52,10 +67,7 @@ class GameScreen extends Component {
   render(): React.Element {
     // clang-format off
       return (
-          <View
-              style={styles.container}
-              onTouchStart={(event: any): void => this._touchStart(event)}
-              onTouchEnd={(event: any): void => this._touchEnd(event)}>
+          <View style={styles.container}>
             <Text>Score: {this.state.score}</Text>
             <Text>Moves: {this.state.movesMade}</Text>
             <Text>GameOver: {this.state.gameOver}</Text>
@@ -66,7 +78,10 @@ class GameScreen extends Component {
                     Back
               </Text>
             </TouchableOpacity>
-            <GameBoard tiles={this.state.gameBoard}/>
+            <GameBoard
+              tiles={this.state.gameBoard}
+              onTouchStart={(event: any): void => this._touchStart(event)}
+              onTouchEnd={(event: any): void => this._touchEnd(event)}/>
             {/*<Text>Winner: {this.state.hasWon}</Text>*/}
           </View>
       );
@@ -86,7 +101,6 @@ class GameScreen extends Component {
   }
 
   _touchStart(event: any) {
-    // FIXME check if the player can move i.e game over
     if (this.state.gameOver) return;
     this.x = event.nativeEvent.pageX;
     this.y = event.nativeEvent.pageY;
@@ -95,23 +109,46 @@ class GameScreen extends Component {
 
   _touchEnd(event: any) {
     if (this.state.gameOver) return;
-    const dx = event.nativeEvent.pageX - this.x;
-    const dy = event.nativeEvent.pageY - this.y;
+    const dx: number = event.nativeEvent.pageX - this.x;
+    const dy: number = event.nativeEvent.pageY - this.y;
 
-    let direction = -1;
+    let direction: Move = Direction.None;
     if (Math.abs(dx) > 3 * Math.abs(dy) && Math.abs(dx) > 30) {
-      direction = dx > 0 ? 2 : 0;
+      direction = dx > 0 ? Direction.Right : Direction.Left;
     } else if (Math.abs(dy) > 3 * Math.abs(dx) && Math.abs(dy) > 30) {
-      direction = dy > 0 ? 3 : 1;
+      direction = dy > 0 ? Direction.Up : Direction.Down;
     }
 
-    if (direction != -1) {
-      console.log("End touch event at (" + this.x + "," + this.y + ")");
-      // TODO send the swipe event and redraw the view, update the score.
+    console.log("End touch event at (" + this.x + "," + this.y + ")");
+    this.x = 0;
+    this.y = 0;
+          // TODO send the swipe event and redraw the view, update the score.
       console.log("Move in direction " + direction);
-      return;
+      // try {
+      this._swipe(direction);
+    // } catch(e) {
+    //   console.error(e);
+    // }
+
+  }
+
+  _swipe(direction: Move) {
+    switch (direction) {
+    case Direction.Up:
+      this.player.swipe(this.player.MoveUp);
+      break;
+    case Direction.Down:
+      this.player.swipe(this.player.MoveDown);
+      break;
+    case Direction.Left:
+      this.player.swipe(this.player.MoveLeft);
+      break;
+    case Direction.Right:
+      this.player.swipe(this.player.MoveRight);
+      break;
+    default:
+      throw Error('Invalid direction');
     }
-    console.error("Undefined touch event");
   }
 }
 
@@ -255,5 +292,5 @@ const styles = StyleSheet.create({
   },
   backButton : {
     margin : buttonAttrs.margin,
-  }
+  },
 });
