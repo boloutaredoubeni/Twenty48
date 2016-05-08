@@ -30,10 +30,6 @@
     "flowtype/space-before-type-colon": [
             1,
             "never"
-    ],
-    "flowtype/type-id-match": [
-            1,
-            "^([A-Z][a-z0-9]+)+Type$"
     ]
   },
   "settings": {
